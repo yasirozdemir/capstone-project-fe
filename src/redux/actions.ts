@@ -1,6 +1,5 @@
 import { Dispatch } from "redux";
 import { slicedStore } from "./slices";
-import { error } from "console";
 
 export const setSpotifyAT = () => {
   return async (dispatch: Dispatch) => {
