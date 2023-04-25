@@ -1,43 +1,13 @@
 import { useEffect, useState } from "react";
-const { REACT_APP_SPOTIFY_CLIENT_ID, REACT_APP_SPOTIFY_CLIENT_SECRET } =
-  process.env;
+import { useAppDispatch } from "../../redux/hooks";
+import { setSpotifyAT } from "../../redux/actions";
 
 const AI = () => {
-  const [spotifyAT, setSpotifyAT] = useState("");
-
-  const getSpotifyAccessToken = async () => {
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body:
-        "grant_type=client_credentials&client_id=" +
-        REACT_APP_SPOTIFY_CLIENT_ID +
-        "&client_secret=" +
-        REACT_APP_SPOTIFY_CLIENT_SECRET,
-    };
-
-    try {
-      const res = await fetch(
-        "https://accounts.spotify.com/api/token",
-        options
-      );
-      if (res.ok) {
-        const { access_token } = await res.json();
-        setSpotifyAT(access_token);
-        console.log(access_token);
-      } else {
-        console.log("SPOTIFY ACCESS ERROR");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    getSpotifyAccessToken();
-  }, []);
+    dispatch(setSpotifyAT());
+  }, [dispatch]);
   return <>HELO</>;
 };
 
