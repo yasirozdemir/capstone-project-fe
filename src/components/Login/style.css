@@ -1,10 +1,10 @@
-.login-form {
+#login-register-form {
   row-gap: 1.3rem;
   font-size: 1.2rem;
   font-weight: 600;
 }
 
-.login-form .logo-wrapper {
+#login-register-form .logo-wrapper {
   max-height: 150px;
   overflow: hidden;
   display: flex;
@@ -13,14 +13,14 @@
   transform: scale(1.2);
 }
 
-.login-form > * {
+#login-register-form > * {
   width: 100%;
   max-width: 600px;
 }
 
-.login-form input,
-.login-form > button,
-.login-form a:nth-of-type(1) {
+#login-register-form input,
+#login-register-form > button,
+#login-register-form a:nth-of-type(1) {
   background-color: #eef7ffc2;
   border-radius: 0.25rem;
   padding: 0.5rem;
@@ -28,12 +28,12 @@
   transition: all 200ms ease;
 }
 
-.login-form input:hover,
-.login-form input:focus,
-.login-form > button:hover,
-.login-form > button:focus,
-.login-form a:nth-of-type(1):hover,
-.login-form a:nth-of-type(1):focus,
+#login-register-form input:hover,
+#login-register-form input:focus,
+#login-register-form > button:hover,
+#login-register-form > button:focus,
+#login-register-form a:nth-of-type(1):hover,
+#login-register-form a:nth-of-type(1):focus,
 #pw-wrapper button:hover,
 #pw-wrapper button:focus {
   background-color: #eef7ff;
@@ -64,29 +64,29 @@
   transition: all 200ms ease;
 }
 
-.login-form a {
+#login-register-form a {
   text-align: center;
 }
 
-.login-form a:focus-visible {
+#login-register-form a:focus-visible {
   outline: none;
 }
 
-.login-form a:nth-of-type(1) {
+#login-register-form a:nth-of-type(1) {
   color: inherit;
 }
 
-.login-form a:nth-of-type(1):hover {
+#login-register-form a:nth-of-type(1):hover {
   text-decoration: none;
 }
 
-.login-form a:nth-last-of-type(1) {
+#login-register-form a:nth-last-of-type(1) {
   text-decoration: underline;
   color: #eef7ffc9;
 }
 
-.login-form a:nth-last-of-type(1):hover,
-.login-form a:nth-last-of-type(1):focus-visible {
+#login-register-form a:nth-last-of-type(1):hover,
+#login-register-form a:nth-last-of-type(1):focus-visible {
   color: #eef7ff;
 }
 

@@ -3,8 +3,7 @@ import AI from "./components/ai";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import LoginRegister from "./components/Login";
 
 function App() {
   return (
@@ -23,8 +22,8 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<LoginRegister />} />
+          <Route path="/register" element={<LoginRegister isLogin={false} />} />
           <Route path="/ai" element={<AI />} />
           <Route
             path="*"
