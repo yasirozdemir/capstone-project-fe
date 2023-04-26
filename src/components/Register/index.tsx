@@ -1,4 +1,3 @@
-import "./style.css";
 import { Container, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
@@ -6,10 +5,10 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { alertOptions } from "../../tools";
 
-const Login = () => {
+const Register = () => {
   const [showPW, setShowPW] = useState(false);
 
-  const loginFunc = (e: any) => {
+  const registerFunc = (e: any) => {
     e.preventDefault();
     toast.success("Your message has been sent!", alertOptions);
   };
@@ -19,7 +18,7 @@ const Login = () => {
       <Row className="justify-content-center align-items-center h-100">
         <Col xs={12} md={6}>
           <form
-            onSubmit={loginFunc}
+            onSubmit={registerFunc}
             className="login-form d-flex flex-column align-items-center "
           >
             <div className="logo-wrapper">
@@ -29,6 +28,13 @@ const Login = () => {
                 className="w-100"
               />
             </div>
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              required
+              autoComplete="false"
+            />
             <input
               type="email"
               name="email"
@@ -77,4 +83,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
