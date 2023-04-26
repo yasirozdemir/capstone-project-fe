@@ -7,4 +7,5 @@ export interface IPlaylist {
   cover: string;
   user: IUser;
   songs: Array<ISong>;
+  likes: Array<string>;
 }

@@ -60,9 +60,10 @@ const AI = () => {
 
   useEffect(() => {
     setSongsList(songIDs);
+    console.log(songs);
     return () => setSongs([]);
     // eslint-disable-next-line
-  }, []);
+  }, [spotifyAT]);
 
   return (
     <>
