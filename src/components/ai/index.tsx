@@ -6,6 +6,7 @@ import Typewriter from "typewriter-effect";
 import { RiMovie2Fill } from "react-icons/ri";
 import MovieCard from "../reusables/MovieCard";
 import { toast } from "react-toastify";
+import { ThreeDots } from "react-loader-spinner";
 
 const AI = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -13,7 +14,7 @@ const AI = () => {
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState({ is: false, message: "" });
 
-  const propmtToMovies = async () => {
+  const promptToMovies = async () => {
     try {
       const res = await fetch(
         process.env.REACT_APP_API_URL! + "/ai/prompt-to-movies",
@@ -25,10 +26,10 @@ const AI = () => {
           body: JSON.stringify({ prompt }),
         }
       );
+      setLoading(true);
       if (res.ok) {
         const data = await res.json();
         setMovies(data.moviesList);
-        console.log(data.moviesList);
       } else {
         setError({ is: true, message: "Something went wrong 😥" });
         toast.error(isError.message);
@@ -43,7 +44,7 @@ const AI = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
-    // propmtToMovies();
+    // promptToMovies();
     setMovies([]);
   };
 
@@ -159,6 +160,16 @@ const AI = () => {
         </Col>
       </Row>
       <Row>
+        {isLoading && (
+          <ThreeDots
+            height="80"
+            width="80"
+            radius="8"
+            color="#fefefe"
+            wrapperClass="mx-auto"
+            visible={true}
+          />
+        )}
         {movies?.map(
           (movie) =>
             movie && (
