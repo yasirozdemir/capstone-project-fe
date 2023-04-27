@@ -16,6 +16,7 @@ const AI = () => {
 
   const promptToMovies = async () => {
     try {
+      setLoading(true);
       const res = await fetch(
         process.env.REACT_APP_API_URL! + "/ai/prompt-to-movies",
         {
@@ -26,7 +27,6 @@ const AI = () => {
           body: JSON.stringify({ prompt }),
         }
       );
-      setLoading(true);
       if (res.ok) {
         const data = await res.json();
         setMovies(data.moviesList);
