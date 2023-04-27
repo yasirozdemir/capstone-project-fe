@@ -117,9 +117,9 @@ const LoginRegister = ({ isLogin }: props) => {
   );
 };
 
-type props = {
+interface props {
   isLogin: boolean;
-};
+}
 
 LoginRegister.propTypes = {
   isLogin: PropTyes.bool,

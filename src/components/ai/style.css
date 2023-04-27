@@ -1,0 +1,56 @@
+#ai-section {
+  color: var(--text-color);
+}
+
+#ai-section > .row:nth-of-type(1) {
+  margin-top: 50vh;
+  transition: all 300ms;
+}
+
+#ai-section > .row:nth-of-type(1).moveUp {
+  transform: translateY(-20vh);
+}
+
+#ai-section .prompt-wrapper {
+  position: relative;
+  color: #212529;
+  display: flex;
+  align-items: center;
+  border-radius: 0.3rem;
+  background-color: var(--text-color);
+  font-size: 1.3rem;
+  font-weight: 600;
+  overflow: hidden;
+}
+
+#ai-section form {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+#ai-section form input {
+  flex-grow: 1;
+  padding: 0.5rem 1rem;
+}
+
+#ai-section .prompt-wrapper button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  fill: #212529;
+  width: 3rem;
+  height: 100%;
+}
+
+#ai-section .Typewriter {
+  position: absolute;
+  left: 1rem;
+  transition: all 200ms;
+}
+
+.prompt-wrapper:focus-within .Typewriter {
+  visibility: hidden;
+  opacity: 0;
+}

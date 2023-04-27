@@ -2,10 +2,11 @@
 
 :root {
   --primary-font: "Ubuntu", sans-serif;
+  --text-color: #eef7ffc2;
 }
 
 body {
-  font-family: var(--primary-font);
+  font-family: var(--primary-font) !important;
   background-color: #222222 !important;
 }
 
