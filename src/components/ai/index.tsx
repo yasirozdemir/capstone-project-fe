@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
 
 // Following import is unnecessary for production, it's just for developers to style the page
-import { sampleMoviesArray } from "../../assets/sampleMovies";
+// import { sampleMoviesArray } from "../../assets/sampleMovies";
 
 const AI = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -52,9 +52,9 @@ const AI = () => {
   };
 
   // Following useEffect is unnecessary for production, it's just for developers to style the page
-  useEffect(() => {
-    setMovies(sampleMoviesArray);
-  }, []);
+  // useEffect(() => {
+  //   setMovies(sampleMoviesArray);
+  // }, []);
 
   return (
     <Container id="ai-section">
