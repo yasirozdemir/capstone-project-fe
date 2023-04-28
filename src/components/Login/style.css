@@ -5,12 +5,10 @@
 }
 
 #login-register-form .logo-wrapper {
-  max-height: 150px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: scale(1.2);
 }
 
 #login-register-form > * {

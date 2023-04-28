@@ -27,11 +27,11 @@ const AI = () => {
           body: JSON.stringify({ prompt }),
         }
       );
+      const data = await res.json();
       if (res.ok) {
-        const data = await res.json();
         setMovies(data.moviesList);
       } else {
-        setError({ is: true, message: "Something went wrong 😥" });
+        setError({ is: true, message: data.message });
         toast.error(isError.message);
       }
     } catch (error) {
@@ -44,79 +44,79 @@ const AI = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
-    // promptToMovies();
+    promptToMovies();
     setMovies([]);
   };
 
-  useEffect(() => {
-    setMovies([
-      {
-        id: "tt0120689",
-        name: "The Green Mile",
-        year: 1999,
-        type: "feature",
-        image: {
-          src: "https://m.media-amazon.com/images/M/MV5BMTUxMzQyNjA5MF5BMl5BanBnXkFtZTYwOTU2NTY3._V1_.jpg",
-          width: 500,
-          height: 740,
-        },
-        starring: "Tom Hanks, Michael Clarke Duncan",
-        similarity: 1,
-      },
-      {
-        id: "tt0108052",
-        name: "Schindler's List",
-        year: 1993,
-        type: "feature",
-        image: {
-          src: "https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg",
-          width: 1600,
-          height: 2400,
-        },
-        starring: "Liam Neeson, Ralph Fiennes",
-        similarity: 1,
-      },
-      {
-        id: "tt0111161",
-        name: "The Shawshank Redemption",
-        year: 1994,
-        type: "feature",
-        image: {
-          src: "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg",
-          width: 1200,
-          height: 1800,
-        },
-        starring: "Tim Robbins, Morgan Freeman",
-        similarity: 1,
-      },
-      {
-        id: "tt0109830",
-        name: "Forrest Gump",
-        year: 1994,
-        type: "feature",
-        image: {
-          src: "https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg",
-          width: 558,
-          height: 809,
-        },
-        starring: "Tom Hanks, Robin Wright",
-        similarity: 1,
-      },
-      {
-        id: "tt0454921",
-        name: "The Pursuit of Happyness",
-        year: 2006,
-        type: "feature",
-        image: {
-          src: "https://m.media-amazon.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_.jpg",
-          width: 1378,
-          height: 2048,
-        },
-        starring: "Will Smith, Thandiwe Newton",
-        similarity: 1,
-      },
-    ]);
-  }, []);
+  // useEffect(() => {
+  //   setMovies([
+  //     {
+  //       id: "tt0120689",
+  //       name: "The Green Mile",
+  //       year: 1999,
+  //       type: "feature",
+  //       image: {
+  //         src: "https://m.media-amazon.com/images/M/MV5BMTUxMzQyNjA5MF5BMl5BanBnXkFtZTYwOTU2NTY3._V1_.jpg",
+  //         width: 500,
+  //         height: 740,
+  //       },
+  //       starring: "Tom Hanks, Michael Clarke Duncan",
+  //       similarity: 1,
+  //     },
+  //     {
+  //       id: "tt0108052",
+  //       name: "Schindler's List",
+  //       year: 1993,
+  //       type: "feature",
+  //       image: {
+  //         src: "https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg",
+  //         width: 1600,
+  //         height: 2400,
+  //       },
+  //       starring: "Liam Neeson, Ralph Fiennes",
+  //       similarity: 1,
+  //     },
+  //     {
+  //       id: "tt0111161",
+  //       name: "The Shawshank Redemption",
+  //       year: 1994,
+  //       type: "feature",
+  //       image: {
+  //         src: "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg",
+  //         width: 1200,
+  //         height: 1800,
+  //       },
+  //       starring: "Tim Robbins, Morgan Freeman",
+  //       similarity: 1,
+  //     },
+  //     {
+  //       id: "tt0109830",
+  //       name: "Forrest Gump",
+  //       year: 1994,
+  //       type: "feature",
+  //       image: {
+  //         src: "https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg",
+  //         width: 558,
+  //         height: 809,
+  //       },
+  //       starring: "Tom Hanks, Robin Wright",
+  //       similarity: 1,
+  //     },
+  //     {
+  //       id: "tt0454921",
+  //       name: "The Pursuit of Happyness",
+  //       year: 2006,
+  //       type: "feature",
+  //       image: {
+  //         src: "https://m.media-amazon.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_.jpg",
+  //         width: 1378,
+  //         height: 2048,
+  //       },
+  //       starring: "Will Smith, Thandiwe Newton",
+  //       similarity: 1,
+  //     },
+  //   ]);
+  // }, []);
 
   return (
     <Container id="ai-section">
@@ -140,6 +140,12 @@ const AI = () => {
                     .typeString("How do you want to feel?")
                     .pauseFor(3000)
                     .deleteAll()
+                    .typeString("What you want to see?")
+                    .pauseFor(3000)
+                    .deleteAll()
+                    .typeString("What are you passionate about?")
+                    .pauseFor(3000)
+                    .deleteAll()
                     .start();
                 }}
               />
@@ -159,24 +165,19 @@ const AI = () => {
           </div>
         </Col>
       </Row>
-      <Row>
+      <Row className="justify-content-center" xs={2} md={3} lg={5}>
         {isLoading && (
           <ThreeDots
             height="80"
             width="80"
             radius="8"
             color="#fefefe"
-            wrapperClass="mx-auto"
+            wrapperStyle={{ marginTop: "10vh" }}
             visible={true}
           />
         )}
         {movies?.map(
-          (movie) =>
-            movie && (
-              <Col key={movie.id}>
-                <MovieCard movie={movie} />
-              </Col>
-            )
+          (movie) => movie && <MovieCard key={movie.id} movie={movie} />
         )}
       </Row>
     </Container>

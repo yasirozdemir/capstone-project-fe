@@ -46,7 +46,7 @@ const LoginRegister = ({ isLogin }: props) => {
           >
             <div className="logo-wrapper">
               <img
-                src="https://res.cloudinary.com/yasirdev/image/upload/v1682517579/capstone/dev/harmonaize_oegw56.png"
+                src={require("../../assets/images/logo-lg.png")}
                 alt="logo"
                 className="w-100"
               />
