@@ -52,14 +52,24 @@ const LoginRegister = ({ isLogin }: props) => {
               />
             </div>
             {!isLogin && (
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                autoComplete="false"
-                required
-                onChange={updateFormData}
-              />
+              <>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  autoComplete="false"
+                  required
+                  onChange={updateFormData}
+                />
+                <input
+                  type="text"
+                  name="surname"
+                  placeholder="Surname"
+                  autoComplete="false"
+                  required
+                  onChange={updateFormData}
+                />
+              </>
             )}
             <input
               type="email"
