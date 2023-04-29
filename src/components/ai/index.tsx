@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IMovie } from "../../interfaces/IMovie";
 import "./style.css";
 import { Col, Container, Row } from "react-bootstrap";
@@ -8,8 +8,9 @@ import MovieCard from "../reusables/MovieCard";
 import { toast } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
 
-// Following import is unnecessary for production, it's just for developers to style the page
+// The following imports are unnecessary for production, it's just for developers to style the page
 // import { sampleMoviesArray } from "../../assets/sampleMovies";
+// import { useEffect } from "react";
 
 const AI = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -51,7 +52,7 @@ const AI = () => {
     setMovies([]);
   };
 
-  // Following useEffect is unnecessary for production, it's just for developers to style the page
+  // The following useEffect is unnecessary for production, it's just for developers to style the page
   // useEffect(() => {
   //   setMovies(sampleMoviesArray);
   // }, []);

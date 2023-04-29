@@ -6,7 +6,6 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { alertOptions } from "../../tools";
-import PropTyes from "prop-types";
 
 const LoginRegister = ({ isLogin }: props) => {
   const [showPW, setShowPW] = useState(false);
@@ -130,10 +129,6 @@ const LoginRegister = ({ isLogin }: props) => {
 interface props {
   isLogin: boolean;
 }
-
-LoginRegister.propTypes = {
-  isLogin: PropTyes.bool,
-};
 
 LoginRegister.defaultProps = {
   isLogin: true,
