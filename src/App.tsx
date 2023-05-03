@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginRegister from "./components/Login";
 import Verified from "./components/Verified";
+import Nav from "./components/Nav";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         theme="light"
       />
       <BrowserRouter>
+        <Nav />
         <Routes>
           <Route path="/" element={<LoginRegister />} />
           <Route path="/register" element={<LoginRegister isLogin={false} />} />
