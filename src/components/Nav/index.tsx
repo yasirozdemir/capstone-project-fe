@@ -68,7 +68,7 @@ const Nav = () => {
           <Link to="/user/me">
             <img
               src={
-                user
+                user.avatar
                   ? user.avatar
                   : "https://res.cloudinary.com/yasirdev/image/upload/v1682762639/WhataMovie/users/avatars/user_default.jpg"
               }
