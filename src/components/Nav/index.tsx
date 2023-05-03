@@ -1,12 +1,13 @@
 import { Container } from "react-bootstrap";
 import "./style.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useAppDispatch } from "../../redux/hooks";
+import { useState, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setLoggedInUser } from "../../redux/actions";
 
 const Nav = () => {
   const dispatch = useAppDispatch();
+  const user = useAppSelector((st) => st.store.user);
   // const observer = new IntersectionObserver((elements) => {
   //   elements.forEach((el) => {
   //     if (el.isIntersecting) {
@@ -17,11 +18,15 @@ const Nav = () => {
 
   // const mdNav: NodeListOf<Element> = document.querySelectorAll("#md-nav");
   // mdNav.forEach((el) => observer.observe(el));
-  localStorage.setItem(
-    "accessToken",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDUwZTAyOGU3YzRhNTYxOWJiODg4YjAiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ2ZXJpZmllZCI6ZmFsc2UsImlhdCI6MTY4MzEwNDMxMCwiZXhwIjoxNjgzMTA3OTEwfQ.CWGrKkfoRWdfZdFSCoCMRiKmw0m1fgfguylGaDhLLPg"
-  );
-  dispatch(setLoggedInUser());
+
+  useEffect(() => {
+    localStorage.setItem(
+      "accessToken",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDUwZTAyOGU3YzRhNTYxOWJiODg4YjAiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ2ZXJpZmllZCI6ZmFsc2UsImlhdCI6MTY4MzEwNDMxMCwiZXhwIjoxNjgzMTA3OTEwfQ.CWGrKkfoRWdfZdFSCoCMRiKmw0m1fgfguylGaDhLLPg"
+    );
+    dispatch(setLoggedInUser());
+    // eslint-disable-next-line
+  }, []);
 
   const [showNav, setShowNav] = useState(false);
   return (
@@ -62,7 +67,11 @@ const Nav = () => {
           <button className="d-none d-lg-inline">Log out</button>
           <Link to="/user/me">
             <img
-              src="https://res.cloudinary.com/yasirdev/image/upload/v1682762639/WhataMovie/users/avatars/user_default.jpg"
+              src={
+                user
+                  ? user.avatar
+                  : "https://res.cloudinary.com/yasirdev/image/upload/v1682762639/WhataMovie/users/avatars/user_default.jpg"
+              }
               alt="user profile"
               className="w-100"
             />
