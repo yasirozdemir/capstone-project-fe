@@ -3,15 +3,17 @@ import { IStore } from "../interfaces/IStore";
 import { IUser } from "../interfaces/IUser";
 
 export const initialState: IStore = {
-  tokens: {
-    spotifyAT: "",
-  },
   user: {
-    fullName: "",
+    name: "",
+    surname: "",
     email: "",
     avatar: "",
+    verified: false,
+    watchlists: [],
+    likedWatchlists: [],
+    followers: [],
+    following: [],
     refreshToken: "",
-    playlists: [],
   },
   users: [],
 };
@@ -27,10 +29,6 @@ export const slicedStore = createSlice({
     // set all the users in the DB
     setUsers: (state, action: PayloadAction<IUser[]>) => {
       state.users = action.payload;
-    },
-    // sets Spotify access token
-    setSpotifyAT: (state, action: PayloadAction<string>) => {
-      state.tokens.spotifyAT = action.payload;
     },
   },
 });

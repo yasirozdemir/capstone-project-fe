@@ -1,32 +1,21 @@
 import { Dispatch } from "redux";
 import { slicedStore } from "./slices";
 
-export const setSpotifyAT = () => {
+export const setLoggedInUser = () => {
   return async (dispatch: Dispatch) => {
     try {
       const options = {
-        method: "POST",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-        body:
-          "grant_type=client_credentials&client_id=" +
-          process.env.REACT_APP_SPOTIFY_CLIENT_ID +
-          "&client_secret=" +
-          process.env.REACT_APP_SPOTIFY_CLIENT_SECRET,
       };
-      const res = await fetch(
-        "https://accounts.spotify.com/api/token",
-        options
-      );
+      const URL = `${process.env.REACT_APP_API_URL}/users/me`;
+      const res = await fetch(URL, options);
       if (res.ok) {
-        const { access_token } = await res.json();
-        dispatch({
-          type: slicedStore.actions.setSpotifyAT,
-          payload: access_token,
-        });
+        const data = await res.json();
+        dispatch({ type: slicedStore.actions.setUser, payload: data });
       } else {
-        console.log("SPOTIFY ACCESS ERROR");
+        console.log(res.body);
       }
     } catch (error) {
       console.error(error);
