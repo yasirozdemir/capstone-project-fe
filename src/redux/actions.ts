@@ -11,11 +11,11 @@ export const setLoggedInUser = () => {
       };
       const URL = `${process.env.REACT_APP_API_URL}/users/me`;
       const res = await fetch(URL, options);
+      const data = await res.json();
       if (res.ok) {
-        const data = await res.json();
         dispatch({ type: slicedStore.actions.setUser, payload: data });
       } else {
-        console.log(res.body);
+        console.log(data.message);
       }
     } catch (error) {
       console.error(error);
