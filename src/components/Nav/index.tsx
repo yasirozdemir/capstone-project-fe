@@ -22,7 +22,7 @@ const Nav = () => {
   useEffect(() => {
     localStorage.setItem(
       "accessToken",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDUwZTAyOGU3YzRhNTYxOWJiODg4YjAiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ2ZXJpZmllZCI6ZmFsc2UsImlhdCI6MTY4MzEwNDMxMCwiZXhwIjoxNjgzMTA3OTEwfQ.CWGrKkfoRWdfZdFSCoCMRiKmw0m1fgfguylGaDhLLPg"
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDUwZTAyOGU3YzRhNTYxOWJiODg4YjAiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ2ZXJpZmllZCI6ZmFsc2UsImlhdCI6MTY4MzEyNzYzNywiZXhwIjoxNjgzMTMxMjM3fQ.bleqIoqeybq7jAWde2GTh4ezr9LFt5OQFQ358vMbJoI"
     );
     dispatch(setLoggedInUser());
     // eslint-disable-next-line
@@ -61,21 +61,28 @@ const Nav = () => {
           <Link to="/ai" className="d-none d-lg-inline">
             Movies
           </Link>
-          <Link to="/" className="d-none d-lg-inline">
-            Login
-          </Link>
-          <button className="d-none d-lg-inline">Log out</button>
-          <Link to="/user/me">
-            <img
-              src={
-                user.avatar
-                  ? user.avatar
-                  : "https://res.cloudinary.com/yasirdev/image/upload/v1682762639/WhataMovie/users/avatars/user_default.jpg"
-              }
-              alt="user profile"
-              className="w-100"
-            />
-          </Link>
+          {user._id === "" ? (
+            <Link to="/" className="d-none d-lg-inline" id="login">
+              Login
+            </Link>
+          ) : (
+            <button className="d-none d-lg-inline" id="logout">
+              Log out
+            </button>
+          )}
+          {user._id && (
+            <Link to="/user/me" id="navatar">
+              <img
+                src={
+                  user.avatar
+                    ? user.avatar
+                    : "https://res.cloudinary.com/yasirdev/image/upload/v1682762639/WhataMovie/users/avatars/user_default.jpg"
+                }
+                alt="user profile"
+                className="w-100"
+              />
+            </Link>
+          )}
         </div>
       </div>
       {showNav && (

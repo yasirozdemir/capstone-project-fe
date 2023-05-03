@@ -1,0 +1,66 @@
+#user-profile {
+  color: white;
+  font-size: 1.2rem;
+}
+
+#user-profile a,
+#user-profile button {
+  color: inherit;
+}
+
+.avatar-wrapper {
+  width: 175px;
+  height: 175px;
+  display: flex;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+#user-profile .f-u-e {
+  background-color: #eef7ff;
+  color: #222222;
+  padding: 0.25rem 2.5rem;
+  border-radius: 0.25rem;
+  transition: all 200ms;
+}
+
+#user-profile .f-u-e:hover,
+#user-profile .f-u-e:focus {
+  outline: transparent;
+  background-color: #eef7ffe0;
+}
+
+#user-profile .wl-li {
+  flex-grow: 1;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#user-profile .wl-li::after {
+  content: "";
+  position: absolute;
+  width: calc(100% + 15px);
+  height: 2px;
+  background-color: #eef7ffe0;
+  bottom: 0;
+  opacity: 0;
+  transition: all 300ms;
+}
+
+#user-profile .wl-li:nth-of-type(1)::after {
+  left: -15px;
+  transform: translateX(100%);
+}
+
+#user-profile .wl-li:nth-of-type(2)::after {
+  right: -15px;
+  transform: translateX(-100%);
+}
+
+#user-profile .wl-li.active::after {
+  opacity: 1;
+  transform: translateX(0%);
+}

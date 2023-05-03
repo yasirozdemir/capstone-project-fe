@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginRegister from "./components/Login";
 import Verified from "./components/Verified";
 import Nav from "./components/Nav";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/register" element={<LoginRegister isLogin={false} />} />
           <Route path="/ai" element={<AI />} />
           <Route path="/verified" element={<Verified />} />
+          <Route path="/user/:userID" element={<UserProfile />} />
           <Route
             path="*"
             element={

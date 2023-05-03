@@ -4,6 +4,7 @@ import { IUser } from "../interfaces/IUser";
 
 export const initialState: IStore = {
   user: {
+    _id: "",
     name: "",
     surname: "",
     email: "",

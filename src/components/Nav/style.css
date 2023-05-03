@@ -25,7 +25,7 @@
   font-weight: 500;
 }
 
-.nav-links-container a:not(:nth-last-of-type(1)),
+.nav-links-container a:not(#navatar),
 .nav-links-container button {
   border-radius: 0.25rem;
   padding: 0.2rem 0.5rem;
@@ -43,7 +43,23 @@
   outline: transparent;
 }
 
-.nav-links-container a:nth-last-of-type(1) {
+#login {
+  background-color: #71a16767;
+}
+
+#login:hover {
+  background-color: #71a167a2;
+}
+
+#logout {
+  background-color: #a1676767;
+}
+
+#logout:hover {
+  background-color: #a16767ad;
+}
+
+#navatar {
   display: flex;
   overflow: hidden;
   border-radius: 50%;
