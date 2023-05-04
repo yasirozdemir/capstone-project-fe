@@ -10,6 +10,7 @@ import { MdLocalMovies } from "react-icons/md";
 import { useAppSelector } from "../../redux/hooks";
 import { ThreeDots } from "react-loader-spinner";
 import WLCardHorizontal from "../reusables/WLCardHorizontal";
+import { alertOptions } from "../../tools";
 
 const UserProfile = () => {
   const loggedInUser = useAppSelector((st) => st.store.user);
@@ -20,6 +21,45 @@ const UserProfile = () => {
   const [isMe, setIsMe] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const [showWLs, setShowWLs] = useState(true);
+
+  const followFunc = async (userID: string | undefined, isFollow: boolean) => {
+    try {
+      if (userID === undefined) {
+        setError({
+          is: true,
+          message: "Something went wrong following this user!",
+        });
+        toast.error(isError.message, alertOptions);
+      } else {
+        const options = {
+          method: isFollow ? "POST" : "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        };
+        const URL = `${process.env.REACT_APP_API_URL}/users/follow/${userID}`;
+        const res = await fetch(URL, options);
+        const data = await res.json();
+        if (res.ok) {
+          toast.success(data.message, alertOptions);
+          setUser((prev) => {
+            if (prev) {
+              return { ...prev, followers: data.followers };
+            }
+            return prev;
+          });
+          setIsFollowing(isFollow);
+        } else {
+          setError({ is: true, message: data.message });
+          toast.error(isError.message, alertOptions);
+        }
+      }
+    } catch (error) {
+      setError({ is: true, message: String(error) });
+      toast.error(isError.message, alertOptions);
+    }
+  };
 
   const getUser = async () => {
     try {
@@ -34,20 +74,23 @@ const UserProfile = () => {
       const data = await res.json();
       if (res.ok) {
         setUser(data);
-        setIsFollowing(loggedInUser.following?.includes(data?._id));
+        setIsFollowing(loggedInUser.following.includes(data._id));
       } else {
         setError({ is: true, message: data.message });
-        toast.error(isError.message);
+        toast.error(isError.message, alertOptions);
       }
     } catch (error) {
       setError({ is: true, message: String(error) });
-      toast.error(isError.message);
+      toast.error(isError.message, alertOptions);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
+    document.title = `What a Movie ${
+      user ? `| ${user.name} ${user.surname}` : ""
+    }`;
     if (userID === "me") setIsMe(true);
     else setIsMe(false);
     getUser();
@@ -119,9 +162,23 @@ const UserProfile = () => {
                 {!isMe && (
                   <>
                     {isFollowing ? (
-                      <button className="f-u-e">Unfollow</button>
+                      <button
+                        className="f-u-e"
+                        onClick={() => {
+                          followFunc(user?._id, false);
+                        }}
+                      >
+                        Unfollow
+                      </button>
                     ) : (
-                      <button className="f-u-e">Follow</button>
+                      <button
+                        className="f-u-e"
+                        onClick={() => {
+                          followFunc(user?._id, true);
+                        }}
+                      >
+                        Follow
+                      </button>
                     )}
                   </>
                 )}
