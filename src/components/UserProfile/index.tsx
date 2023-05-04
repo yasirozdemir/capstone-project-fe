@@ -10,9 +10,12 @@ import { MdLocalMovies } from "react-icons/md";
 import { ThreeDots } from "react-loader-spinner";
 import WLCardHorizontal from "../reusables/WLCardHorizontal";
 import { alertOptions } from "../../tools";
+import PPModal from "../modals/AvatarModal";
+import { useAppSelector } from "../../redux/hooks";
 
 const UserProfile = () => {
   const loggedInUserID = localStorage.getItem("loggedInUserID");
+  const loggedInUser = useAppSelector((st) => st.store.user);
   const { userID } = useParams();
   const [user, setUser] = useState<IUser | null>(null);
   const [isLoading, setLoading] = useState(false);
@@ -20,6 +23,7 @@ const UserProfile = () => {
   const [isMe, setIsMe] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const [showWLs, setShowWLs] = useState(true);
+  const [showAvatarModal, setShowAvatarModal] = useState(false);
 
   const followFunc = async (userID: string | undefined, isFollow: boolean) => {
     try {
@@ -88,11 +92,13 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    if (userID === "me") setIsMe(true);
-    else setIsMe(false);
+    if (userID === "me") {
+      setIsMe(true);
+      setShowAvatarModal(false);
+    } else setIsMe(false);
     getUser();
     // eslint-disable-next-line
-  }, [userID]);
+  }, [userID, loggedInUser]);
 
   return (
     <Container id="user-profile" className="topnav-fix">
@@ -116,7 +122,7 @@ const UserProfile = () => {
               md={6}
               className="d-flex flex-column flex-lg-row align-items-center"
             >
-              <div className="avatar-wrapper mr-lg-5">
+              <div className={`avatar-wrapper mr-lg-5 ${isMe ? "me" : ""}`}>
                 <img
                   src={
                     user
@@ -125,7 +131,16 @@ const UserProfile = () => {
                   }
                   alt="user avatar"
                   className="w-100"
+                  onClick={() => {
+                    if (isMe) setShowAvatarModal(!showAvatarModal);
+                  }}
                 />
+                {isMe && (
+                  <PPModal
+                    showAvatarModal={showAvatarModal}
+                    setShowAvatarModal={setShowAvatarModal}
+                  />
+                )}
               </div>
               <div className="d-flex flex-column ml-0 ml-lg-4 align-items-center justify-content-center align-items-lg-start">
                 <div className="d-flex align-items-center">

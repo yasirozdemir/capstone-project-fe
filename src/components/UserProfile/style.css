@@ -22,6 +22,10 @@
   overflow: hidden;
 }
 
+.avatar-wrapper.me {
+  cursor: pointer;
+}
+
 #user-profile .f-u-e {
   background-color: #eef7ff;
   color: #222222;
