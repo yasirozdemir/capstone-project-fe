@@ -8,8 +8,19 @@ import Verified from "./components/non-functionals/Verified";
 import Nav from "./components/Nav";
 import UserProfile from "./components/UserProfile";
 import GoogleRedirect from "./components/non-functionals/GoogleRedirect";
+import { useAppDispatch } from "./redux/hooks";
+import { setLoggedInUser } from "./redux/actions";
+import { useEffect } from "react";
 
 function App() {
+  const dispatch = useAppDispatch();
+  const accessToken = localStorage.getItem("accessToken");
+
+  useEffect(() => {
+    dispatch(setLoggedInUser());
+    // eslint-disable-next-line
+  }, [accessToken]);
+
   return (
     <div className="App">
       <ToastContainer

@@ -1,19 +1,11 @@
 import { Container } from "react-bootstrap";
 import "./style.css";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setLoggedInUser } from "../../redux/actions";
+import { useState } from "react";
+import { useAppSelector } from "../../redux/hooks";
 
 const Nav = () => {
-  const dispatch = useAppDispatch();
   const user = useAppSelector((st) => st.store.user);
-
-  useEffect(() => {
-    dispatch(setLoggedInUser());
-    // eslint-disable-next-line
-  }, []);
-
   const [showNav, setShowNav] = useState(false);
 
   return (
@@ -33,7 +25,7 @@ const Nav = () => {
           </button>
         </div>
         <div style={{ width: "8rem" }}>
-          <Link to="/ai">
+          <Link to="/discover">
             <img
               src={require("../../assets/images/logo-lg.png")}
               alt="logo"

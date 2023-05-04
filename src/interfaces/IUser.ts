@@ -9,7 +9,7 @@ export interface IUser {
   verified: boolean;
   watchlists: IWatchlist[];
   likedWatchlists: IWatchlist[];
-  followers: IUser[];
-  following: IUser[];
+  followers: string[];
+  following: string[];
   refreshToken: string;
 }

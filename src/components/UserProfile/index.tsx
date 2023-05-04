@@ -87,6 +87,8 @@ const UserProfile = () => {
     }
   };
 
+  console.log(loggedInUser);
+
   useEffect(() => {
     document.title = `What a Movie ${
       user ? `| ${user.name} ${user.surname}` : ""
