@@ -12,6 +12,7 @@ import WLCardHorizontal from "../reusables/WLCardHorizontal";
 import { alertOptions } from "../../tools";
 import PPModal from "../modals/AvatarModal";
 import { useAppSelector } from "../../redux/hooks";
+import EditProfile from "../modals/EditProfile";
 
 const UserProfile = () => {
   const loggedInUserID = localStorage.getItem("loggedInUserID");
@@ -24,6 +25,7 @@ const UserProfile = () => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [showWLs, setShowWLs] = useState(true);
   const [showAvatarModal, setShowAvatarModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const followFunc = async (userID: string | undefined, isFollow: boolean) => {
     try {
@@ -194,7 +196,22 @@ const UserProfile = () => {
                     )}
                   </>
                 )}
-                {isMe && <button className="f-u-e">Edit Profile</button>}
+                {isMe && (
+                  <>
+                    <button
+                      className="f-u-e"
+                      onClick={() => {
+                        setShowEditModal(!showEditModal);
+                      }}
+                    >
+                      Edit Profile
+                    </button>
+                    <EditProfile
+                      showEditModal={showEditModal}
+                      setShowEditModal={setShowEditModal}
+                    />
+                  </>
+                )}
               </div>
             </Col>
           </Row>

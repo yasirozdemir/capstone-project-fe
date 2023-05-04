@@ -1,0 +1,32 @@
+.modal-dialog {
+  margin-block-start: 5rem !important;
+}
+
+#EditModal .modal-footer {
+  border-top: transparent;
+  justify-content: center;
+}
+
+#EditModal .modal-body {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+#EditModal .modal-body input {
+  background-color: #eef7ffc2;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  font-weight: 600;
+  transition: all 200ms ease;
+}
+
+#EditModal .modal-footer button {
+  display: flex;
+  align-items: center;
+  background-color: #eef7ffc2;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  font-weight: 600;
+  transition: all 200ms ease;
+}
