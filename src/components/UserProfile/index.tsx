@@ -142,7 +142,7 @@ const UserProfile = () => {
                   />
                 )}
               </div>
-              <div className="d-flex flex-column ml-0 ml-lg-4 align-items-center justify-content-center align-items-lg-start">
+              <div className="d-flex flex-column ml-0 ml-lg-2 align-items-center justify-content-center align-items-lg-start">
                 <div className="d-flex align-items-center">
                   <h2 className="mt-3 mt-lg-0 mb-0 text-center text-lg-left">
                     {user ? `${user.name} ${user.surname}` : "John Doe"}

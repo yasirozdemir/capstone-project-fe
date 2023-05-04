@@ -57,10 +57,10 @@ const Nav = () => {
           </Link>
         </div>
         <div className="nav-links-container">
-          <Link to="/ai" className="d-none d-lg-inline">
+          <Link to="/discover" className="d-none d-lg-inline">
             Discover
           </Link>
-          <Link to="/ai" className="d-none d-lg-inline">
+          <Link to="/movies" className="d-none d-lg-inline">
             Movies
           </Link>
           {user._id === "" ? (
