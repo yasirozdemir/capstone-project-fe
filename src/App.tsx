@@ -1,5 +1,5 @@
 import React from "react";
-import AI from "./components/ai";
+import AI from "./components/Discover";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -28,13 +28,13 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginRegister />} />
           <Route path="/register" element={<LoginRegister isLogin={false} />} />
-          <Route path="/ai" element={<AI />} />
+          <Route path="/discover" element={<AI />} />
           <Route path="/verified" element={<Verified />} />
           <Route path="/user/:userID" element={<UserProfile />} />
           <Route
             path="*"
             element={
-              <h1 className="text-center text-white mt-5">
+              <h1 className="text-center text-white mt-5 topnav-fix">
                 404 Page Not Found :(
               </h1>
             }

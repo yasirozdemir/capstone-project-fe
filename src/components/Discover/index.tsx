@@ -7,6 +7,7 @@ import { RiMovie2Fill } from "react-icons/ri";
 import MovieCard from "../reusables/MovieCard";
 import { toast } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
+import { alertOptions } from "../../tools";
 
 // The following imports are unnecessary for production, it's just for developers to style the page
 // import { sampleMoviesArray } from "../../assets/sampleMovies";
@@ -36,11 +37,11 @@ const AI = () => {
         setMovies(data.moviesList);
       } else {
         setError({ is: true, message: data.message });
-        toast.error(isError.message);
+        toast.error(isError.message, alertOptions);
       }
     } catch (error) {
       setError({ is: true, message: String(error) });
-      toast.error(isError.message);
+      toast.error(isError.message, alertOptions);
     } finally {
       setLoading(false);
     }

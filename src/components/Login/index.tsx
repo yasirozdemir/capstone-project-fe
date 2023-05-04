@@ -1,7 +1,7 @@
 import "./style.css";
 import { ChangeEventHandler } from "react";
 import { Container, Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -10,6 +10,8 @@ import { alertOptions } from "../../tools";
 const LoginRegister = ({ isLogin }: props) => {
   const [showPW, setShowPW] = useState(false);
   const [formData, setFormData] = useState({});
+  const [isError, setError] = useState({ is: false, message: "" });
+  const navigate = useNavigate();
 
   const updateFormData: ChangeEventHandler<HTMLInputElement> = (e) => {
     setFormData({
@@ -18,20 +20,35 @@ const LoginRegister = ({ isLogin }: props) => {
     });
   };
 
-  const loginFunc = () => {
-    toast.success("Login!", alertOptions);
-    console.log(formData);
-  };
-
-  const registerFunc = () => {
-    toast.success("Register!", alertOptions);
-    console.log(formData);
+  const loginOrRegisterFunc = async () => {
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      };
+      let URL = `${process.env.REACT_APP_API_URL}/users`;
+      if (isLogin) URL += "/session";
+      const res = await fetch(URL, options);
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem("accessToken", data.accessToken);
+        navigate("/discover");
+      } else {
+        setError({ is: true, message: data.message });
+        toast.error(isError.message, alertOptions);
+      }
+    } catch (error) {
+      setError({ is: true, message: String(error) });
+      toast.error(isError.message, alertOptions);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isLogin) loginFunc();
-    else registerFunc();
+    loginOrRegisterFunc();
   };
 
   return (
@@ -101,7 +118,7 @@ const LoginRegister = ({ isLogin }: props) => {
               <small>OR</small>
             </div>
             <a
-              href="#/"
+              href={`${process.env.REACT_APP_API_URL}/users/googleLogin`}
               className="d-flex justify-content-center align-items-center"
             >
               <img

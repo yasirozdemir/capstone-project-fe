@@ -6,5 +6,5 @@ export const alertOptions: any = {
   pauseOnHover: true,
   draggable: true,
   progress: undefined,
-  theme: "dark",
+  theme: "light",
 };
