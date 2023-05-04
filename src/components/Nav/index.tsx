@@ -1,12 +1,35 @@
 import { Container } from "react-bootstrap";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAppSelector } from "../../redux/hooks";
+import { toast } from "react-toastify";
+import { alertOptions } from "../../tools";
 
 const Nav = () => {
   const user = useAppSelector((st) => st.store.user);
   const [showNav, setShowNav] = useState(false);
+  const navigate = useNavigate();
+
+  const logOut = async () => {
+    try {
+      const options = {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      };
+      const URL = `${process.env.REACT_APP_API_URL}/users/session`;
+      const res = await fetch(URL, options);
+      if (res.ok) {
+        localStorage.removeItem("accessToken");
+        navigate("/");
+      } else {
+        const data = await res.json();
+        toast.error(data.message, alertOptions);
+      }
+    } catch (error) {}
+  };
 
   return (
     <Container fluid className="sticky-top" id="nav">
@@ -45,7 +68,7 @@ const Nav = () => {
               Login
             </Link>
           ) : (
-            <button className="d-none d-lg-inline" id="logout">
+            <button className="d-none d-lg-inline" id="logout" onClick={logOut}>
               Log out
             </button>
           )}
