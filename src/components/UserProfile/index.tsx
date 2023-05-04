@@ -74,6 +74,7 @@ const UserProfile = () => {
       if (res.ok) {
         setUser(data);
         setIsFollowing(data.followers.includes(loggedInUserID));
+        document.title = `What a Movie | ${data.name} ${data.surname}`;
       } else {
         setError({ is: true, message: data.message });
         toast.error(isError.message, alertOptions);
@@ -87,9 +88,6 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    document.title = `What a Movie ${
-      user ? `| ${user.name} ${user.surname}` : ""
-    }`;
     if (userID === "me") setIsMe(true);
     else setIsMe(false);
     getUser();
