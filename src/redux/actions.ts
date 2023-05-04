@@ -14,6 +14,7 @@ export const setLoggedInUser = () => {
       const data = await res.json();
       if (res.ok) {
         dispatch({ type: slicedStore.actions.setUser, payload: data });
+        localStorage.setItem("loggedInUserID", data._id);
       } else {
         console.log(data.message);
       }

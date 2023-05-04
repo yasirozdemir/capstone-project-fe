@@ -7,13 +7,12 @@ import { Col, Container, Row } from "react-bootstrap";
 import { GoVerified } from "react-icons/go";
 import { AiFillLike } from "react-icons/ai";
 import { MdLocalMovies } from "react-icons/md";
-import { useAppSelector } from "../../redux/hooks";
 import { ThreeDots } from "react-loader-spinner";
 import WLCardHorizontal from "../reusables/WLCardHorizontal";
 import { alertOptions } from "../../tools";
 
 const UserProfile = () => {
-  const loggedInUser = useAppSelector((st) => st.store.user);
+  const loggedInUserID = localStorage.getItem("loggedInUserID");
   const { userID } = useParams();
   const [user, setUser] = useState<IUser | null>(null);
   const [isLoading, setLoading] = useState(false);
@@ -74,7 +73,7 @@ const UserProfile = () => {
       const data = await res.json();
       if (res.ok) {
         setUser(data);
-        setIsFollowing(loggedInUser.following.includes(data._id));
+        setIsFollowing(data.followers.includes(loggedInUserID));
       } else {
         setError({ is: true, message: data.message });
         toast.error(isError.message, alertOptions);
@@ -86,8 +85,6 @@ const UserProfile = () => {
       setLoading(false);
     }
   };
-
-  console.log(loggedInUser);
 
   useEffect(() => {
     document.title = `What a Movie ${
