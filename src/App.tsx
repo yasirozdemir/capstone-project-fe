@@ -4,9 +4,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginRegister from "./components/Login";
-import Verified from "./components/Verified";
+import Verified from "./components/non-functionals/Verified";
 import Nav from "./components/Nav";
 import UserProfile from "./components/UserProfile";
+import GoogleRedirect from "./components/non-functionals/GoogleRedirect";
 
 function App() {
   return (
@@ -36,7 +37,6 @@ function App() {
               </>
             }
           />
-          <Route path="/verified" element={<Verified />} />
           <Route
             path="/user/:userID"
             element={
@@ -46,6 +46,8 @@ function App() {
               </>
             }
           />
+          <Route path="/verified" element={<Verified />} />
+          <Route path="/googleRedirect" element={<GoogleRedirect />} />
           <Route
             path="*"
             element={

@@ -1,0 +1,21 @@
+#google-redirect-card {
+  background-color: white;
+  height: min-content;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+  padding-block-end: 1rem;
+}
+
+#google-redirect-card > div:nth-of-type(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+}

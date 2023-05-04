@@ -24,7 +24,7 @@ const Verified = () => {
             {v ? (
               <RiCheckboxCircleFill fill="green" />
             ) : (
-              <RiErrorWarningFill fill="red" />
+              <RiErrorWarningFill fill="var(--logo-color)" />
             )}
           </span>
           {u ? (
