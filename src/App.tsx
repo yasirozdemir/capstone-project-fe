@@ -24,13 +24,28 @@ function App() {
         theme="light"
       />
       <BrowserRouter>
-        <Nav />
         <Routes>
           <Route path="/" element={<LoginRegister />} />
           <Route path="/register" element={<LoginRegister isLogin={false} />} />
-          <Route path="/discover" element={<AI />} />
+          <Route
+            path="/discover"
+            element={
+              <>
+                <Nav />
+                <AI />
+              </>
+            }
+          />
           <Route path="/verified" element={<Verified />} />
-          <Route path="/user/:userID" element={<UserProfile />} />
+          <Route
+            path="/user/:userID"
+            element={
+              <>
+                <Nav />
+                <UserProfile />
+              </>
+            }
+          />
           <Route
             path="*"
             element={
