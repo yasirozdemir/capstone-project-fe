@@ -18,7 +18,7 @@ const WLCard = ({ WL }: props) => {
           .filter((m) => m)
           .map((m, i, arr) => (
             <React.Fragment key={m._id}>
-              <Link to={`/users/${m._id}`}>
+              <Link to={`/user/${m._id}`}>
                 <small style={{ fontSize: "0.8rem" }}>
                   {m.name} {m.surname}
                 </small>

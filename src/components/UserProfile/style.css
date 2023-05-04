@@ -3,14 +3,20 @@
   font-size: 1.2rem;
 }
 
+#user-profile h2 {
+  font-size: 1.4rem;
+}
+
 #user-profile a,
 #user-profile button {
   color: inherit;
 }
 
 .avatar-wrapper {
-  width: 175px;
-  height: 175px;
+  min-width: 175px;
+  max-width: 175px;
+  min-height: 175px;
+  max-height: 175px;
   display: flex;
   border-radius: 50%;
   overflow: hidden;
@@ -42,10 +48,12 @@
 #user-profile .wl-li::after {
   content: "";
   position: absolute;
-  width: calc(100% + 15px);
+  width: 100%;
   height: 2px;
   background-color: #eef7ffe0;
   bottom: 0;
+  left: 15px;
+  right: 15px;
   opacity: 0;
   transition: all 300ms;
 }
