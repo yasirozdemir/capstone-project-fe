@@ -17,7 +17,7 @@ function App() {
   const accessToken = localStorage.getItem("accessToken");
 
   useEffect(() => {
-    dispatch(setLoggedInUser());
+    if (accessToken) dispatch(setLoggedInUser());
     // eslint-disable-next-line
   }, [accessToken]);
 

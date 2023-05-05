@@ -6,12 +6,15 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { alertOptions } from "../../tools";
+import { useAppDispatch } from "../../redux/hooks";
+import { slicedStore } from "../../redux/slices";
 
 const LoginRegister = ({ isLogin }: props) => {
   const [showPW, setShowPW] = useState(false);
   const [formData, setFormData] = useState({});
   const [isError, setError] = useState({ is: false, message: "" });
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const updateFormData: ChangeEventHandler<HTMLInputElement> = (e) => {
     setFormData({
@@ -33,9 +36,14 @@ const LoginRegister = ({ isLogin }: props) => {
       if (isLogin) URL += "/session";
       const res = await fetch(URL, options);
       const data = await res.json();
+      console.log(data);
       if (res.ok) {
         localStorage.setItem("accessToken", data.accessToken);
         navigate("/discover");
+        dispatch({
+          type: slicedStore.actions.setUser,
+          payload: data.user,
+        });
       } else {
         setError({ is: true, message: data.message });
         toast.error(isError.message, alertOptions);
