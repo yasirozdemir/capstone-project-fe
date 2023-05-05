@@ -63,16 +63,12 @@ const Nav = () => {
           <Link to="/movies" className="d-none d-lg-inline">
             Movies
           </Link>
-          {user._id === "" ? (
-            <Link to="/" className="d-none d-lg-inline" id="login">
-              Login
-            </Link>
-          ) : (
+          {user._id !== "" && (
             <button className="d-none d-lg-inline" id="logout" onClick={logOut}>
               Log out
             </button>
           )}
-          {user._id && (
+          {user._id !== "" ? (
             <Link to="/user/me" id="navatar">
               <img
                 src={
@@ -84,20 +80,20 @@ const Nav = () => {
                 className="w-100"
               />
             </Link>
+          ) : (
+            <Link to="/" id="login">
+              Login
+            </Link>
           )}
         </div>
       </div>
       {showNav && (
         <div id="md-nav" className="pb-2">
-          <Link to="/ai" className="mt-2">
+          <Link to="/discover" className="mt-2">
             Discover
           </Link>
           <Link to="/movies">Movies</Link>
-          {user._id === "" ? (
-            <Link to="/" id="login">
-              Login
-            </Link>
-          ) : (
+          {user._id !== "" && (
             <button id="logout" onClick={logOut}>
               Log out
             </button>
