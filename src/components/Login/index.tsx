@@ -120,7 +120,7 @@ const LoginRegister = ({ isLogin }: props) => {
                 {showPW ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
               </button>
             </div>
-            <button type="submit">{isLogin ? "LOGIN" : "REGISTER"}</button>
+            <button type="submit">{isLogin ? "Login" : "Register"}</button>
             <div id="or-line">
               <small>OR</small>
             </div>
