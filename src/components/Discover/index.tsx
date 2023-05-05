@@ -105,7 +105,13 @@ const AI = () => {
           </div>
         </Col>
       </Row>
-      <Row className="justify-content-center" xs={2} md={3} lg={5}>
+      <Row
+        className="justify-content-center mb-3 mb-lg-0"
+        xs={1}
+        md={3}
+        lg={5}
+        style={{ rowGap: "1rem" }}
+      >
         {isLoading && (
           <ThreeDots
             height="80"
