@@ -3,12 +3,13 @@
 }
 
 #ai-section > .row:nth-of-type(1) {
-  margin-top: 50vh;
   transition: all 600ms;
+  height: 30vh;
+  align-items: flex-end;
 }
 
 #ai-section > .row:nth-of-type(1).moveUp {
-  transform: translateY(-20vh);
+  transform: translateY(-10vh);
 }
 
 #ai-section .prompt-wrapper {
@@ -18,7 +19,6 @@
   align-items: center;
   border-radius: 0.3rem;
   background-color: var(--text-color);
-  overflow: hidden;
 }
 
 @media (min-width: 768px) {
