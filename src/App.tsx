@@ -62,8 +62,8 @@ function App() {
           <Route
             path="*"
             element={
-              <h1 className="text-center text-white mt-5 topnav-fix">
-                404 Page Not Found :(
+              <h1 className="text-center text-white topnav-fix">
+                404 Page Not Found!
               </h1>
             }
           />
