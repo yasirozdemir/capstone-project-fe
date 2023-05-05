@@ -36,7 +36,6 @@ const LoginRegister = ({ isLogin }: props) => {
       if (isLogin) URL += "/session";
       const res = await fetch(URL, options);
       const data = await res.json();
-      console.log(data);
       if (res.ok) {
         localStorage.setItem("accessToken", data.accessToken);
         navigate("/discover");
