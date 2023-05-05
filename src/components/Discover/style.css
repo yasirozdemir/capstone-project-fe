@@ -18,9 +18,13 @@
   align-items: center;
   border-radius: 0.3rem;
   background-color: var(--text-color);
-  font-size: 1.3rem;
-  font-weight: 600;
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  #ai-section .prompt-wrapper {
+    font-size: 1.3rem;
+  }
 }
 
 #ai-section form {
