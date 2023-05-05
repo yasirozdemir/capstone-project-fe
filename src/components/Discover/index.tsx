@@ -3,7 +3,7 @@ import { IMovie } from "../../interfaces/IMovie";
 import "./style.css";
 import { Col, Container, Row } from "react-bootstrap";
 import Typewriter from "typewriter-effect";
-import { RiMovie2Fill } from "react-icons/ri";
+import { TbMoodSearch } from "react-icons/tb";
 import MovieCard from "../reusables/MovieCard";
 import { toast } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
@@ -50,7 +50,6 @@ const AI = () => {
   const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
     promptToMovies();
-    setMovies([]);
   };
 
   // The following useEffect is unnecessary for production, it's just for developers to style the page
@@ -59,74 +58,79 @@ const AI = () => {
   // }, []);
 
   return (
-    <Container id="ai-section">
-      <Row className={movies.length !== 0 ? "moveUp" : ""}>
-        <Col>
-          <div className="prompt-wrapper">
-            {prompt.length === 0 && (
-              <Typewriter
-                options={{
-                  autoStart: true,
-                  loop: true,
-                }}
-                onInit={(typewriter) => {
-                  typewriter
-                    .typeString("Describe your mood briefly!")
-                    .pauseFor(3000)
-                    .deleteAll()
-                    .typeString("How do you feel?")
-                    .pauseFor(3000)
-                    .deleteAll()
-                    .typeString("How do you want to feel?")
-                    .pauseFor(3000)
-                    .deleteAll()
-                    .typeString("What you want to see?")
-                    .pauseFor(3000)
-                    .deleteAll()
-                    .typeString("What are you passionate about?")
-                    .pauseFor(3000)
-                    .deleteAll()
-                    .start();
-                }}
-              />
-            )}
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="prompt"
-                onChange={(e) => {
-                  setPrompt(e.target.value);
-                }}
-              />
-              <button type="submit" disabled={prompt.length === 0}>
-                <RiMovie2Fill />
-              </button>
-            </form>
-          </div>
-        </Col>
-      </Row>
-      <Row
-        className="justify-content-center mb-3 mb-lg-0"
-        xs={1}
-        md={3}
-        lg={5}
-        style={{ rowGap: "1rem" }}
+    <div id="ai-wrapper">
+      <Container
+        id="ai-section"
+        className={movies.length !== 0 ? "moveUp" : ""}
       >
-        {isLoading && (
-          <ThreeDots
-            height="80"
-            width="80"
-            radius="8"
-            color="#fefefe"
-            wrapperStyle={{ marginTop: "10vh" }}
-            visible={true}
-          />
-        )}
-        {movies?.map(
-          (movie) => movie && <MovieCard key={movie._id} movie={movie} />
-        )}
-      </Row>
-    </Container>
+        <Row>
+          <Col>
+            <div className="prompt-wrapper">
+              {prompt.length === 0 && (
+                <Typewriter
+                  options={{
+                    autoStart: true,
+                    loop: true,
+                  }}
+                  onInit={(typewriter) => {
+                    typewriter
+                      .typeString("Describe your mood briefly!")
+                      .pauseFor(3000)
+                      .deleteAll()
+                      .typeString("How do you feel?")
+                      .pauseFor(3000)
+                      .deleteAll()
+                      .typeString("How do you want to feel?")
+                      .pauseFor(3000)
+                      .deleteAll()
+                      .typeString("What you want to see?")
+                      .pauseFor(3000)
+                      .deleteAll()
+                      .typeString("What are you passionate about?")
+                      .pauseFor(3000)
+                      .deleteAll()
+                      .start();
+                  }}
+                />
+              )}
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  name="prompt"
+                  onChange={(e) => {
+                    setPrompt(e.target.value);
+                  }}
+                />
+                <button type="submit" disabled={prompt.length === 0}>
+                  <TbMoodSearch fill="#00000000" color="#fff" />
+                </button>
+              </form>
+            </div>
+          </Col>
+        </Row>
+        <Row
+          className="justify-content-center pb-3 pb-lg-0"
+          xs={1}
+          md={3}
+          lg={5}
+          style={{ rowGap: "1rem" }}
+        >
+          {isLoading && (
+            <ThreeDots
+              height="80"
+              width="80"
+              radius="8"
+              color="#fefefe"
+              wrapperStyle={{ marginTop: "10vh" }}
+              visible={true}
+            />
+          )}
+          {movies?.map(
+            (movie) => movie && <MovieCard key={movie._id} movie={movie} />
+          )}
+        </Row>
+      </Container>
+    </div>
   );
 };
 
