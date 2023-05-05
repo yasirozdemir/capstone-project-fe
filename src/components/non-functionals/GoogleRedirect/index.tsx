@@ -3,16 +3,20 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Col, Row } from "react-bootstrap";
 import { useEffect } from "react";
 import { MutatingDots } from "react-loader-spinner";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setLoggedInUser } from "../../../redux/actions";
 
 const GoogleRedirect = () => {
   const loc = useLocation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(loc.search);
     const accessToken = searchParams.get("accessToken");
     if (accessToken) {
       localStorage.setItem("accessToken", accessToken);
+      dispatch(setLoggedInUser());
       navigate("/discover");
     }
     // eslint-disable-next-line
