@@ -88,13 +88,20 @@ const Nav = () => {
         </div>
       </div>
       {showNav && (
-        <div id="md-nav">
+        <div id="md-nav" className="pb-2">
           <Link to="/ai" className="mt-2">
             Discover
           </Link>
           <Link to="/movies">Movies</Link>
-          <Link to="/">Login</Link>
-          <button>Log out</button>
+          {user._id === "" ? (
+            <Link to="/" id="login">
+              Login
+            </Link>
+          ) : (
+            <button id="logout" onClick={logOut}>
+              Log out
+            </button>
+          )}
         </div>
       )}
     </Container>

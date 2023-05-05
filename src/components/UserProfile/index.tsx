@@ -221,7 +221,7 @@ const UserProfile = () => {
             <Col
               xs={12}
               md={8}
-              className="d-flex"
+              className="d-flex px-0"
               style={{ borderBlockEnd: "1px solid #eef7ff8f" }}
             >
               <button

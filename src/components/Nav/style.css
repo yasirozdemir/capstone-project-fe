@@ -143,4 +143,6 @@
   text-decoration: none;
   color: inherit;
   font-weight: inherit;
+  border-radius: 0.25rem;
+  padding: 0.2rem 0.5rem;
 }
