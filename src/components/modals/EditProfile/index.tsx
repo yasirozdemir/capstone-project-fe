@@ -6,38 +6,44 @@ import { toast } from "react-toastify";
 import { alertOptions } from "../../../tools";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { IoMdCheckmarkCircle, IoMdClose } from "react-icons/io";
-import { setLoggedInUser } from "../../../redux/actions";
+import { slicedStore } from "../../../redux/slices";
 
-const EditProfile = ({ showEditModal, setShowEditModal }: props) => {
+const EditProfile = ({ showEditModal, setShowEditModal, setUser }: props) => {
   const [formData, setFormData] = useState<IFormData>({});
   const loggedInUser = useAppSelector((st) => st.store.user);
   const dispatch = useAppDispatch();
 
-  //   const editFunc = async () => {
-  //     try {
-  //       if (formData.password !== undefined && formData.password !== "") {
-  //         delete formData.password;
-  //       }
-
-  //       const options = {
-  //         method: "PUT",
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //         },
-  //         body: JSON.stringify(formData),
-  //       };
-  //       const URL = `${process.env.REACT_APP_API_URL}/users/me`;
-  //       const res = await fetch(URL, options);
-  //       if (res.ok) {
-  //         dispatch(setLoggedInUser());
-  //       } else {
-  //         const data = await res.json();
-  //         toast.error(data.message, alertOptions);
-  //       }
-  //     } catch (error) {
-  //       toast.error(String(error), alertOptions);
-  //     }
-  //   };
+  const editFunc = async () => {
+    try {
+      if (formData.password === undefined || formData.password === "") {
+        delete formData.password;
+      }
+      const options = {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      };
+      const URL = `${process.env.REACT_APP_API_URL}/users/me`;
+      if (options.body !== "{}") {
+        const res = await fetch(URL, options);
+        const data = await res.json();
+        if (res.ok) {
+          setUser(data);
+          dispatch({ type: slicedStore.actions.setUser, payload: data });
+          toast.success("User successfully edited!", alertOptions);
+        } else {
+          toast.error(data.message, alertOptions);
+        }
+      } else {
+        toast.error("You haven't updated anything!", alertOptions);
+      }
+    } catch (error) {
+      toast.error(String(error), alertOptions);
+    }
+  };
 
   const updateFormData: ChangeEventHandler<HTMLInputElement> = (e) => {
     setFormData({
@@ -48,7 +54,7 @@ const EditProfile = ({ showEditModal, setShowEditModal }: props) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // editFunc();
+    editFunc();
   };
 
   return (
@@ -120,6 +126,7 @@ interface IFormData {
 interface props {
   showEditModal: boolean;
   setShowEditModal: Function;
+  setUser: Function;
 }
 
 export default EditProfile;

@@ -97,6 +97,7 @@ const UserProfile = () => {
     if (userID === "me") {
       setIsMe(true);
       setShowAvatarModal(false);
+      setShowEditModal(false);
     } else setIsMe(false);
     getUser();
     // eslint-disable-next-line
@@ -209,6 +210,7 @@ const UserProfile = () => {
                     <EditProfile
                       showEditModal={showEditModal}
                       setShowEditModal={setShowEditModal}
+                      setUser={setUser}
                     />
                   </>
                 )}

@@ -36,6 +36,7 @@ const AvatarModal = ({ showAvatarModal, setShowAvatarModal }: props) => {
       const URL = `${process.env.REACT_APP_API_URL}/users/me/avatar`;
       const res = await fetch(URL, options);
       if (res.ok) {
+        toast.success("Avatar has successfully updated!", alertOptions);
         dispatch(setLoggedInUser());
       } else {
         if (isSet) {
