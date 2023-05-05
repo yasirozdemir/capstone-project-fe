@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import "./style.css";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAppSelector } from "../../redux/hooks";
 import { toast } from "react-toastify";
@@ -48,28 +48,28 @@ const Nav = () => {
           </button>
         </div>
         <div style={{ width: "8rem" }}>
-          <Link to="/discover">
+          <NavLink to="/discover">
             <img
               src={require("../../assets/images/logo-lg.png")}
               alt="logo"
               className="w-100"
             />
-          </Link>
+          </NavLink>
         </div>
         <div className="nav-links-container">
-          <Link to="/discover" className="d-none d-lg-inline">
+          <NavLink to="/discover" className="d-none d-lg-inline">
             Discover
-          </Link>
-          <Link to="/movies" className="d-none d-lg-inline">
+          </NavLink>
+          <NavLink to="/movies" className="d-none d-lg-inline">
             Movies
-          </Link>
+          </NavLink>
           {user._id !== "" && (
             <button className="d-none d-lg-inline" id="logout" onClick={logOut}>
               Log out
             </button>
           )}
           {user._id !== "" ? (
-            <Link to="/user/me" id="navatar">
+            <NavLink to="/user/me" id="navatar">
               <img
                 src={
                   user.avatar
@@ -79,20 +79,20 @@ const Nav = () => {
                 alt="user profile"
                 className="w-100"
               />
-            </Link>
+            </NavLink>
           ) : (
-            <Link to="/" id="login">
+            <NavLink to="/" id="login">
               Login
-            </Link>
+            </NavLink>
           )}
         </div>
       </div>
       {showNav && (
         <div id="md-nav" className="pb-2">
-          <Link to="/discover" className="mt-2">
+          <NavLink to="/discover" className="mt-2">
             Discover
-          </Link>
-          <Link to="/movies">Movies</Link>
+          </NavLink>
+          <NavLink to="/movies">Movies</NavLink>
           {user._id !== "" && (
             <button id="logout" onClick={logOut}>
               Log out
