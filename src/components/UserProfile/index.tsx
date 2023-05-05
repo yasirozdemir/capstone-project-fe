@@ -5,8 +5,6 @@ import { IUser } from "../../interfaces/IUser";
 import { toast } from "react-toastify";
 import { Col, Container, Row } from "react-bootstrap";
 import { GoVerified } from "react-icons/go";
-import { AiFillLike } from "react-icons/ai";
-import { MdLocalMovies } from "react-icons/md";
 import { ThreeDots } from "react-loader-spinner";
 import WLCardHorizontal from "../reusables/WLCardHorizontal";
 import { alertOptions } from "../../tools";
@@ -104,22 +102,22 @@ const UserProfile = () => {
   }, [userID, loggedInUser]);
 
   return (
-    <Container id="user-profile" className="topnav-fix">
+    <Container id="user-profile">
       {isLoading ? (
-        <Col xs={12} className="d-flex mt-3">
+        <Col xs={12} className="d-flex">
           <ThreeDots
             height="80"
             width="80"
             radius="8"
-            color="#fefefe"
+            color="#0a0a0a"
             wrapperClass="mx-auto"
-            wrapperStyle={{ marginTop: "calc(50vh - 100px)" }}
+            wrapperStyle={{ marginTop: "5rem" }}
             visible={true}
           />
         </Col>
       ) : (
         <>
-          <Row className="justify-content-center">
+          <Row className="justify-content-center py-4 py-lg-5">
             <Col
               xs={12}
               md={6}
@@ -217,12 +215,12 @@ const UserProfile = () => {
               </div>
             </Col>
           </Row>
-          <Row className="mt-3 mt-lg-5 justify-content-center">
+          <Row className="justify-content-center">
             <Col
               xs={12}
               md={8}
               className="d-flex px-0"
-              style={{ borderBlockEnd: "1px solid #eef7ff8f" }}
+              style={{ borderBlockEnd: "1px solid #0000009f" }}
             >
               <button
                 className={`wl-li ${showWLs && "active"}`}
@@ -231,10 +229,6 @@ const UserProfile = () => {
                 }}
               >
                 Watchlists
-                <MdLocalMovies
-                  className="ml-2"
-                  style={{ fontSize: "1.3rem" }}
-                />
               </button>
               <button
                 className={`wl-li ${!showWLs && "active"}`}
@@ -243,7 +237,6 @@ const UserProfile = () => {
                 }}
               >
                 Likes
-                <AiFillLike className="ml-2" style={{ fontSize: "1.3rem" }} />
               </button>
             </Col>
             <Col xs={12} md={8} className="d-flex mt-3">

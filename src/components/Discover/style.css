@@ -6,7 +6,7 @@
   background: -webkit-linear-gradient(to right, #89253e, #3a6186);
   background: linear-gradient(to right, #89253e, #3a6186);
   background-size: 400% 400%;
-  animation: bgAnim 15s ease infinite;
+  animation: bgAnim 30s ease infinite;
 }
 
 @keyframes bgAnim {

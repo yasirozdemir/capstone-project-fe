@@ -1,6 +1,6 @@
 #user-profile {
-  color: white;
   font-size: 1.2rem;
+  margin-block-start: 65px;
 }
 
 #user-profile h2 {
@@ -27,8 +27,7 @@
 }
 
 #user-profile .f-u-e {
-  background-color: #eef7ff;
-  color: #222222;
+  background-color: #ececec;
   padding: 0.25rem 2.5rem;
   border-radius: 0.25rem;
   transition: all 200ms;
@@ -37,7 +36,7 @@
 #user-profile .f-u-e:hover,
 #user-profile .f-u-e:focus {
   outline: transparent;
-  background-color: #eef7ffe0;
+  background-color: #dfdfdf;
 }
 
 #user-profile .wl-li {
@@ -54,9 +53,8 @@
   position: absolute;
   width: 100%;
   height: 2px;
-  background-color: #eef7ffe0;
+  background-color: #000;
   bottom: 0;
-
   opacity: 0;
   transition: all 300ms;
 }

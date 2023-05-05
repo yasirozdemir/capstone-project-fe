@@ -6,31 +6,29 @@ import React from "react";
 
 const WLCard = ({ WL }: props) => {
   return (
-    <div className="wl-wrapper">
-      <div className="cover-wrapper">
-        <img src={WL.cover} alt="WL cover" className="w-100" />
-      </div>
-      <div className="ml-2">
-        <Link to={`/watchlist/${WL._id}`}>
-          <p className="mb-0">{WL.name}</p>
-        </Link>
-        {WL.members
-          .filter((m) => m)
-          .map((m, i, arr) => (
-            <React.Fragment key={m._id}>
-              <Link to={`/user/${m._id}`}>
-                <small style={{ fontSize: "0.8rem" }}>
+    <Link to={`/watchlist/${WL._id}`} className="wl-link">
+      <div className="wl-wrapper">
+        <div className="cover-wrapper">
+          <img src={WL.cover} alt="WL cover" className="w-100" />
+        </div>
+        <div className="ml-2 d-flex flex-column">
+          <strong>{WL.name}</strong>
+          <small style={{ fontSize: "0.8rem" }}>
+            {WL.members
+              .filter((m) => m)
+              .map((m, i, arr) => (
+                <React.Fragment key={m._id}>
                   {m.name} {m.surname}
-                </small>
-              </Link>
-              {i !== arr.length - 1 && ", "}
-            </React.Fragment>
-          ))}
+                  {i !== arr.length - 1 && ", "}
+                </React.Fragment>
+              ))}
+          </small>
+        </div>
+        <small className="ml-auto">
+          {WL.likes.length} <BsHeartFill />
+        </small>
       </div>
-      <small className="ml-auto">
-        {WL.likes.length} <BsHeartFill />
-      </small>
-    </div>
+    </Link>
   );
 };
 

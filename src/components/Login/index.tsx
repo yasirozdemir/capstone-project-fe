@@ -59,7 +59,7 @@ const LoginRegister = ({ isLogin }: props) => {
   };
 
   return (
-    <Container fluid style={{ height: "100vh" }}>
+    <Container fluid style={{ height: "100vh" }} id="log-reg">
       <Row className="justify-content-center align-items-center h-100">
         <Col xs={12} md={6}>
           <form
