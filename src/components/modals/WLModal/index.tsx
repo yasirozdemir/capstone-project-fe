@@ -1,14 +1,40 @@
 import { Modal } from "react-bootstrap";
 import { IoMdClose } from "react-icons/io";
-import { useAppSelector } from "../../../redux/hooks";
 import "./style.css";
 import { BsBookmarks, BsBookmarksFill } from "react-icons/bs";
 import { IWatchlist } from "../../../interfaces/IWatchlist";
 import { alertOptions } from "../../../tools";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
 const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
-  const { watchlists } = useAppSelector((st) => st.store.user);
+  const userID = localStorage.getItem("loggedInUserID");
+  const [watchlists, setWatchlists] = useState<IWatchlist[] | null>(null);
+
+  const getWLs = async () => {
+    try {
+      const options = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      };
+      const URL = `${process.env.REACT_APP_API_URL}/users/${userID}/watchlists`;
+      const res = await fetch(URL, options);
+      const data = await res.json();
+      if (res.ok) {
+        setWatchlists(data);
+      } else {
+        toast.error(data.message, alertOptions);
+      }
+    } catch (error) {
+      toast.error(String(error), alertOptions);
+    }
+  };
+
+  useEffect(() => {
+    getWLs();
+    // eslint-disable-next-line
+  }, [userID]);
 
   const saveToWL = async (w: IWatchlist) => {
     try {
@@ -20,10 +46,11 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
       };
       const URL = `${process.env.REACT_APP_API_URL}/watchlists/${w._id}/movies/${movieID}`;
       const res = await fetch(URL, options);
+      const data = await res.json();
       if (res.ok) {
         toast.success(`Movie successfully saved into ${w.name}!`, alertOptions);
+        getWLs();
       } else {
-        const data = await res.json();
         toast.error(data.message, alertOptions);
       }
     } catch (error) {
