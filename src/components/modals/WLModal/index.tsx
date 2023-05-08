@@ -22,7 +22,6 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
       const data = await res.json();
       if (res.ok) {
         setWatchlists(data);
-        console.log(data);
       } else {
         toast.error(data.message, alertOptions);
       }
