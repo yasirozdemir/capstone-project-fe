@@ -1,0 +1,14 @@
+#watchlist-page {
+  min-height: calc(100vh - 100px);
+  color: #fff;
+}
+
+#watchlist-page .cover-wrapper {
+  width: 200px;
+  object-position: center;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.5);
+}
+
+#watchlist-page .cover-wrapper img {
+  aspect-ratio: 1;
+}

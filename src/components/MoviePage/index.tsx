@@ -8,6 +8,30 @@ import { alertOptions } from "../../tools";
 import { BsStarFill, BsBookmarksFill } from "react-icons/bs";
 import WLModal from "../modals/WLModal";
 
+function formatArrays(arr: Array<string>): JSX.Element[] {
+  return arr
+    .filter((m) => m)
+    .map((m, i, arr) => (
+      <React.Fragment key={i}>
+        {m}
+        {i !== arr.length - 1 && " ∙ "}
+      </React.Fragment>
+    ));
+}
+
+function durationToHM(dur: string): string {
+  const totalM = parseInt(dur, 10);
+  const h = Math.floor(totalM / 60);
+  const m = totalM % 60;
+  return `${h}h ${m}m`;
+}
+
+function fullDateToYear(date: string): string {
+  const d = new Date(date);
+  const y = d.getFullYear();
+  return y.toString();
+}
+
 const MoviePage = () => {
   const { movieID } = useParams();
   const [movie, setMovie] = useState<IMovie | null>(null);
@@ -27,30 +51,6 @@ const MoviePage = () => {
       toast.error(data.message, alertOptions);
     }
   };
-
-  function durationToHM(dur: string): string {
-    const totalM = parseInt(dur, 10);
-    const h = Math.floor(totalM / 60);
-    const m = totalM % 60;
-    return `${h}h ${m}m`;
-  }
-
-  function fullDateToYear(date: string): string {
-    const d = new Date(date);
-    const y = d.getFullYear();
-    return y.toString();
-  }
-
-  function formatArrays(arr: Array<string>): JSX.Element[] {
-    return arr
-      .filter((m) => m)
-      .map((m, i, arr) => (
-        <React.Fragment key={i}>
-          {m}
-          {i !== arr.length - 1 && " ∙ "}
-        </React.Fragment>
-      ));
-  }
 
   useEffect(() => {
     getMovie();

@@ -12,6 +12,7 @@ import { useAppDispatch } from "./redux/hooks";
 import { setLoggedInUser } from "./redux/actions";
 import { useEffect } from "react";
 import MoviePage from "./components/MoviePage";
+import WatchlistPage from "./components/WatchlistPage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -64,6 +65,15 @@ function App() {
               <>
                 <Nav />
                 <MoviePage />
+              </>
+            }
+          />
+          <Route
+            path="/watchlist/:watchlistID"
+            element={
+              <>
+                <Nav />
+                <WatchlistPage />
               </>
             }
           />

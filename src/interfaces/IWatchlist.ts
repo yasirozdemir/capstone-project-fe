@@ -8,6 +8,7 @@ export interface IWatchlist {
   members: IUser[];
   movies: string[];
   likes: string[];
+  createdAt: Date;
 }
 
 export interface IWatchlistDetailed {
@@ -16,5 +17,6 @@ export interface IWatchlistDetailed {
   cover: string;
   members: IUser[];
   movies: IMovie[];
-  likes: IUser[];
+  likes: string[];
+  createdAt: Date;
 }
