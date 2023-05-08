@@ -56,10 +56,8 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
         body: JSON.stringify({ name }),
       };
       const URL = `${process.env.REACT_APP_API_URL}/watchlists`;
-      console.log(URL, options);
       const res = await fetch(URL, options);
       const data = await res.json();
-      console.log(data);
       if (res.ok) {
         toast.success(
           `Watchlist '${data.name}' successfully created!`,
