@@ -11,6 +11,7 @@ import GoogleRedirect from "./components/non-functionals/GoogleRedirect";
 import { useAppDispatch } from "./redux/hooks";
 import { setLoggedInUser } from "./redux/actions";
 import { useEffect } from "react";
+import MoviePage from "./components/MoviePage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -54,6 +55,15 @@ function App() {
               <>
                 <Nav />
                 <UserProfile />
+              </>
+            }
+          />
+          <Route
+            path="/movie/:movieID"
+            element={
+              <>
+                <Nav />
+                <MoviePage />
               </>
             }
           />

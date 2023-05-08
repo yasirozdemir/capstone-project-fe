@@ -8,6 +8,9 @@
 
 body {
   font-family: var(--primary-font) !important;
+  background: #3a6186;
+  background: -webkit-linear-gradient(to right, #89253e, #3a6186);
+  background: linear-gradient(to right, #89253e, #3a6186);
 }
 
 * {

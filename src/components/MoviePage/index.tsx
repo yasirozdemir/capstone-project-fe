@@ -1,0 +1,152 @@
+import { Col, Container, Row } from "react-bootstrap";
+import "./style.css";
+import React, { useEffect, useState } from "react";
+import { IMovie } from "../../interfaces/IMovie";
+import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { alertOptions } from "../../tools";
+import { BsStarFill, BsBookmarksFill } from "react-icons/bs";
+import WLModal from "../modals/WLModal";
+
+const MoviePage = () => {
+  const { movieID } = useParams();
+  const [movie, setMovie] = useState<IMovie | null>(null);
+  const [showWLModal, setShowWLModal] = useState(false);
+  const getMovie = async () => {
+    const options = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    };
+    const URL = `${process.env.REACT_APP_API_URL}/movies/${movieID}`;
+    const res = await fetch(URL, options);
+    const data = await res.json();
+    if (res.ok) {
+      setMovie(data);
+    } else {
+      toast.error(data.message, alertOptions);
+    }
+  };
+
+  function durationToHM(dur: string): string {
+    const totalM = parseInt(dur, 10);
+    const h = Math.floor(totalM / 60);
+    const m = totalM % 60;
+    return `${h}h ${m}m`;
+  }
+
+  function fullDateToYear(date: string): string {
+    const d = new Date(date);
+    const y = d.getFullYear();
+    return y.toString();
+  }
+
+  function formatArrays(arr: Array<string>): JSX.Element[] {
+    return arr
+      .filter((m) => m)
+      .map((m, i, arr) => (
+        <React.Fragment key={i}>
+          {m}
+          {i !== arr.length - 1 && " ∙ "}
+        </React.Fragment>
+      ));
+  }
+
+  useEffect(() => {
+    getMovie();
+    // eslint-disable-next-line
+  }, [movieID]);
+
+  return (
+    <Container id="movie-page" className="topnav-fix mb-3 mb-md-0">
+      {movie && (
+        <>
+          <Row className="flex-column flex-md-row mb-3">
+            <Col
+              xs={12}
+              md={9}
+              className="d-flex flex-column align-items-center align-items-md-start justify-content-center text-center text-md-left"
+            >
+              <h2 className="m-0">{movie.title}</h2>
+              <div
+                className="d-flex justify-content-center"
+                style={{ columnGap: "0.5rem", flexWrap: "wrap" }}
+              >
+                {fullDateToYear(movie.released)}
+                <span>∙</span>
+                {movie.rated}
+                <span>∙</span>
+                {durationToHM(movie.duration)}
+                <span>∙</span>
+                <span className="d-flex align-items-center justify-content-center">
+                  {movie.imdbRating}
+                  <BsStarFill fill="#f5c518" className="ml-1" />
+                </span>
+              </div>
+            </Col>
+            <Col className="d-flex flex-column align-items-center align-items-md-end justify-content-center ml-auto">
+              <button
+                id="saveToWLBtn"
+                onClick={() => {
+                  setShowWLModal(!showWLModal);
+                }}
+              >
+                <BsBookmarksFill /> Save
+              </button>
+              <WLModal
+                showWLModal={showWLModal}
+                setShowWLModal={setShowWLModal}
+              />
+            </Col>
+          </Row>
+          <Row className="align-items-md-center">
+            <Col
+              xs={12}
+              md={4}
+              className="d-flex justify-content-center justify-content-md-start mb-2 mb-md-0"
+            >
+              <div className="poster-wrapper">
+                <img
+                  src={movie.poster}
+                  alt="movie poster"
+                  className="img-fluid"
+                />
+              </div>
+            </Col>
+            <Col xs={12} md={8} style={{ fontSize: "1.2rem" }}>
+              <div className="genre-wrapper mb-2 justify-content-center justify-content-md-start">
+                {movie.genres.map((g, i) => (
+                  <Link
+                    to={"/movies/" + g.toLowerCase()}
+                    key={i}
+                    className="genre-badge"
+                  >
+                    {g}
+                  </Link>
+                ))}
+              </div>
+              <div className="movie-info-rows">
+                <i>Description:</i>
+                <p className="m-0">{movie.description}</p>
+              </div>
+              <div className="movie-info-rows">
+                <i>Directors:</i>
+                <p className="m-0">{formatArrays(movie.director)}</p>
+              </div>
+              <div className="movie-info-rows">
+                <i>Writers:</i>
+                <p className="m-0">{formatArrays(movie.writer)}</p>
+              </div>
+              <div className="movie-info-rows">
+                <i>Stars:</i>
+                <p className="m-0">{formatArrays(movie.actors)}</p>
+              </div>
+            </Col>
+          </Row>
+        </>
+      )}
+    </Container>
+  );
+};
+
+export default MoviePage;
