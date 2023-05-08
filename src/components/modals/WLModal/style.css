@@ -1,0 +1,9 @@
+#WLModal .WL-modal-item {
+  background-color: #cfcfcf;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+#WLModal .WL-modal-item:not(:nth-last-of-type(1)) {
+  margin-block-end: 0.5rem;
+}

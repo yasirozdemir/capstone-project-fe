@@ -6,6 +6,15 @@ export interface IWatchlist {
   name: string;
   cover: string;
   members: IUser[];
+  movies: string[];
+  likes: string[];
+}
+
+export interface IWatchlistDetailed {
+  _id: string;
+  name: string;
+  cover: string;
+  members: IUser[];
   movies: IMovie[];
   likes: IUser[];
 }

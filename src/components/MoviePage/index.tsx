@@ -87,6 +87,7 @@ const MoviePage = () => {
             <Col className="d-flex flex-column align-items-center align-items-md-end justify-content-center ml-auto">
               <button
                 id="saveToWLBtn"
+                className="mt-2 mt-md-0"
                 onClick={() => {
                   setShowWLModal(!showWLModal);
                 }}
@@ -94,6 +95,7 @@ const MoviePage = () => {
                 <BsBookmarksFill /> Save
               </button>
               <WLModal
+                movieID={movieID}
                 showWLModal={showWLModal}
                 setShowWLModal={setShowWLModal}
               />
