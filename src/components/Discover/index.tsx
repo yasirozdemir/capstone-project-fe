@@ -19,7 +19,6 @@ const AI = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);
   const [prompt, setPrompt] = useState("");
   const [isLoading, setLoading] = useState(false);
-  const [isError, setError] = useState({ is: false, message: "" });
   const dispatch = useAppDispatch();
   const moviesRedux = useAppSelector((st) => st.store.movies);
 
@@ -44,12 +43,10 @@ const AI = () => {
           payload: data.moviesList,
         });
       } else {
-        setError({ is: true, message: data.message });
-        toast.error(isError.message, alertOptions);
+        toast.error(data.message, alertOptions);
       }
     } catch (error) {
-      setError({ is: true, message: String(error) });
-      toast.error(isError.message, alertOptions);
+      toast.error(String(error), alertOptions);
     } finally {
       setLoading(false);
     }
