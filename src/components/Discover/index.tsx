@@ -8,6 +8,8 @@ import MovieCard from "../reusables/MovieCard";
 import { toast } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
 import { alertOptions } from "../../tools";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { slicedStore } from "../../redux/slices";
 
 // The following imports are unnecessary for production, it's just for developers to style the page
 // import { sampleMoviesArray } from "../../assets/sampleMovies";
@@ -18,6 +20,8 @@ const AI = () => {
   const [prompt, setPrompt] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState({ is: false, message: "" });
+  const dispatch = useAppDispatch();
+  const moviesRedux = useAppSelector((st) => st.store.movies);
 
   const promptToMovies = async () => {
     try {
@@ -35,6 +39,10 @@ const AI = () => {
       const data = await res.json();
       if (res.ok) {
         setMovies(data.moviesList);
+        dispatch({
+          type: slicedStore.actions.setMoviesRedux,
+          payload: data.moviesList,
+        });
       } else {
         setError({ is: true, message: data.message });
         toast.error(isError.message, alertOptions);
@@ -61,7 +69,9 @@ const AI = () => {
     <div id="ai-wrapper">
       <Container
         id="ai-section"
-        className={movies.length !== 0 ? "moveUp" : ""}
+        className={
+          movies.length !== 0 || moviesRedux.length !== 0 ? "moveUp" : ""
+        }
       >
         <Row>
           <Col>
@@ -128,6 +138,12 @@ const AI = () => {
           {movies?.map(
             (movie) => movie && <MovieCard key={movie._id} movie={movie} />
           )}
+          {isLoading
+            ? ""
+            : movies.length === 0 &&
+              moviesRedux.map(
+                (movie) => movie && <MovieCard key={movie._id} movie={movie} />
+              )}
         </Row>
       </Container>
     </div>

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IStore } from "../interfaces/IStore";
 import { IUser } from "../interfaces/IUser";
+import { IMovie } from "../interfaces/IMovie";
 
 export const initialState: IStore = {
   user: {
@@ -16,7 +17,7 @@ export const initialState: IStore = {
     following: [],
     refreshToken: "",
   },
-  users: [],
+  movies: [],
 };
 
 export const slicedStore = createSlice({
@@ -27,9 +28,9 @@ export const slicedStore = createSlice({
     setUser: (state, action: PayloadAction<IUser>) => {
       state.user = action.payload;
     },
-    // set all the users in the DB
-    setUsers: (state, action: PayloadAction<IUser[]>) => {
-      state.users = action.payload;
+    // set AI suggestions
+    setMoviesRedux: (state, action: PayloadAction<IMovie[]>) => {
+      state.movies = action.payload;
     },
   },
 });
