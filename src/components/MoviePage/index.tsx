@@ -114,33 +114,43 @@ const MoviePage = () => {
               </div>
             </Col>
             <Col xs={12} md={8} style={{ fontSize: "1.2rem" }}>
-              <div className="genre-wrapper mb-2 justify-content-center justify-content-md-start">
-                {movie.genres.map((g, i) => (
-                  <Link
-                    to={"/movies/" + g.toLowerCase()}
-                    key={i}
-                    className="genre-badge"
-                  >
-                    {g}
-                  </Link>
-                ))}
-              </div>
-              <div className="movie-info-rows">
-                <i>Description:</i>
-                <p className="m-0">{movie.description}</p>
-              </div>
-              <div className="movie-info-rows">
-                <i>Directors:</i>
-                <p className="m-0">{formatArrays(movie.director)}</p>
-              </div>
-              <div className="movie-info-rows">
-                <i>Writers:</i>
-                <p className="m-0">{formatArrays(movie.writer)}</p>
-              </div>
-              <div className="movie-info-rows">
-                <i>Stars:</i>
-                <p className="m-0">{formatArrays(movie.actors)}</p>
-              </div>
+              {movie.genres.length >= 1 && (
+                <div className="genre-wrapper mb-2 justify-content-center justify-content-md-start">
+                  {movie.genres.map((g, i) => (
+                    <Link
+                      to={"/movies/" + g.toLowerCase()}
+                      key={i}
+                      className="genre-badge"
+                    >
+                      {g}
+                    </Link>
+                  ))}
+                </div>
+              )}
+              {movie.description.length >= 1 && (
+                <div className="movie-info-rows">
+                  <i>Description:</i>
+                  <p className="m-0">{movie.description}</p>
+                </div>
+              )}
+              {movie.director.length >= 1 && (
+                <div className="movie-info-rows">
+                  <i>Director{movie.director.length > 1 ? "s" : ""}:</i>
+                  <p className="m-0">{formatArrays(movie.director)}</p>
+                </div>
+              )}
+              {movie.writer.length >= 1 && (
+                <div className="movie-info-rows">
+                  <i>Writer{movie.writer.length > 1 ? "s" : ""}:</i>
+                  <p className="m-0">{formatArrays(movie.writer)}</p>
+                </div>
+              )}
+              {movie.actors.length >= 1 && (
+                <div className="movie-info-rows">
+                  <i>Star{movie.actors.length > 1 ? "s" : ""}:</i>
+                  <p className="m-0">{formatArrays(movie.actors)}</p>
+                </div>
+              )}
             </Col>
           </Row>
         </>
