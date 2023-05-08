@@ -20,13 +20,20 @@
   object-fit: cover;
 }
 
-.movie-card-body::after {
-  content: "";
+.movie-card-body .poster-overlay {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  display: flex;
+  padding-inline: 10px;
+  padding-bottom: 5px;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  justify-content: space-between;
+  align-items: end;
   background: rgb(0, 0, 0);
   background: -moz-linear-gradient(
     0deg,
@@ -47,20 +54,6 @@
     rgba(0, 0, 0, 0) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1);
-}
-
-.movie-card-body .poster-overlay {
-  position: absolute;
-  width: 100%;
-  display: flex;
-  padding-inline: 10px;
-  padding-bottom: 5px;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  bottom: 0;
-  justify-content: space-between;
-  align-items: end;
 }
 
 .movie-card-body .poster-overlay > span {
