@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./style.css";
 import { useEffect, useState } from "react";
 import { IUser } from "../../interfaces/IUser";
@@ -15,6 +15,7 @@ import EditProfile from "../modals/EditProfile";
 const UserProfile = () => {
   const loggedInUserID = localStorage.getItem("loggedInUserID");
   const loggedInUser = useAppSelector((st) => st.store.user);
+  const navigate = useNavigate();
   const { userID } = useParams();
   const [user, setUser] = useState<IUser | null>(null);
   const [isLoading, setLoading] = useState(false);
@@ -92,6 +93,7 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
+    if (userID === loggedInUserID) navigate("/user/me");
     if (userID === "me") {
       setIsMe(true);
       setShowAvatarModal(false);
@@ -109,7 +111,7 @@ const UserProfile = () => {
             height="80"
             width="80"
             radius="8"
-            color="#0a0a0a"
+            color="#fefefe"
             wrapperClass="mx-auto"
             wrapperStyle={{ marginTop: "5rem" }}
             visible={true}
@@ -220,7 +222,7 @@ const UserProfile = () => {
               xs={12}
               md={8}
               className="d-flex px-0"
-              style={{ borderBlockEnd: "1px solid #0000009f" }}
+              style={{ borderBlockEnd: "1px solid #ffffff9f" }}
             >
               <button
                 className={`wl-li ${showWLs && "active"}`}
