@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
 const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
-  const userID = localStorage.getItem("loggedInUserID");
   const [watchlists, setWatchlists] = useState<IWatchlist[] | null>(null);
 
   const getWLs = async () => {
@@ -18,11 +17,12 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       };
-      const URL = `${process.env.REACT_APP_API_URL}/users/${userID}/watchlists`;
+      const URL = `${process.env.REACT_APP_API_URL}/users/me/watchlists`;
       const res = await fetch(URL, options);
       const data = await res.json();
       if (res.ok) {
         setWatchlists(data);
+        console.log(data);
       } else {
         toast.error(data.message, alertOptions);
       }
@@ -34,7 +34,7 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
   useEffect(() => {
     getWLs();
     // eslint-disable-next-line
-  }, [userID]);
+  }, [showWLModal]);
 
   const saveToWL = async (w: IWatchlist) => {
     try {
@@ -78,7 +78,7 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
       <Modal.Body>
         <div>HELO</div>
         <div>
-          {watchlists
+          {watchlists !== null
             ? watchlists.map((w) => (
                 <div
                   key={w._id}
