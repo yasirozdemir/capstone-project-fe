@@ -1,9 +1,40 @@
-#WLModal .WL-modal-item {
-  background-color: #cfcfcf;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.25rem;
+#WLModal .WL-link {
+  color: inherit;
 }
 
-#WLModal .WL-modal-item:not(:nth-last-of-type(1)) {
-  margin-block-end: 0.5rem;
+#WLModal .WL-link:hover {
+  text-decoration: none;
+}
+
+#WLModal .WL-modal-item {
+  background-color: #ebebeb;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+  transition: all 300ms;
+}
+
+#WLModal .WL-modal-item:hover {
+  background-color: #cfcfcf;
+}
+
+#create-wl-form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#create-wl-form input {
+  border-block-end: 1px solid #cfcfcf;
+  margin-inline-end: 0.5rem;
+  width: calc(100% - 0.5rem);
+}
+
+#create-wl-form button {
+  font-size: 1.2rem;
+  transition: all 300ms;
+}
+
+#create-wl-form button:hover {
+  color: green;
 }

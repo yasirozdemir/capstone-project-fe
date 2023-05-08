@@ -1,14 +1,22 @@
 import { Modal } from "react-bootstrap";
 import { IoMdClose } from "react-icons/io";
 import "./style.css";
-import { BsBookmarks, BsBookmarksFill } from "react-icons/bs";
+import {
+  BsBookmarks,
+  BsBookmarksFill,
+  BsChevronDown,
+  BsFillCheckSquareFill,
+} from "react-icons/bs";
 import { IWatchlist } from "../../../interfaces/IWatchlist";
 import { alertOptions } from "../../../tools";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
   const [watchlists, setWatchlists] = useState<IWatchlist[] | null>(null);
+  const [isCreate, setIsCreate] = useState(false);
+  const [name, setName] = useState<string>("");
 
   const getWLs = async () => {
     try {
@@ -34,6 +42,37 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
     getWLs();
     // eslint-disable-next-line
   }, [showWLModal]);
+
+  const creataNewWL = async (e: React.FormEvent<HTMLElement>) => {
+    e.preventDefault();
+    if (name === "") toast.error("Please insert a name first!", alertOptions);
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify({ name }),
+      };
+      const URL = `${process.env.REACT_APP_API_URL}/watchlists`;
+      console.log(URL, options);
+      const res = await fetch(URL, options);
+      const data = await res.json();
+      console.log(data);
+      if (res.ok) {
+        toast.success(
+          `Watchlist '${data.name}' successfully created!`,
+          alertOptions
+        );
+        getWLs();
+      } else {
+        toast.error(data.message, alertOptions);
+      }
+    } catch (error) {
+      toast.error(String(error), alertOptions);
+    }
+  };
 
   const saveToWL = async (w: IWatchlist) => {
     try {
@@ -75,7 +114,6 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
         </button>
       </Modal.Header>
       <Modal.Body>
-        <div>HELO</div>
         <div>
           {watchlists !== null
             ? watchlists.map((w) => (
@@ -83,10 +121,15 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
                   key={w._id}
                   className="WL-modal-item d-flex align-items-center"
                 >
-                  <div style={{ width: "32px", height: "32px" }}>
-                    <img src={w.cover} alt="cover" className="img-fluid" />
-                  </div>
-                  <span className="ml-1">{w.name}</span>
+                  <Link
+                    to={"/watchlist/" + w._id}
+                    className="WL-link d-flex align-items-center"
+                  >
+                    <div style={{ width: "32px", height: "32px" }}>
+                      <img src={w.cover} alt="cover" className="img-fluid" />
+                    </div>
+                    <span className="ml-2">{w.name}</span>
+                  </Link>
                   {checkIsSaved(w) ? (
                     <button className="ml-auto" disabled>
                       <BsBookmarksFill />
@@ -106,6 +149,32 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
             : "You don't have any watchlist yet!"}
         </div>
       </Modal.Body>
+      <Modal.Footer className="d-block">
+        <div className="d-flex flex-column justfiy-content-center">
+          <button
+            onClick={() => {
+              setIsCreate(!isCreate);
+            }}
+          >
+            Create a new watchlist! <BsChevronDown />
+          </button>
+          {isCreate && (
+            <form id="create-wl-form" onSubmit={creataNewWL}>
+              <input
+                type="text"
+                name="name"
+                placeholder="New Watchlist"
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+              <button type="submit">
+                <BsFillCheckSquareFill />
+              </button>
+            </form>
+          )}
+        </div>
+      </Modal.Footer>
     </Modal>
   );
 };
