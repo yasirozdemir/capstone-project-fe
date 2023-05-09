@@ -21,11 +21,13 @@
   font-size: 1.6rem;
   font-weight: 500;
   color: inherit;
+  width: 100%;
 }
 
 #watchlist-page .WL-header form {
   display: flex;
   padding-inline-end: 0.5rem;
+  width: 50%;
 }
 
 #watchlist-page .WL-header form.isEditing {

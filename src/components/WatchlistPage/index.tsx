@@ -150,28 +150,24 @@ const WatchlistPage = () => {
                 {isMember ? (
                   <form
                     onSubmit={(e) => e.preventDefault()}
-                    className={isEditing ? "isEditing" : ""}
+                    className={
+                      isEditing
+                        ? "isEditing mx-auto mx-md-0"
+                        : "mx-auto mx-md-0"
+                    }
                   >
                     <input
                       type="text"
                       defaultValue={name}
                       disabled={!isEditing}
+                      className="text-center text-md-left"
                       onChange={(e) => {
                         setName(e.target.value);
                       }}
                     />
-                    {isEditing ? (
+                    {isEditing && (
                       <button type="submit" onClick={editWL}>
                         <BsCheckSquareFill />
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setIsEditing(!isEditing);
-                        }}
-                      >
-                        <BsPencilSquare />
                       </button>
                     )}
                   </form>
@@ -183,6 +179,17 @@ const WatchlistPage = () => {
                   {" ~ "}
                   {format(new Date(WL.createdAt), "MMM yyyy")}
                 </span>
+                {isMember && (
+                  <button
+                    type="button"
+                    className="mx-auto mx-md-0"
+                    onClick={() => {
+                      setIsEditing(!isEditing);
+                    }}
+                  >
+                    Edit <BsPencilSquare />
+                  </button>
+                )}
                 <button
                   onClick={likeOrDislike}
                   className="mx-auto mx-md-0 d-flex justify-content-around"
