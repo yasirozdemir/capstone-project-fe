@@ -7,7 +7,12 @@ import { toast } from "react-toastify";
 import { alertOptions } from "../../tools";
 import { format } from "date-fns";
 import { IUser } from "../../interfaces/IUser";
-import { BsHeart, BsHeartFill } from "react-icons/bs";
+import {
+  BsHeart,
+  BsHeartFill,
+  BsPencilSquare,
+  BsCheckSquareFill,
+} from "react-icons/bs";
 import { MdBookmarkRemove } from "react-icons/md";
 
 function formatMembers(arr: Array<IUser>): JSX.Element[] {
@@ -28,6 +33,8 @@ const WatchlistPage = () => {
   const [WL, setWL] = useState<IWatchlistDetailed | null>(null);
   const [isLiked, setIsLiked] = useState(false);
   const [isMember, setIsMember] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [name, setName] = useState("");
   const loggedInUserID = localStorage.getItem("loggedInUserID");
 
   const getWatchlist = async () => {
@@ -44,6 +51,7 @@ const WatchlistPage = () => {
         setWL(data);
         setIsMember(data.members.some((m: IUser) => m._id === loggedInUserID));
         setIsLiked(data.likes.some((id: string) => id === loggedInUserID));
+        setName(data.name);
       } else {
         toast.error(data.message, alertOptions);
       }
@@ -88,13 +96,49 @@ const WatchlistPage = () => {
     // eslint-disable-next-line
   }, [watchlistID]);
 
+  const editWL = async (e: React.FormEvent<HTMLElement>) => {
+    e.preventDefault();
+    const options = {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name }),
+    };
+    const URL = `${process.env.REACT_APP_API_URL}/watchlists/${watchlistID}`;
+    console.log(URL, options);
+    try {
+      const res = await fetch(URL, options);
+      const data = await res.json();
+      if (res.ok) {
+        toast.success("Watchlist succesfully edited!", alertOptions);
+        setIsEditing(false);
+        setWL((prev) => {
+          if (prev) {
+            return { ...prev, name: data.name };
+          }
+          return prev;
+        });
+      } else {
+        toast.error(data.message, alertOptions);
+      }
+    } catch (error) {
+      toast.error(String(error), alertOptions);
+    }
+  };
+
   return (
     <Container id="watchlist-page" className="topnav-fix">
       {WL && (
         <>
-          <Row>
-            <Col>
-              <div className="cover-wrapper">
+          <Row className="mb-5 justify-content-center">
+            <Col
+              xs={12}
+              md={8}
+              className="d-flex justify-content-center align-items-center flex-column flex-md-row"
+            >
+              <div className="cover-wrapper mr-0 mr-md-3 mb-3 mb-md-0">
                 <img
                   src={WL.cover}
                   alt="cover"
@@ -102,23 +146,60 @@ const WatchlistPage = () => {
                   style={{ aspectRatio: 1 }}
                 />
               </div>
-              <h2 className="m-0">{WL.name}</h2>
-              <span>{format(new Date(WL.createdAt), "MMM yyyy")}</span>
-              <span>{formatMembers(WL.members)}</span>
-              <button onClick={likeOrDislike}>
-                <span>{WL.likes?.length}</span>
-                {isLiked ? (
-                  <span>
-                    Dislike <BsHeartFill />
-                  </span>
+              <div className="d-flex flex-column WL-header text-center text-md-left">
+                {isMember ? (
+                  <form
+                    onSubmit={(e) => e.preventDefault()}
+                    className={isEditing ? "isEditing" : ""}
+                  >
+                    <input
+                      type="text"
+                      defaultValue={name}
+                      disabled={!isEditing}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }}
+                    />
+                    {isEditing ? (
+                      <button type="submit" onClick={editWL}>
+                        <BsCheckSquareFill />
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsEditing(!isEditing);
+                        }}
+                      >
+                        <BsPencilSquare />
+                      </button>
+                    )}
+                  </form>
                 ) : (
-                  <span>
-                    Like <BsHeart />
-                  </span>
+                  <h2 className="m-0">{WL.name}</h2>
                 )}
-              </button>
-
-              {isMember && <button>Edit</button>}
+                <span>
+                  {formatMembers(WL.members)}
+                  {" ~ "}
+                  {format(new Date(WL.createdAt), "MMM yyyy")}
+                </span>
+                <button
+                  onClick={likeOrDislike}
+                  className="mx-auto mx-md-0 d-flex justify-content-around"
+                >
+                  {isLiked ? (
+                    <span>
+                      Dislike <BsHeartFill />
+                    </span>
+                  ) : (
+                    <span>
+                      Like <BsHeart />
+                    </span>
+                  )}
+                  <span> | </span>
+                  <span>{WL.likes?.length}</span>
+                </button>
+              </div>
             </Col>
           </Row>
           <Row xs={1} md={3} lg={5}>
@@ -127,7 +208,7 @@ const WatchlistPage = () => {
                 movie && (
                   <Col
                     key={movie._id}
-                    className="d-flex justify-content-center"
+                    className="d-flex justify-content-center mb-3"
                   >
                     <div className="movie-card">
                       <div className="movie-card-body">

@@ -13,6 +13,47 @@
   aspect-ratio: 1;
 }
 
+#watchlist-page .WL-header {
+  gap: 0.5rem;
+}
+
+#watchlist-page .WL-header input {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: inherit;
+}
+
+#watchlist-page .WL-header form {
+  display: flex;
+  padding-inline-end: 0.5rem;
+}
+
+#watchlist-page .WL-header form.isEditing {
+  background-color: rgba(173, 173, 173, 0.342);
+}
+
+#watchlist-page .WL-header input + button {
+  color: inherit;
+}
+
+#watchlist-page .WL-header a {
+  color: inherit;
+}
+
+#watchlist-page .WL-header > button {
+  border: 2px solid #f5c518;
+  border-radius: 0.25rem;
+  transition: all 300ms;
+  padding: 0.2rem 0.5rem;
+  color: #f5c518;
+  min-width: 140px;
+  max-width: 160px;
+}
+
+#watchlist-page .WL-header > button:hover {
+  background-color: #9292927e;
+}
+
 .poster-overlay-detailed {
   position: absolute;
   right: 0;
