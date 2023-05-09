@@ -12,3 +12,79 @@
 #watchlist-page .cover-wrapper img {
   aspect-ratio: 1;
 }
+
+.poster-overlay-detailed {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  padding-block-end: 0.3rem;
+  background: rgb(0, 0, 0);
+  background: -moz-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.41358550256039917) 35%,
+    rgba(255, 255, 255, 0) 80%,
+    rgba(0, 0, 0, 0.7021009087228641) 100%
+  );
+  background: -webkit-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.41358550256039917) 35%,
+    rgba(255, 255, 255, 0) 80%,
+    rgba(0, 0, 0, 0.7021009087228641) 100%
+  );
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.41358550256039917) 35%,
+    rgba(255, 255, 255, 0) 80%,
+    rgba(0, 0, 0, 0.7021009087228641) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1);
+}
+
+.poster-overlay-detailed > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  font-size: 0.8rem;
+}
+
+.poster-overlay-detailed > div .genre-badge {
+  color: #f5c518;
+  border-radius: 0.25rem;
+  padding: 0rem 0.2rem;
+}
+
+.second-poster-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  font-size: 1.4rem;
+  justify-content: flex-end;
+}
+
+.second-poster-overlay button {
+  color: #ffffffb0;
+  display: flex;
+  padding: 0.3rem;
+  transition: all 300ms;
+}
+
+.second-poster-overlay button:hover {
+  color: inherit;
+}

@@ -12,8 +12,8 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { slicedStore } from "../../redux/slices";
 
 // The following imports are unnecessary for production, it's just for developers to style the page
-// import { sampleMoviesArray } from "../../assets/sampleMovies";
-// import { useEffect } from "react";
+import { sampleMoviesArray } from "../../assets/sampleMovies";
+import { useEffect } from "react";
 
 const AI = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -58,9 +58,9 @@ const AI = () => {
   };
 
   // The following useEffect is unnecessary for production, it's just for developers to style the page
-  // useEffect(() => {
-  //   setMovies(sampleMoviesArray);
-  // }, []);
+  useEffect(() => {
+    setMovies(sampleMoviesArray);
+  }, []);
 
   return (
     <div id="ai-wrapper">
