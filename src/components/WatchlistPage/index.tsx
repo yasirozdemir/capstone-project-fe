@@ -157,7 +157,7 @@ const WatchlistPage = () => {
     <Container id="watchlist-page" className="topnav-fix">
       {WL && (
         <>
-          <Row className="mb-5 justify-content-center">
+          <Row className="mb-5 pb-4 justify-content-center">
             <Col
               xs={12}
               md={8}
@@ -261,15 +261,17 @@ const WatchlistPage = () => {
                             </div>
                           </div>
                         </Link>
-                        <div className="second-poster-overlay">
-                          <button
-                            onClick={() => {
-                              removeFromWL(movie._id);
-                            }}
-                          >
-                            <MdBookmarkRemove />
-                          </button>
-                        </div>
+                        {isMember && (
+                          <div className="second-poster-overlay">
+                            <button
+                              onClick={() => {
+                                removeFromWL(movie._id);
+                              }}
+                            >
+                              <MdBookmarkRemove />
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </Col>

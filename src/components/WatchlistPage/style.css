@@ -3,6 +3,37 @@
   color: #fff;
 }
 
+#watchlist-page .row:nth-of-type(1) {
+  position: relative;
+  border-block-end: 1px solid #fff;
+}
+
+#watchlist-page .row:nth-of-type(1)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -1rem;
+  left: 0;
+  height: 1rem;
+  background: rgb(0, 0, 0);
+  background: -moz-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(255, 255, 255, 0.19789922805059523) 100%
+  );
+  background: -webkit-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(255, 255, 255, 0.19789922805059523) 100%
+  );
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(255, 255, 255, 0.19789922805059523) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#ffffff",GradientType=1);
+}
+
 #watchlist-page .cover-wrapper {
   width: 200px;
   object-position: center;
