@@ -128,6 +128,31 @@ const WatchlistPage = () => {
     }
   };
 
+  const removeFromWL = async (movieID: string) => {
+    try {
+      const options = {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      };
+      const URL = `${process.env.REACT_APP_API_URL}/watchlists/${watchlistID}/movies/${movieID}`;
+      const res = await fetch(URL, options);
+      const data = await res.json();
+      if (res.ok) {
+        toast.success(
+          "Movie successfully removed from the wathclist!",
+          alertOptions
+        );
+        getWatchlist();
+      } else {
+        toast.error(data.message, alertOptions);
+      }
+    } catch (error) {
+      toast.error(String(error), alertOptions);
+    }
+  };
+
   return (
     <Container id="watchlist-page" className="topnav-fix">
       {WL && (
@@ -209,7 +234,7 @@ const WatchlistPage = () => {
               </div>
             </Col>
           </Row>
-          <Row xs={1} md={3} lg={5}>
+          <Row xs={1} md={3} lg={5} className="justify-content-center">
             {WL.movies.map(
               (movie) =>
                 movie && (
@@ -239,7 +264,7 @@ const WatchlistPage = () => {
                         <div className="second-poster-overlay">
                           <button
                             onClick={() => {
-                              console.log("heloWorld");
+                              removeFromWL(movie._id);
                             }}
                           >
                             <MdBookmarkRemove />
