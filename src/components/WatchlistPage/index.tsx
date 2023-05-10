@@ -4,16 +4,22 @@ import { Link, useParams } from "react-router-dom";
 import { IWatchlistDetailed } from "../../interfaces/IWatchlist";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { alertOptions } from "../../tools";
+import {
+  IColor,
+  alertOptions,
+  colorToRgba,
+  getAverageColorFromImage,
+} from "../../tools";
 import { format } from "date-fns";
 import { IUser } from "../../interfaces/IUser";
 import {
   BsHeart,
   BsHeartFill,
-  BsPencilSquare,
+  BsFillPencilFill,
   BsCheckSquareFill,
 } from "react-icons/bs";
-import { MdBookmarkRemove } from "react-icons/md";
+import { BsBookmarkXFill } from "react-icons/bs";
+import BG from "../reusables/BG";
 
 function formatMembers(arr: Array<IUser>): JSX.Element[] {
   return arr
@@ -35,6 +41,7 @@ const WatchlistPage = () => {
   const [isMember, setIsMember] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState("");
+  const [primColor, setPrimColor] = useState("");
   const loggedInUserID = localStorage.getItem("loggedInUserID");
 
   const getWatchlist = async () => {
@@ -52,6 +59,8 @@ const WatchlistPage = () => {
         setIsMember(data.members.some((m: IUser) => m._id === loggedInUserID));
         setIsLiked(data.likes.some((id: string) => id === loggedInUserID));
         setName(data.name);
+        const avColor = await getAverageColorFromImage(data.cover);
+        setPrimColor(colorToRgba(avColor as IColor));
       } else {
         toast.error(data.message, alertOptions);
       }
@@ -79,10 +88,6 @@ const WatchlistPage = () => {
           return prev;
         });
         setIsLiked(!isLiked);
-        toast.success(
-          isLiked ? `${WL?.name} disliked!` : `${WL?.name} liked!`,
-          alertOptions
-        );
       } else {
         toast.error(data.message, alertOptions);
       }
@@ -96,8 +101,7 @@ const WatchlistPage = () => {
     // eslint-disable-next-line
   }, [watchlistID]);
 
-  const editWL = async (e: React.FormEvent<HTMLElement>) => {
-    e.preventDefault();
+  const editWL = async () => {
     const options = {
       method: "PUT",
       headers: {
@@ -156,7 +160,8 @@ const WatchlistPage = () => {
     <Container id="watchlist-page" className="topnav-fix">
       {WL && (
         <>
-          <Row className="mb-5 pb-4 justify-content-center">
+          <BG colors={[primColor, "#2E2E2E"]} to="bottom" />
+          <Row className="mb-4 pb-4 justify-content-center">
             <Col
               xs={12}
               md={8}
@@ -189,11 +194,6 @@ const WatchlistPage = () => {
                         setName(e.target.value);
                       }}
                     />
-                    {isEditing && (
-                      <button type="submit" onClick={editWL}>
-                        <BsCheckSquareFill />
-                      </button>
-                    )}
                   </form>
                 ) : (
                   <h2 className="m-0">{WL.name}</h2>
@@ -204,27 +204,41 @@ const WatchlistPage = () => {
                   {format(new Date(WL.createdAt), "MMM yyyy")}
                 </span>
                 {isMember && (
-                  <button
-                    type="button"
-                    className="mx-auto mx-md-0"
-                    onClick={() => {
-                      setIsEditing(!isEditing);
-                    }}
-                  >
-                    Edit <BsPencilSquare />
-                  </button>
+                  <>
+                    {isEditing ? (
+                      <button
+                        type="button"
+                        className="mx-auto mx-md-0"
+                        onClick={() => {
+                          editWL();
+                        }}
+                      >
+                        Save <BsCheckSquareFill className="ml-2" />
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="mx-auto mx-md-0"
+                        onClick={() => {
+                          setIsEditing(!isEditing);
+                        }}
+                      >
+                        Edit <BsFillPencilFill className="ml-2" />
+                      </button>
+                    )}
+                  </>
                 )}
                 <button
                   onClick={likeOrDislike}
-                  className="mx-auto mx-md-0 d-flex justify-content-around"
+                  className="mx-auto mx-md-0 justify-content-around"
                 >
                   {isLiked ? (
-                    <span>
-                      Dislike <BsHeartFill />
+                    <span className="d-flex align-items-center">
+                      Dislike <BsHeartFill className="ml-2" />
                     </span>
                   ) : (
                     <span>
-                      Like <BsHeart />
+                      Like <BsHeart className="ml-2" />
                     </span>
                   )}
                   <span> | </span>
@@ -233,7 +247,7 @@ const WatchlistPage = () => {
               </div>
             </Col>
           </Row>
-          <Row xs={1} md={3} lg={5} className="justify-content-center">
+          <Row xs={1} md={3} lg={5} className="pt-3 justify-content-center">
             {WL.movies.map(
               (movie) =>
                 movie && (
@@ -267,7 +281,7 @@ const WatchlistPage = () => {
                                 removeFromWL(movie._id);
                               }}
                             >
-                              <MdBookmarkRemove />
+                              <BsBookmarkXFill />
                             </button>
                           </div>
                         )}
