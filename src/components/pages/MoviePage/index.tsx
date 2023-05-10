@@ -102,7 +102,7 @@ const MoviePage = () => {
                 />
               </Col>
             </Row>
-            <Row className="align-items-md-center">
+            <Row>
               <Col
                 xs={12}
                 md={4}
@@ -133,7 +133,17 @@ const MoviePage = () => {
                 {movie.description.length >= 1 && (
                   <div className="movie-info-rows">
                     <i>Description:</i>
-                    <p className="m-0">{movie.description}</p>
+                    <p
+                      className="m-0"
+                      style={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: 5,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {movie.description}
+                    </p>
                   </div>
                 )}
                 {movie.director.length >= 1 && (

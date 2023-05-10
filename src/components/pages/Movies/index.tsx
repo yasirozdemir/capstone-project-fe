@@ -25,7 +25,10 @@ const MoviesPage = () => {
     };
     const URL = `${
       process.env.REACT_APP_API_URL
-    }/movies?genres=${genres}&limit=${limit}&offset=${(page - 1) * limit || 0}`;
+    }/movies?limit=${limit}&offset=${(page - 1) * limit || 0}${
+      genres && `&genres=${genres}`
+    }`;
+    console.log(URL);
     try {
       setIsLoading(true);
       const res = await fetch(URL, options);
@@ -63,7 +66,7 @@ const MoviesPage = () => {
           />
         </Row>
       )}
-      <Row xs={1} sm={2} md={3} lg={5} className="pt-3 justify-content-center">
+      <Row xs={1} sm={2} md={3} lg={5} className="pt-3">
         {movies?.map(
           (movie) =>
             movie && <MovieCardV2 key={movie._id} movie={movie} saveable />
