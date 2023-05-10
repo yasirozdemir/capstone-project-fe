@@ -5,9 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { alertOptions } from "../../tools";
-import { useAppDispatch } from "../../redux/hooks";
-import { slicedStore } from "../../redux/slices";
+import { alertOptions } from "../../../tools";
+import { useAppDispatch } from "../../../redux/hooks";
+import { slicedStore } from "../../../redux/slices";
 
 const LoginRegister = ({ isLogin }: props) => {
   const [showPW, setShowPW] = useState(false);
@@ -76,7 +76,7 @@ const LoginRegister = ({ isLogin }: props) => {
           >
             <div className="logo-wrapper">
               <img
-                src={require("../../assets/images/logo-lg.png")}
+                src={require("../../../assets/images/logo-lg.png")}
                 alt="logo"
                 className="w-100"
               />
@@ -136,7 +136,7 @@ const LoginRegister = ({ isLogin }: props) => {
               className="d-flex justify-content-center align-items-center"
             >
               <img
-                src={require("../../assets/images/google.png")}
+                src={require("../../../assets/images/google.png")}
                 style={{ width: "20px" }}
                 alt="google"
                 className="mr-2"

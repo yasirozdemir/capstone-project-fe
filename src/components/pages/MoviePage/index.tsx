@@ -1,7 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap";
 import "./style.css";
 import React, { useEffect, useState } from "react";
-import { IMovie } from "../../interfaces/IMovie";
+import { IMovie } from "../../../interfaces/IMovie";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -11,10 +11,10 @@ import {
   durationToHM,
   fullDateToYear,
   getAverageColorFromImage,
-} from "../../tools";
+} from "../../../tools";
 import { BsStarFill, BsBookmarksFill } from "react-icons/bs";
-import WLModal from "../modals/WLModal";
-import BG from "../reusables/BG";
+import WLModal from "../../modals/WLModal";
+import BG from "../../reusables/BG";
 
 function formatArrays(arr: Array<string>): JSX.Element[] {
   return arr

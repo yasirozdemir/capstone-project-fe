@@ -1,18 +1,18 @@
 import React from "react";
-import AI from "./components/Discover";
+import AI from "./components/pages/Discover";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginRegister from "./components/Login";
+import LoginRegister from "./components/pages/Login";
 import Verified from "./components/non-functionals/Verified";
 import Nav from "./components/Nav";
-import UserProfile from "./components/UserProfile";
+import UserProfile from "./components/pages/UserProfile";
 import GoogleRedirect from "./components/non-functionals/GoogleRedirect";
 import { useAppDispatch } from "./redux/hooks";
 import { setLoggedInUser } from "./redux/actions";
 import { useEffect } from "react";
-import MoviePage from "./components/MoviePage";
-import WatchlistPage from "./components/WatchlistPage";
+import MoviePage from "./components/pages/MoviePage";
+import WatchlistPage from "./components/pages/WatchlistPage";
 
 function App() {
   const dispatch = useAppDispatch();

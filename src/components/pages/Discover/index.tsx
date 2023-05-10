@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
-import { IMovie } from "../../interfaces/IMovie";
+import { IMovie } from "../../../interfaces/IMovie";
 import "./style.css";
 import { Col, Container, Row } from "react-bootstrap";
 import Typewriter from "typewriter-effect";
 import { TbMoodSearch } from "react-icons/tb";
-import MovieCard from "../reusables/MovieCard";
+import MovieCard from "../../reusables/MovieCard";
 import { toast } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
-import { alertOptions } from "../../tools";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { slicedStore } from "../../redux/slices";
+import { alertOptions } from "../../../tools";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { slicedStore } from "../../../redux/slices";
 
 // The following import is unnecessary for production, it's just for developers to style the page
-// import { sampleMoviesArray } from "../../assets/sampleMovies";
+// import { sampleMoviesArray } from "../../../assets/sampleMovies";
 
 const AI = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);

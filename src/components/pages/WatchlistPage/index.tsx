@@ -1,7 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap";
 import "./style.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { IWatchlistDetailed } from "../../interfaces/IWatchlist";
+import { IWatchlistDetailed } from "../../../interfaces/IWatchlist";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import {
@@ -9,9 +9,9 @@ import {
   alertOptions,
   colorToRgba,
   getAverageColorFromImage,
-} from "../../tools";
+} from "../../../tools";
 import { format } from "date-fns";
-import { IUser } from "../../interfaces/IUser";
+import { IUser } from "../../../interfaces/IUser";
 import {
   BsHeart,
   BsHeartFill,
@@ -21,8 +21,8 @@ import {
 } from "react-icons/bs";
 import { BiMovie } from "react-icons/bi";
 import { FaSkullCrossbones } from "react-icons/fa";
-import BG from "../reusables/BG";
-import MovieCardV2 from "../reusables/MovieCardV2";
+import BG from "../../reusables/BG";
+import MovieCardV2 from "../../reusables/MovieCardV2";
 
 function formatMembers(arr: Array<IUser>): JSX.Element[] {
   return arr

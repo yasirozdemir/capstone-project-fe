@@ -1,22 +1,22 @@
 import { useNavigate, useParams } from "react-router-dom";
 import "./style.css";
 import { useEffect, useState } from "react";
-import { IUser } from "../../interfaces/IUser";
+import { IUser } from "../../../interfaces/IUser";
 import { toast } from "react-toastify";
 import { Col, Container, Row } from "react-bootstrap";
 import { GoVerified } from "react-icons/go";
 import { ThreeDots } from "react-loader-spinner";
-import WLCardHorizontal from "../reusables/WLCardHorizontal";
+import WLCardHorizontal from "../../reusables/WLCardHorizontal";
 import {
   IColor,
   alertOptions,
   colorToRgba,
   getAverageColorFromImage,
-} from "../../tools";
-import PPModal from "../modals/AvatarModal";
-import { useAppSelector } from "../../redux/hooks";
-import EditProfile from "../modals/EditProfile";
-import BG from "../reusables/BG";
+} from "../../../tools";
+import PPModal from "../../modals/AvatarModal";
+import { useAppSelector } from "../../../redux/hooks";
+import EditProfile from "../../modals/EditProfile";
+import BG from "../../reusables/BG";
 
 const UserProfile = () => {
   const loggedInUserID = localStorage.getItem("loggedInUserID");
