@@ -16,30 +16,30 @@
   background: -moz-linear-gradient(
     0deg,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.41358550256039917) 35%,
-    rgba(255, 255, 255, 0) 80%,
-    rgba(0, 0, 0, 0.7021009087228641) 100%
+    rgba(0, 0, 0, 0) 45%,
+    rgba(0, 0, 0, 0.19789922805059523) 80%,
+    rgba(0, 0, 0, 1) 100%
   );
   background: -webkit-linear-gradient(
     0deg,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.41358550256039917) 35%,
-    rgba(255, 255, 255, 0) 80%,
-    rgba(0, 0, 0, 0.7021009087228641) 100%
+    rgba(0, 0, 0, 0) 45%,
+    rgba(0, 0, 0, 0.19789922805059523) 80%,
+    rgba(0, 0, 0, 1) 100%
   );
   background: linear-gradient(
     0deg,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.41358550256039917) 35%,
-    rgba(255, 255, 255, 0) 80%,
-    rgba(0, 0, 0, 0.7021009087228641) 100%
+    rgba(0, 0, 0, 0) 45%,
+    rgba(0, 0, 0, 0.19789922805059523) 80%,
+    rgba(0, 0, 0, 1) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1);
 }
 
 .poster-overlay-detailed > div {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   justify-content: center;
   align-items: center;
   gap: 0.2rem;
@@ -59,17 +59,29 @@
   right: 0;
   left: 0;
   display: flex;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   justify-content: flex-end;
 }
 
 .second-poster-overlay button {
-  color: rgb(255, 205, 205);
   display: flex;
   transition: all 300ms;
+  margin-inline-end: 0.2rem;
 }
 
-.second-poster-overlay button:hover {
+.second-poster-overlay button.save {
+  color: #f1d46a;
+}
+
+.second-poster-overlay button.save:hover {
+  color: #f5c518;
+}
+
+.second-poster-overlay button.remove {
+  color: rgb(255, 205, 205);
+}
+
+.second-poster-overlay button.remove:hover {
   color: red;
 }
 

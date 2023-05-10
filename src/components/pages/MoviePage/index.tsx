@@ -121,7 +121,7 @@ const MoviePage = () => {
                   <div className="genre-wrapper mb-2 justify-content-center justify-content-md-start">
                     {movie.genres.map((g, i) => (
                       <Link
-                        to={"/movies/" + g.toLowerCase()}
+                        to={"/movies?genres=" + g}
                         key={i}
                         className="genre-badge"
                       >

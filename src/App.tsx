@@ -13,6 +13,7 @@ import { setLoggedInUser } from "./redux/actions";
 import { useEffect } from "react";
 import MoviePage from "./components/pages/MoviePage";
 import WatchlistPage from "./components/pages/WatchlistPage";
+import MoviesPage from "./components/pages/Movies";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -74,6 +75,15 @@ function App() {
               <>
                 <Nav />
                 <WatchlistPage />
+              </>
+            }
+          />
+          <Route
+            path="/movies"
+            element={
+              <>
+                <Nav />
+                <MoviesPage />
               </>
             }
           />

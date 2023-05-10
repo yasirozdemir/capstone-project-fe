@@ -1,10 +1,10 @@
 import { Col } from "react-bootstrap";
-import { BsBookmarkXFill } from "react-icons/bs";
+import { BsBookmarkXFill, BsBookmarkCheckFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { IMovie } from "../../../interfaces/IMovie";
 import "./style.css";
 
-const MovieCardV2 = ({ movie, isMember, removeFromWL }: props) => {
+const MovieCardV2 = ({ movie, isMember, removeFromWL, saveable }: props) => {
   return (
     <Col key={movie._id} className="d-flex justify-content-center mb-3">
       <div className="movie-card">
@@ -22,17 +22,28 @@ const MovieCardV2 = ({ movie, isMember, removeFromWL }: props) => {
               </div>
             </div>
           </Link>
-          {isMember && (
-            <div className="second-poster-overlay">
+          <div className="second-poster-overlay">
+            {isMember && (
               <button
+                className="remove"
                 onClick={() => {
-                  removeFromWL(movie._id);
+                  removeFromWL!(movie._id);
                 }}
               >
                 <BsBookmarkXFill />
               </button>
-            </div>
-          )}
+            )}
+            {saveable && (
+              <button
+                className="save"
+                onClick={() => {
+                  console.log("will be added later");
+                }}
+              >
+                <BsBookmarkCheckFill />
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </Col>
@@ -41,8 +52,9 @@ const MovieCardV2 = ({ movie, isMember, removeFromWL }: props) => {
 
 interface props {
   movie: IMovie;
-  isMember: boolean;
-  removeFromWL: Function;
+  isMember?: boolean;
+  removeFromWL?: Function;
+  saveable?: boolean;
 }
 
 export default MovieCardV2;
