@@ -2,17 +2,12 @@ import { createGradient } from "../../../tools";
 import { useState, useEffect } from "react";
 import "./style.css";
 
-interface Props {
-  primColor: string;
-  secColor: string;
-}
-
-const BG = ({ primColor, secColor }: Props) => {
+const BG = ({ colors }: { colors: string[] }) => {
   const [gradient, setGradient] = useState("");
 
   useEffect(() => {
-    setGradient(createGradient(primColor, secColor));
-  }, [primColor, secColor]);
+    setGradient(createGradient(colors));
+  }, [colors]);
 
   return <div id="bg-holder" style={{ background: gradient }}></div>;
 };

@@ -128,7 +128,7 @@ const UserProfile = () => {
         </Col>
       ) : (
         <>
-          <BG primColor={primColor} secColor="#2E2E2E" />
+          <BG colors={[primColor, "#2E2E2E"]} />
           <Row className="justify-content-center py-4 py-lg-5">
             <Col
               xs={12}

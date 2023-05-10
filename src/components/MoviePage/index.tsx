@@ -60,7 +60,7 @@ const MoviePage = () => {
     <Container id="movie-page" className="topnav-fix mb-3 mb-md-0">
       {movie && (
         <>
-          <BG primColor={primColor} secColor="#2E2E2E" />
+          <BG colors={[primColor, "#2E2E2E"]} />
           <div id="movie-detail-wrapper">
             <Row className="flex-column flex-md-row mb-3">
               <Col
