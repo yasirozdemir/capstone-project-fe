@@ -66,7 +66,7 @@ const EditProfile = ({ showEditModal, setShowEditModal, setUser }: props) => {
             setShowEditModal(false);
           }}
         >
-          <IoMdClose style={{ fontSize: "1.8rem", fill: "#fff" }} />
+          <IoMdClose style={{ fontSize: "1.8rem" }} />
         </button>
       </Modal.Header>
       <Form onSubmit={handleSubmit} style={{ height: "fit-content" }}>

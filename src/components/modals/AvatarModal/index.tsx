@@ -79,7 +79,7 @@ const AvatarModal = ({ showAvatarModal, setShowAvatarModal }: props) => {
             setShowAvatarModal(false);
           }}
         >
-          <IoMdClose style={{ fontSize: "1.8rem", fill: "#fff" }} />
+          <IoMdClose style={{ fontSize: "1.8rem" }} />
         </button>
       </Modal.Header>
       <Modal.Body>

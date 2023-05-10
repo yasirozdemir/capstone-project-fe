@@ -1,9 +1,3 @@
-#PPModal > .modal-content,
-#EditModal > .modal-content {
-  background-color: #222222;
-  color: #fff;
-}
-
 #PPModal .modal-body {
   display: flex;
   align-items: center;
@@ -48,12 +42,10 @@
   border: transparent;
   background-color: transparent;
   border-radius: 0.5rem;
-  color: #fff;
-  fill: #fff;
   transition: all 300ms;
   padding: 0.5rem;
 }
 
 #PPModal .modal-footer button:hover {
-  background-color: #5c6268;
+  background-color: #d4d4d491;
 }
