@@ -7,10 +7,16 @@ import { Col, Container, Row } from "react-bootstrap";
 import { GoVerified } from "react-icons/go";
 import { ThreeDots } from "react-loader-spinner";
 import WLCardHorizontal from "../reusables/WLCardHorizontal";
-import { alertOptions } from "../../tools";
+import {
+  IColor,
+  alertOptions,
+  colorToRgba,
+  getAverageColorFromImage,
+} from "../../tools";
 import PPModal from "../modals/AvatarModal";
 import { useAppSelector } from "../../redux/hooks";
 import EditProfile from "../modals/EditProfile";
+import BG from "../reusables/BG";
 
 const UserProfile = () => {
   const loggedInUserID = localStorage.getItem("loggedInUserID");
@@ -25,6 +31,7 @@ const UserProfile = () => {
   const [showWLs, setShowWLs] = useState(true);
   const [showAvatarModal, setShowAvatarModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [primColor, setPrimColor] = useState("");
 
   const followFunc = async (userID: string | undefined, isFollow: boolean) => {
     try {
@@ -80,6 +87,8 @@ const UserProfile = () => {
         setUser(data);
         setIsFollowing(data.followers.includes(loggedInUserID));
         document.title = `What a Movie | ${data.name} ${data.surname}`;
+        const avColor = await getAverageColorFromImage(data.avatar);
+        setPrimColor(colorToRgba(avColor as IColor));
       } else {
         setError({ is: true, message: data.message });
         toast.error(isError.message, alertOptions);
@@ -119,6 +128,7 @@ const UserProfile = () => {
         </Col>
       ) : (
         <>
+          <BG primColor={primColor} secColor="#2E2E2E" />
           <Row className="justify-content-center py-4 py-lg-5">
             <Col
               xs={12}

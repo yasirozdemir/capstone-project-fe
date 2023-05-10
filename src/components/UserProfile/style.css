@@ -2,6 +2,7 @@
   font-size: 1.2rem;
   margin-block-start: 65px;
   color: #fff;
+  min-height: calc(100vh - 65px);
 }
 
 #user-profile h2 {

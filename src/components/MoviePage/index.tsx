@@ -8,13 +8,13 @@ import {
   IColor,
   alertOptions,
   colorToRgba,
-  createGradient,
   durationToHM,
   fullDateToYear,
   getAverageColorFromImage,
 } from "../../tools";
 import { BsStarFill, BsBookmarksFill } from "react-icons/bs";
 import WLModal from "../modals/WLModal";
+import BG from "../reusables/BG";
 
 function formatArrays(arr: Array<string>): JSX.Element[] {
   return arr
@@ -31,7 +31,7 @@ const MoviePage = () => {
   const { movieID } = useParams();
   const [movie, setMovie] = useState<IMovie | null>(null);
   const [showWLModal, setShowWLModal] = useState(false);
-  const [bgColor, setBgColor] = useState("");
+  const [primColor, setPrimColor] = useState("");
   const getMovie = async () => {
     const options = {
       headers: {
@@ -45,7 +45,7 @@ const MoviePage = () => {
       setMovie(data);
       document.title = `What a Movie | ${data.title}`;
       const avColor = await getAverageColorFromImage(data.poster);
-      setBgColor(colorToRgba(avColor as IColor));
+      setPrimColor(colorToRgba(avColor as IColor));
     } else {
       toast.error(data.message, alertOptions);
     }
@@ -60,12 +60,7 @@ const MoviePage = () => {
     <Container id="movie-page" className="topnav-fix mb-3 mb-md-0">
       {movie && (
         <>
-          <div
-            className="bg-holder"
-            // style={{ background: `url(${movie?.poster})` }}
-            // style={{ backgroundColor: bgColor }}
-            style={{ background: createGradient(bgColor, "#2E2E2E") }}
-          ></div>
+          <BG primColor={primColor} secColor="#2E2E2E" />
           <div id="movie-detail-wrapper">
             <Row className="flex-column flex-md-row mb-3">
               <Col
