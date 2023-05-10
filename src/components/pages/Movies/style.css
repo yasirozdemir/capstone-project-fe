@@ -5,6 +5,25 @@
   flex-direction: column;
 }
 
+#movies-page .control-panel {
+}
+
+#movies-page .control-panel button {
+  background-color: #585858;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #f5c518;
+  color: #f5c518;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 300ms;
+}
+
+#movies-page .control-panel button:hover {
+  background-color: #f0c21c5d;
+}
+
 #movies-page .pagination-link {
   background-color: #585858;
   color: #f5c518;

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { alertOptions } from "../../../tools";
 import MovieCardV2 from "../../reusables/MovieCardV2";
 import { ThreeDots } from "react-loader-spinner";
+import { BsSortAlphaDown, BsSortAlphaDownAlt } from "react-icons/bs";
 
 const MoviesPage = () => {
   const [params] = useSearchParams();
@@ -15,7 +16,7 @@ const MoviesPage = () => {
   const [pages, setPages] = useState<number | null>(0);
   const [movies, setMovies] = useState<IMovie[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [sortOrder, setSortOrder] = useState("");
+  const [sortOrder, setSortOrder] = useState(true);
   const limit = 15;
 
   const getMovies = async () => {
@@ -26,9 +27,9 @@ const MoviesPage = () => {
     };
     const URL = `${
       process.env.REACT_APP_API_URL
-    }/movies?limit=${limit}&offset=${
-      (page - 1) * limit || 0
-    }&sort=${sortOrder}title${genres ? `&genres=${genres}` : ""}`;
+    }/movies?limit=${limit}&offset=${(page - 1) * limit || 0}&sort=${
+      sortOrder ? "" : "-"
+    }title${genres ? `&genres=${genres}` : ""}`;
     try {
       setIsLoading(true);
       const res = await fetch(URL, options);
@@ -37,10 +38,10 @@ const MoviesPage = () => {
         setMovies(data.movies);
         setPages(data.numberOfPages);
       } else {
-        toast(data.message, alertOptions);
+        toast.error(data.message, alertOptions);
       }
     } catch (error) {
-      toast(String(error), alertOptions);
+      toast.error(String(error), alertOptions);
     } finally {
       setIsLoading(false);
     }
@@ -53,6 +54,28 @@ const MoviesPage = () => {
 
   return (
     <Container id="movies-page" className="topnav-fix">
+      <Row className="control-panel mb-5">
+        <Col xs={12}>
+          <button
+            onClick={() => {
+              setSortOrder(!sortOrder);
+            }}
+          >
+            Sort{" "}
+            {sortOrder ? (
+              <BsSortAlphaDownAlt
+                className="ml-2"
+                style={{ fontSize: "1.5rem" }}
+              />
+            ) : (
+              <BsSortAlphaDown
+                className="ml-2"
+                style={{ fontSize: "1.5rem" }}
+              />
+            )}
+          </button>
+        </Col>
+      </Row>
       {isLoading && (
         <Row>
           <ThreeDots
