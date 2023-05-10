@@ -1,3 +1,28 @@
 #movies-page {
   color: #fff;
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+}
+
+#movies-page .pagination-link {
+  background-color: #585858;
+  color: #f5c518;
+  font-size: 1.2rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 300ms;
+}
+
+#movies-page .pagination-link:hover {
+  text-decoration: none;
+  background-color: #f0c21c5d;
+}
+
+#movies-page .pagination-link.current {
+  background-color: #f5c518;
+  color: #000;
 }

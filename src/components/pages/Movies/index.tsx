@@ -7,24 +7,15 @@ import { toast } from "react-toastify";
 import { alertOptions } from "../../../tools";
 import MovieCardV2 from "../../reusables/MovieCardV2";
 import { ThreeDots } from "react-loader-spinner";
-import { BiFirstPage } from "react-icons/bi";
-
-interface ILinks {
-  prev?: string;
-  next?: string;
-  first?: string;
-  last?: string;
-}
 
 const MoviesPage = () => {
   const [params] = useSearchParams();
   const genres = params.get("genres");
-  const limit = params.get("limit");
-  const offset = params.get("offset");
+  const page = parseInt(params.get("page") ?? "1");
   const [pages, setPages] = useState<number | null>(0);
   const [movies, setMovies] = useState<IMovie[] | null>(null);
-  const [links, setLinks] = useState<ILinks | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const limit = 15;
 
   const getMovies = async () => {
     const options = {
@@ -34,15 +25,13 @@ const MoviesPage = () => {
     };
     const URL = `${
       process.env.REACT_APP_API_URL
-    }/movies?genres=${genres}&limit=${limit || 15}&offset=${offset || 0}`;
+    }/movies?genres=${genres}&limit=${limit}&offset=${(page - 1) * limit || 0}`;
     try {
       setIsLoading(true);
       const res = await fetch(URL, options);
       const data = await res.json();
-      console.log({ pages });
       if (res.ok) {
         setMovies(data.movies);
-        setLinks(data.links);
         setPages(data.numberOfPages);
       } else {
         toast(data.message, alertOptions);
@@ -57,7 +46,7 @@ const MoviesPage = () => {
   useEffect(() => {
     getMovies();
     // eslint-disable-next-line
-  }, [genres, limit, offset]);
+  }, [genres, page]);
 
   return (
     <Container id="movies-page" className="topnav-fix">
@@ -80,19 +69,25 @@ const MoviesPage = () => {
             movie && <MovieCardV2 key={movie._id} movie={movie} saveable />
         )}
       </Row>
-      <Row className="mb-3">
-        {links && (
-          <Col xs={12}>
-            {links.first && (
-              <Link to={links.first}>
-                <BiFirstPage />
+      <Row className="mb-3 justify-content-center mt-auto">
+        <Col
+          xs={12}
+          className="d-flex justify-content-center"
+          style={{ gap: "0.5rem", flexWrap: "wrap" }}
+        >
+          {pages &&
+            Array.from({ length: pages }, (_, i) => (
+              <Link
+                key={i}
+                to={`/movies?genres=${genres}&page=${i + 1}`}
+                className={
+                  page === i + 1 ? "pagination-link current" : "pagination-link"
+                }
+              >
+                {i + 1}
               </Link>
-            )}
-            {/* {links.prev && <Link to={links.prev}>Prev</Link>}
-            {links.next && <Link to={links.next}>Next</Link>}
-            {links.last && <Link to={links.last}>Last</Link>} */}
-          </Col>
-        )}
+            ))}
+        </Col>
       </Row>
     </Container>
   );
