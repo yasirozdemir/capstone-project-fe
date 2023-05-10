@@ -132,3 +132,33 @@
 .second-poster-overlay button:hover {
   color: red;
 }
+
+.discover-overlay {
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: -moz-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.41358550256039917) 35%,
+    rgba(255, 255, 255, 0) 80%,
+    rgba(0, 0, 0, 0.7021009087228641) 100%
+  );
+  background: -webkit-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.41358550256039917) 35%,
+    rgba(255, 255, 255, 0) 80%,
+    rgba(0, 0, 0, 0.7021009087228641) 100%
+  );
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.41358550256039917) 35%,
+    rgba(255, 255, 255, 0) 80%,
+    rgba(0, 0, 0, 0.7021009087228641) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1);
+}
