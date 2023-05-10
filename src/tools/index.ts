@@ -9,42 +9,59 @@ export const alertOptions: any = {
   theme: "light",
 };
 
-export function getAverageColorFromImage(imageUrl: string) {
+export function durationToHM(dur: string): string {
+  const totalM = parseInt(dur, 10);
+  const h = Math.floor(totalM / 60);
+  const m = totalM % 60;
+  return `${h}h ${m}m`;
+}
+
+export function fullDateToYear(date: string): string {
+  const d = new Date(date);
+  const y = d.getFullYear();
+  return y.toString();
+}
+
+export function getAverageColorFromImage(url: string) {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.crossOrigin = "anonymous";
-    img.src = imageUrl;
+    img.src = url;
     img.onload = () => {
       const canvas = document.createElement("canvas");
       canvas.width = img.width;
       canvas.height = img.height;
       const ctx = canvas.getContext("2d");
       ctx?.drawImage(img, 0, 0);
-      const imageData = ctx?.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imageData?.data;
+      const imgData = ctx?.getImageData(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      )?.data;
       let red = 0,
         green = 0,
         blue = 0,
         alpha = 0;
-      if (data) {
-        for (let i = 0; i < data.length; i += 4) {
-          red += data[i];
-          green += data[i + 1];
-          blue += data[i + 2];
-          alpha += data[i + 3];
+      if (imgData) {
+        for (let i = 0; i < imgData.length; i += 4) {
+          red += imgData[i];
+          green += imgData[i + 1];
+          blue += imgData[i + 2];
+          alpha += imgData[i + 3];
         }
-        const pixelCount = data.length / 4;
-        const averageRed = red / pixelCount;
-        const averageGreen = green / pixelCount;
-        const averageBlue = blue / pixelCount;
-        const averageAlpha = alpha / pixelCount;
-        const averageColor = {
-          red: averageRed,
-          green: averageGreen,
-          blue: averageBlue,
-          alpha: averageAlpha,
+        const pixel = imgData.length / 4;
+        const avRed = red / pixel;
+        const avGreen = green / pixel;
+        const avBlue = blue / pixel;
+        const avAlpha = alpha / pixel;
+        const avColor = {
+          red: avRed,
+          green: avGreen,
+          blue: avBlue,
+          alpha: avAlpha,
         };
-        resolve(averageColor);
+        resolve(avColor);
       }
     };
     img.onerror = reject;
@@ -63,19 +80,6 @@ export function colorToRgba(color: IColor): string {
   return `rgba(${red}, ${green}, ${blue}, ${alpha / 255})`;
 }
 
-export function createGradient(startColor: string, endColor: string): string {
-  return `linear-gradient(to bottom, ${startColor}, ${endColor})`;
-}
-
-export function durationToHM(dur: string): string {
-  const totalM = parseInt(dur, 10);
-  const h = Math.floor(totalM / 60);
-  const m = totalM % 60;
-  return `${h}h ${m}m`;
-}
-
-export function fullDateToYear(date: string): string {
-  const d = new Date(date);
-  const y = d.getFullYear();
-  return y.toString();
+export function createGradient(primColor: string, secColor: string): string {
+  return `linear-gradient(to bottom, ${primColor}, ${secColor})`;
 }
