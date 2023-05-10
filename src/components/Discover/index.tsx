@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IMovie } from "../../interfaces/IMovie";
 import "./style.css";
 import { Col, Container, Row } from "react-bootstrap";
@@ -11,9 +11,8 @@ import { alertOptions } from "../../tools";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { slicedStore } from "../../redux/slices";
 
-// The following imports are unnecessary for production, it's just for developers to style the page
-import { sampleMoviesArray } from "../../assets/sampleMovies";
-import { useEffect } from "react";
+// The following import is unnecessary for production, it's just for developers to style the page
+// import { sampleMoviesArray } from "../../assets/sampleMovies";
 
 const AI = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -61,10 +60,10 @@ const AI = () => {
     document.title = "What a Movie | Discover";
   }, []);
 
-  // The following useEffect is unnecessary for production, it's just for developers to style the page
-  useEffect(() => {
-    setMovies(sampleMoviesArray);
-  }, []);
+  // The following lines (76 -79) is unnecessary for production, it's just for developers to style the page
+  // useEffect(() => {
+  //   setMovies(sampleMoviesArray);
+  // }, []);
 
   return (
     <div id="ai-wrapper">

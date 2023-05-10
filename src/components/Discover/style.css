@@ -1,25 +1,19 @@
 #ai-wrapper {
+  position: relative;
   color: var(--text-color);
   min-height: calc(100vh - 65px);
   margin-top: 65px;
-  background: #3a6186;
-  background: -webkit-linear-gradient(to right, #89253e, #3a6186);
-  background: linear-gradient(to right, #89253e, #3a6186);
-  background-size: 400% 400%;
-  animation: bgAnim 30s ease infinite;
 }
 
-@keyframes bgAnim {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
+/* #ai-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+} */
 
 #ai-section {
   transition: all 600ms;
