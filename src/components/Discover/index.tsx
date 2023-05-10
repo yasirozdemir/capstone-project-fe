@@ -57,6 +57,10 @@ const AI = () => {
     promptToMovies();
   };
 
+  useEffect(() => {
+    document.title = "What a Movie | Discover";
+  }, []);
+
   // The following useEffect is unnecessary for production, it's just for developers to style the page
   useEffect(() => {
     setMovies(sampleMoviesArray);

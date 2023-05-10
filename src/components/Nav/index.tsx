@@ -23,12 +23,15 @@ const Nav = () => {
       const res = await fetch(URL, options);
       if (res.ok) {
         localStorage.removeItem("accessToken");
+        localStorage.removeItem("loggedInUserID");
         navigate("/");
       } else {
         const data = await res.json();
         toast.error(data.message, alertOptions);
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error(String(error), alertOptions);
+    }
   };
 
   return (

@@ -1,4 +1,7 @@
 #log-reg {
+  background: url(https://images.pexels.com/photos/7991319/pexels-photo-7991319.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #login-register-form {
@@ -12,6 +15,10 @@
   align-items: center;
   justify-content: center;
   max-width: 520px;
+}
+
+#login-register-form .logo-wrapper img {
+  filter: drop-shadow(0px 2px 3px rgba(255, 255, 255, 0.45));
 }
 
 #login-register-form > * {
@@ -86,13 +93,13 @@
 
 #login-register-form a:nth-last-of-type(1) {
   text-decoration: underline;
-  color: #0000008f;
+  color: #ffffffad;
   transition: all 200ms;
 }
 
 #login-register-form a:nth-last-of-type(1):hover,
 #login-register-form a:nth-last-of-type(1):focus-visible {
-  color: #000;
+  color: #fff;
 }
 
 #or-line {
@@ -100,6 +107,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #ffffffad;
 }
 
 #or-line::before,
@@ -108,7 +116,7 @@
   position: absolute;
   height: 2px;
   width: 45%;
-  background-color: #00000062;
+  background-color: #ffffffad;
 }
 
 #or-line::before {

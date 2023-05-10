@@ -107,7 +107,6 @@ const WatchlistPage = () => {
       body: JSON.stringify({ name }),
     };
     const URL = `${process.env.REACT_APP_API_URL}/watchlists/${watchlistID}`;
-    console.log(URL, options);
     try {
       const res = await fetch(URL, options);
       const data = await res.json();

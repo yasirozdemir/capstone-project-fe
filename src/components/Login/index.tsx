@@ -1,5 +1,5 @@
 import "./style.css";
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, useEffect } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
@@ -53,6 +53,10 @@ const LoginRegister = ({ isLogin }: props) => {
     }
   };
 
+  useEffect(() => {
+    document.title = `What a Movie | ${isLogin ? "Login" : "Register"}`;
+  }, [isLogin]);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     loginOrRegisterFunc();
@@ -60,7 +64,10 @@ const LoginRegister = ({ isLogin }: props) => {
 
   return (
     <Container fluid style={{ height: "100vh" }} id="log-reg">
-      <Row className="justify-content-center align-items-center h-100">
+      <Row
+        className="justify-content-center align-items-center h-100"
+        style={{ backdropFilter: "blur(5px)" }}
+      >
         <Col xs={12} md={6}>
           <form
             onSubmit={handleSubmit}
