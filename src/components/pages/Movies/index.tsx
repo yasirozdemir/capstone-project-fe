@@ -15,6 +15,7 @@ const MoviesPage = () => {
   const [pages, setPages] = useState<number | null>(0);
   const [movies, setMovies] = useState<IMovie[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [sortOrder, setSortOrder] = useState("");
   const limit = 15;
 
   const getMovies = async () => {
@@ -25,10 +26,9 @@ const MoviesPage = () => {
     };
     const URL = `${
       process.env.REACT_APP_API_URL
-    }/movies?limit=${limit}&offset=${(page - 1) * limit || 0}${
-      genres ? `&genres=${genres}` : ""
-    }`;
-    console.log(URL);
+    }/movies?limit=${limit}&offset=${
+      (page - 1) * limit || 0
+    }&sort=${sortOrder}title${genres ? `&genres=${genres}` : ""}`;
     try {
       setIsLoading(true);
       const res = await fetch(URL, options);
@@ -49,7 +49,7 @@ const MoviesPage = () => {
   useEffect(() => {
     getMovies();
     // eslint-disable-next-line
-  }, [genres, page]);
+  }, [genres, page, sortOrder]);
 
   return (
     <Container id="movies-page" className="topnav-fix">
@@ -79,6 +79,7 @@ const MoviesPage = () => {
           style={{ gap: "0.5rem", flexWrap: "wrap" }}
         >
           {pages &&
+            pages !== 0 &&
             Array.from({ length: pages }, (_, i) => (
               <Link
                 key={i}
