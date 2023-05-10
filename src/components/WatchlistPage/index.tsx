@@ -1,6 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import "./style.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { IWatchlistDetailed } from "../../interfaces/IWatchlist";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -17,10 +17,12 @@ import {
   BsHeartFill,
   BsFillPencilFill,
   BsCheckSquareFill,
-  BsBookmarkXFill,
+  BsTrash3Fill,
 } from "react-icons/bs";
 import { BiMovie } from "react-icons/bi";
+import { FaSkullCrossbones } from "react-icons/fa";
 import BG from "../reusables/BG";
+import MovieCardV2 from "../reusables/MovieCardV2";
 
 function formatMembers(arr: Array<IUser>): JSX.Element[] {
   return arr
@@ -41,9 +43,11 @@ const WatchlistPage = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [isMember, setIsMember] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [name, setName] = useState("");
   const [primColor, setPrimColor] = useState("");
   const loggedInUserID = localStorage.getItem("loggedInUserID");
+  const navigate = useNavigate();
 
   const getWatchlist = async () => {
     const options = {
@@ -157,6 +161,28 @@ const WatchlistPage = () => {
     }
   };
 
+  const deleteWL = async (WLID: string) => {
+    try {
+      const options = {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      };
+      const URL = `${process.env.REACT_APP_API_URL}/watchlists/${WLID}`;
+      const res = await fetch(URL, options);
+      if (res.ok) {
+        toast.success("Watchlist successfully deleted!", alertOptions);
+        navigate("/user/me");
+      } else {
+        const data = await res.json();
+        toast.error(data.message, alertOptions);
+      }
+    } catch (error) {
+      toast.error(String(error), alertOptions);
+    }
+  };
+
   return (
     <Container id="watchlist-page" className="topnav-fix">
       {WL && (
@@ -165,7 +191,6 @@ const WatchlistPage = () => {
           <Row className="mb-4 pb-4 justify-content-center">
             <Col
               xs={12}
-              md={8}
               className="d-flex justify-content-center align-items-center flex-column flex-md-row"
             >
               <div className="cover-wrapper mr-0 mr-md-3 mb-3 mb-md-0">
@@ -227,6 +252,42 @@ const WatchlistPage = () => {
                         Edit <BsFillPencilFill className="ml-2" />
                       </button>
                     )}
+                    {isDeleting ? (
+                      <div className="delete-wrapper justify-content-center justify-content-md-start">
+                        <button
+                          style={{
+                            backgroundColor: "red",
+                            color: "#000",
+                            borderColor: "#000",
+                          }}
+                        >
+                          Sure? <FaSkullCrossbones className="ml-2" />
+                        </button>
+                        <button
+                          onClick={() => {
+                            deleteWL(WL._id);
+                          }}
+                        >
+                          YES
+                        </button>
+                        <button
+                          onClick={() => {
+                            setIsDeleting(false);
+                          }}
+                        >
+                          NO
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        className="mx-auto mx-md-0"
+                        onClick={() => {
+                          setIsDeleting(!isDeleting);
+                        }}
+                      >
+                        Delete <BsTrash3Fill className="ml-2" />
+                      </button>
+                    )}
                   </>
                 )}
                 <button
@@ -252,47 +313,15 @@ const WatchlistPage = () => {
             {WL.movies.map(
               (movie) =>
                 movie && (
-                  <Col
-                    key={movie._id}
-                    className="d-flex justify-content-center mb-3"
-                  >
-                    <div className="movie-card">
-                      <div className="movie-card-body">
-                        <Link to={`/movie/${movie._id}`}>
-                          <img
-                            src={movie.poster}
-                            alt="movie cover"
-                            className="img-fluid"
-                          />
-                          <div className="poster-overlay-detailed">
-                            <i>{movie.title}</i>
-                            <div>
-                              {movie.genres.map((g, i) => (
-                                <span key={i} className="genre-badge">
-                                  {g}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </Link>
-                        {isMember && (
-                          <div className="second-poster-overlay">
-                            <button
-                              onClick={() => {
-                                removeFromWL(movie._id);
-                              }}
-                            >
-                              <BsBookmarkXFill />
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </Col>
+                  <MovieCardV2
+                    movie={movie}
+                    isMember={isMember}
+                    removeFromWL={removeFromWL}
+                  />
                 )
             )}
             <Col className="d-flex justify-content-center mb-3">
-              <div className="movie-card">
+              <div className="movie-card" style={{ maxWidth: "300px" }}>
                 <div className="movie-card-body">
                   <Link
                     to={"/discover"}
