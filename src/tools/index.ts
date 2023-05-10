@@ -80,7 +80,7 @@ export function colorToRgba(color: IColor): string {
   return `rgba(${red}, ${green}, ${blue}, ${alpha / 255})`;
 }
 
-export function createGradient(colors: string[]): string {
+export function createGradient(colors: string[], to: string): string {
   const gradientColors = colors.join(",");
-  return `linear-gradient(to bottom, ${gradientColors})`;
+  return `linear-gradient(to ${to}, ${gradientColors})`;
 }
