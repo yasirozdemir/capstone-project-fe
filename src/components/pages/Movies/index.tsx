@@ -26,7 +26,7 @@ const MoviesPage = () => {
     const URL = `${
       process.env.REACT_APP_API_URL
     }/movies?limit=${limit}&offset=${(page - 1) * limit || 0}${
-      genres && `&genres=${genres}`
+      genres ? `&genres=${genres}` : ""
     }`;
     console.log(URL);
     try {
@@ -82,7 +82,7 @@ const MoviesPage = () => {
             Array.from({ length: pages }, (_, i) => (
               <Link
                 key={i}
-                to={`/movies?genres=${genres}&page=${i + 1}`}
+                to={`/movies?page=${i + 1}${genres ? `&genres=${genres}` : ""}`}
                 className={
                   page === i + 1 ? "pagination-link current" : "pagination-link"
                 }
