@@ -74,7 +74,7 @@ const AI = () => {
         }
       >
         <Row>
-          <Col>
+          <Col xs={12}>
             <div className="prompt-wrapper">
               {prompt.length === 0 && (
                 <Typewriter
