@@ -314,6 +314,7 @@ const WatchlistPage = () => {
               (movie) =>
                 movie && (
                   <MovieCardV2
+                    key={movie._id}
                     movie={movie}
                     isMember={isMember}
                     removeFromWL={removeFromWL}
