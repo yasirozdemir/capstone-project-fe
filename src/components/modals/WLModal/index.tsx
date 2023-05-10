@@ -2,8 +2,8 @@ import { Modal } from "react-bootstrap";
 import { IoMdClose } from "react-icons/io";
 import "./style.css";
 import {
-  BsBookmarks,
-  BsBookmarksFill,
+  BsBookmarkXFill,
+  BsBookmarkCheck,
   BsChevronDown,
   BsFillCheckSquareFill,
 } from "react-icons/bs";
@@ -72,10 +72,10 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
     }
   };
 
-  const saveToWL = async (w: IWatchlist) => {
+  const saveToWL = async (w: IWatchlist, isSave: boolean) => {
     try {
       const options = {
-        method: "POST",
+        method: isSave ? "POST" : "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -84,7 +84,12 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
       const res = await fetch(URL, options);
       const data = await res.json();
       if (res.ok) {
-        toast.success(`Movie successfully saved into ${w.name}!`, alertOptions);
+        toast.success(
+          `Movie successfully ${isSave ? "saved into" : "removed from"} ${
+            w.name
+          }!`,
+          alertOptions
+        );
         getWLs();
       } else {
         toast.error(data.message, alertOptions);
@@ -115,33 +120,36 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
         <div>
           {watchlists !== null
             ? watchlists.map((w) => (
-                <div
-                  key={w._id}
-                  className="WL-modal-item d-flex align-items-center"
-                >
-                  <Link
-                    to={"/watchlist/" + w._id}
-                    className="WL-link d-flex align-items-center"
-                  >
-                    <div style={{ width: "32px", height: "32px" }}>
-                      <img src={w.cover} alt="cover" className="img-fluid" />
+                <div key={w._id} className="WL-modal-item">
+                  <Link to={"/watchlist/" + w._id} className="WL-link d-flex">
+                    <div key={w._id} className="d-flex align-items-center">
+                      <div style={{ width: "32px", height: "32px" }}>
+                        <img src={w.cover} alt="cover" className="img-fluid" />
+                      </div>
+                      <span className="ml-2">{w.name}</span>
                     </div>
-                    <span className="ml-2">{w.name}</span>
                   </Link>
-                  {checkIsSaved(w) ? (
-                    <button className="ml-auto" disabled>
-                      <BsBookmarksFill />
-                    </button>
-                  ) : (
-                    <button
-                      className="ml-auto"
-                      onClick={() => {
-                        saveToWL(w);
-                      }}
-                    >
-                      <BsBookmarks />
-                    </button>
-                  )}
+                  <div>
+                    {checkIsSaved(w) ? (
+                      <button
+                        className="remove"
+                        onClick={() => {
+                          saveToWL(w, false);
+                        }}
+                      >
+                        <BsBookmarkXFill />
+                      </button>
+                    ) : (
+                      <button
+                        className="save"
+                        onClick={() => {
+                          saveToWL(w, true);
+                        }}
+                      >
+                        <BsBookmarkCheck />
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))
             : "You don't have any watchlist yet!"}
