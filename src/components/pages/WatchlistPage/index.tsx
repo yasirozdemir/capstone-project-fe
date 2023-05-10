@@ -187,7 +187,7 @@ const WatchlistPage = () => {
     <Container id="watchlist-page" className="topnav-fix">
       {WL && (
         <>
-          <BG colors={[primColor, "#2E2E2E"]} to="bottom" />
+          <BG colors={[primColor, "#121212"]} to="bottom" />
           <Row className="mb-4 pb-4 justify-content-center">
             <Col
               xs={12}
