@@ -296,7 +296,7 @@ const WatchlistPage = () => {
                 <div className="movie-card-body">
                   <Link
                     to={"/discover"}
-                    style={{ fontSize: "1.2rem", backgroundColor: primColor }}
+                    style={{ fontSize: "1.2rem" }}
                     className="d-flex flex-column justify-content-center align-items-center w-100"
                   >
                     <img
@@ -304,10 +304,7 @@ const WatchlistPage = () => {
                       alt="movie cover"
                       className="img-fluid"
                     />
-                    <div
-                      style={{ color: "#f5c518" }}
-                      className="position-absolute d-flex flex-column justify-content-center align-items-center discover-overlay"
-                    >
+                    <div className="d-flex flex-column justify-content-center align-items-center discover-overlay">
                       <BiMovie style={{ fontSize: "4rem" }} />
                       <span>DISCOVER</span>
                       <span>MORE</span>
