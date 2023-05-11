@@ -17,10 +17,15 @@ const GenreDropdown = ({ genres, currentGenre }: Props) => {
     setShow(isOpen);
   };
 
+  const handleGenreChange = (genre: string) => {
+    setShow(false);
+    navigate(`/movies?genres=${genre}`);
+  };
+
   return (
     <>
-      <Dropdown onToggle={handleToggle}>
-        <Dropdown.Toggle variant="dark" id="dropdownButton" className="d-flex">
+      <Dropdown onToggle={handleToggle} id="genre-dropdown">
+        <Dropdown.Toggle variant="dark" className="d-flex">
           <span className="d-flex align-items-center justify-content-center">
             {currentGenre || "Genres"}
             {show ? (
@@ -31,14 +36,20 @@ const GenreDropdown = ({ genres, currentGenre }: Props) => {
           </span>
         </Dropdown.Toggle>
         <Dropdown.Menu>
+          <Dropdown.Item
+            as="button"
+            onClick={() => {
+              navigate("/movies");
+            }}
+          >
+            All
+          </Dropdown.Item>
           {genres.map((genre, i) => (
             <Dropdown.Item
               key={i}
               as="button"
-              onClick={(e) => {
-                e.preventDefault();
-                setShow(false);
-                navigate(`/movies?genres=${genre}`);
+              onClick={() => {
+                handleGenreChange(genre);
               }}
             >
               {genre}

@@ -9,6 +9,7 @@ import MovieCardV2 from "../../reusables/MovieCardV2";
 import { ThreeDots } from "react-loader-spinner";
 import { BsSortAlphaDown, BsSortAlphaDownAlt } from "react-icons/bs";
 import GenreDropdown from "../../reusables/GenreDropdown";
+import SearchInput from "../../reusables/SearchInput";
 
 export interface IOption {
   label: string;
@@ -19,6 +20,7 @@ const MoviesPage = () => {
   const [params] = useSearchParams();
   const genres = params.get("genres");
   const page = parseInt(params.get("page") ?? "1");
+  const [title, setTitle] = useState("");
   const [pages, setPages] = useState<number | null>(0);
   const [movies, setMovies] = useState<IMovie[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +39,9 @@ const MoviesPage = () => {
       process.env.REACT_APP_API_URL
     }/movies?limit=${limit}&offset=${(page - 1) * limit || 0}&sort=${
       sortOrder ? "" : "-"
-    }title${genres ? `&genres=${genres}` : ""}`;
+    }title${genres ? `&genres=${genres}` : ""}${
+      title ? `&title=/^${title}/i` : ""
+    }`;
     try {
       setIsLoading(true);
       const res = await fetch(URL, options);
@@ -65,21 +69,23 @@ const MoviesPage = () => {
 
   useEffect(() => {
     getGenres();
+    setTitle(params.get("title") ?? "");
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     getMovies();
-
     return () => {
       setMovies([]);
     };
     // eslint-disable-next-line
-  }, [genres, page, sortOrder]);
+  }, [genres, page, sortOrder, title]);
 
   return (
     <Container id="movies-page" className="topnav-fix">
       <Row className="control-panel mb-5">
-        <Col xs={12}>
+        <Col xs={12} className="d-flex">
+          <SearchInput setSearchParam={setTitle} />
           {allGenres && (
             <GenreDropdown currentGenre={genres as string} genres={allGenres} />
           )}
@@ -117,9 +123,15 @@ const MoviesPage = () => {
         </Row>
       )}
       <Row xs={1} sm={2} md={3} lg={5} className="pt-3">
-        {movies?.map(
-          (movie) =>
-            movie && <MovieCardV2 key={movie._id} movie={movie} saveable />
+        {movies ? (
+          <>
+            {movies.map(
+              (movie) =>
+                movie && <MovieCardV2 key={movie._id} movie={movie} saveable />
+            )}
+          </>
+        ) : (
+          "Nothing to show!"
         )}
       </Row>
       <Row className="mb-3 justify-content-center mt-auto">
@@ -128,12 +140,15 @@ const MoviesPage = () => {
           className="d-flex justify-content-center"
           style={{ gap: "0.5rem", flexWrap: "wrap" }}
         >
-          {pages &&
+          {movies?.length !== 0 &&
+            pages &&
             pages !== 0 &&
             Array.from({ length: pages }, (_, i) => (
               <Link
                 key={i}
-                to={`/movies?page=${i + 1}${genres ? `&genres=${genres}` : ""}`}
+                to={`/movies?page=${i + 1}${genres ? `&genres=${genres}` : ""}${
+                  title ? `&title=${title}` : ""
+                }`}
                 className={
                   page === i + 1 ? "pagination-link current" : "pagination-link"
                 }

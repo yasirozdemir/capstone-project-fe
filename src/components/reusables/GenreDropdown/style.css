@@ -1,13 +1,23 @@
-.dropdown-menu {
+#genre-dropdown .dropdown-menu {
   max-height: 250px;
   overflow-y: scroll;
-  background-color: #d4d4d4 !important;
+  background-color: #d4d4d4;
 }
 
-.dropdown-toggle::after {
-  content: none !important;
+#genre-dropdown .dropdown-toggle::after {
+  content: none;
 }
 
-.btn-primary.dropdown-toggle:focus {
-  box-shadow: none !important;
+#genre-dropdown.btn-primary.dropdown-toggle:focus {
+  box-shadow: none;
+}
+
+#genre-dropdown .btn.focus,
+#genre-dropdown .btn:focus {
+  box-shadow: none;
+}
+
+#genre-dropdown .dropdown-item:active {
+  color: #000;
+  background-color: #f0c21c5d;
 }
