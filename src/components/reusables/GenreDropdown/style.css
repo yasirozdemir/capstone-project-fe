@@ -1,0 +1,13 @@
+.dropdown-menu {
+  max-height: 250px;
+  overflow-y: scroll;
+  background-color: #d4d4d4 !important;
+}
+
+.dropdown-toggle::after {
+  content: none !important;
+}
+
+.btn-primary.dropdown-toggle:focus {
+  box-shadow: none !important;
+}

@@ -8,6 +8,7 @@ import { alertOptions } from "../../../tools";
 import MovieCardV2 from "../../reusables/MovieCardV2";
 import { ThreeDots } from "react-loader-spinner";
 import { BsSortAlphaDown, BsSortAlphaDownAlt } from "react-icons/bs";
+import GenreDropdown from "../../reusables/GenreDropdown";
 
 export interface IOption {
   label: string;
@@ -23,7 +24,6 @@ const MoviesPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [sortOrder, setSortOrder] = useState(true);
   const [allGenres, setAllGenres] = useState<string[]>([]);
-  const [genreOptions, setGenreOptions] = useState<IOption[]>([]);
   const limit = 15;
 
   const options = {
@@ -59,7 +59,6 @@ const MoviesPage = () => {
     const res = await fetch(`${process.env.REACT_APP_API_URL}/movies/genres`);
     if (res.ok) {
       const data = await res.json();
-      setGenreOptions(data.map((g: string) => ({ label: g, value: g })));
       setAllGenres(data);
     }
   };
@@ -70,6 +69,10 @@ const MoviesPage = () => {
 
   useEffect(() => {
     getMovies();
+
+    return () => {
+      setMovies([]);
+    };
     // eslint-disable-next-line
   }, [genres, page, sortOrder]);
 
@@ -77,6 +80,9 @@ const MoviesPage = () => {
     <Container id="movies-page" className="topnav-fix">
       <Row className="control-panel mb-5">
         <Col xs={12}>
+          {allGenres && (
+            <GenreDropdown currentGenre={genres as string} genres={allGenres} />
+          )}
           <button
             onClick={() => {
               setSortOrder(!sortOrder);

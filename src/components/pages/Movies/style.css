@@ -5,10 +5,7 @@
   flex-direction: column;
 }
 
-#movies-page .control-panel {
-}
-
-#movies-page .control-panel button {
+#movies-page .control-panel button:not(.dropdown-item) {
   background-color: #585858;
   display: flex;
   align-items: center;
@@ -20,7 +17,7 @@
   transition: all 300ms;
 }
 
-#movies-page .control-panel button:hover {
+#movies-page .control-panel button:not(.dropdown-item):hover {
   background-color: #f0c21c5d;
 }
 
