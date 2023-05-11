@@ -9,6 +9,11 @@ import MovieCardV2 from "../../reusables/MovieCardV2";
 import { ThreeDots } from "react-loader-spinner";
 import { BsSortAlphaDown, BsSortAlphaDownAlt } from "react-icons/bs";
 
+export interface IOption {
+  label: string;
+  value: string;
+}
+
 const MoviesPage = () => {
   const [params] = useSearchParams();
   const genres = params.get("genres");
@@ -17,14 +22,17 @@ const MoviesPage = () => {
   const [movies, setMovies] = useState<IMovie[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [sortOrder, setSortOrder] = useState(true);
+  const [allGenres, setAllGenres] = useState<string[]>([]);
+  const [genreOptions, setGenreOptions] = useState<IOption[]>([]);
   const limit = 15;
 
+  const options = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    },
+  };
+
   const getMovies = async () => {
-    const options = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    };
     const URL = `${
       process.env.REACT_APP_API_URL
     }/movies?limit=${limit}&offset=${(page - 1) * limit || 0}&sort=${
@@ -47,6 +55,19 @@ const MoviesPage = () => {
     }
   };
 
+  const getGenres = async () => {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/movies/genres`);
+    if (res.ok) {
+      const data = await res.json();
+      setGenreOptions(data.map((g: string) => ({ label: g, value: g })));
+      setAllGenres(data);
+    }
+  };
+
+  useEffect(() => {
+    getGenres();
+  }, []);
+
   useEffect(() => {
     getMovies();
     // eslint-disable-next-line
@@ -61,7 +82,7 @@ const MoviesPage = () => {
               setSortOrder(!sortOrder);
             }}
           >
-            Sort{" "}
+            Sort
             {sortOrder ? (
               <BsSortAlphaDownAlt
                 className="ml-2"
