@@ -13,6 +13,7 @@ import MovieCard from "../../reusables/MovieCard";
 
 // The following import is unnecessary for production, it's just for developers to style the page
 import { sampleMoviesArray } from "../../../assets/sampleMovies";
+import WLModal from "../../modals/WLModal";
 
 const AI = () => {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -20,6 +21,8 @@ const AI = () => {
   const [isLoading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const moviesRedux = useAppSelector((st) => st.store.movies);
+  const [showWLModal, setShowWLModal] = useState(false);
+  const [movieIDToSave, setMovieIDToSave] = useState("");
 
   const promptToMovies = async () => {
     try {
@@ -125,6 +128,11 @@ const AI = () => {
           lg={5}
           style={{ rowGap: "1rem" }}
         >
+          <WLModal
+            showWLModal={showWLModal}
+            setShowWLModal={setShowWLModal}
+            movieID={movieIDToSave}
+          />
           {isLoading && (
             <ThreeDots
               height="80"
@@ -136,13 +144,31 @@ const AI = () => {
             />
           )}
           {movies?.map(
-            (movie) => movie && <MovieCard key={movie._id} movie={movie} />
+            (movie) =>
+              movie && (
+                <MovieCard
+                  key={movie._id}
+                  movie={movie}
+                  setMovieIDToSave={setMovieIDToSave}
+                  setShowWLModal={setShowWLModal}
+                  saveable
+                />
+              )
           )}
           {isLoading
             ? ""
             : movies.length === 0 &&
               moviesRedux.map(
-                (movie) => movie && <MovieCard key={movie._id} movie={movie} />
+                (movie) =>
+                  movie && (
+                    <MovieCard
+                      key={movie._id}
+                      movie={movie}
+                      setMovieIDToSave={setMovieIDToSave}
+                      setShowWLModal={setShowWLModal}
+                      saveable
+                    />
+                  )
               )}
         </Row>
       </Container>
