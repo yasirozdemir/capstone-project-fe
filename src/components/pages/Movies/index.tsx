@@ -89,7 +89,7 @@ const MoviesPage = () => {
 
   return (
     <Container id="movies-page" className="topnav-fix">
-      <Row className="control-panel mb-5">
+      <Row className="control-panel mt-4 mb-5">
         <Col
           xs={12}
           className="d-flex flex-column flex-md-row"
@@ -98,7 +98,7 @@ const MoviesPage = () => {
           <SearchInput setSearchParam={setTitle} setPage={setPage} />
           <div
             className="d-flex justify-content-end justify-content-md-center"
-            style={{ gap: "inherit" }}
+            style={{ gap: "inherit", flexWrap: "wrap" }}
           >
             <SortDropdown sort={sort} setSort={setSort} />
             {allGenres && (
