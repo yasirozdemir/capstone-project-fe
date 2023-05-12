@@ -96,10 +96,18 @@ const MoviesPage = () => {
           style={{ gap: "0.5rem" }}
         >
           <SearchInput setSearchParam={setTitle} setPage={setPage} />
-          <SortDropdown sort={sort} setSort={setSort} />
-          {allGenres && (
-            <GenreDropdown currentGenre={genres as string} genres={allGenres} />
-          )}
+          <div
+            className="d-flex justify-content-end justify-content-md-center"
+            style={{ gap: "inherit" }}
+          >
+            <SortDropdown sort={sort} setSort={setSort} />
+            {allGenres && (
+              <GenreDropdown
+                currentGenre={genres as string}
+                genres={allGenres}
+              />
+            )}
+          </div>
         </Col>
       </Row>
       {isLoading && (
