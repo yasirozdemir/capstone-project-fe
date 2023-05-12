@@ -89,11 +89,12 @@ const MoviesPage = () => {
   return (
     <Container id="movies-page" className="topnav-fix">
       <Row className="control-panel mb-5">
-        <Col xs={12} className="d-flex">
+        <Col
+          xs={12}
+          className="d-flex flex-column flex-md-row"
+          style={{ gap: "0.5rem" }}
+        >
           <SearchInput setSearchParam={setTitle} setPage={setPage} />
-          {allGenres && (
-            <GenreDropdown currentGenre={genres as string} genres={allGenres} />
-          )}
           <button
             onClick={() => {
               setSortOrder(!sortOrder);
@@ -112,6 +113,9 @@ const MoviesPage = () => {
               />
             )}
           </button>
+          {allGenres && (
+            <GenreDropdown currentGenre={genres as string} genres={allGenres} />
+          )}
         </Col>
       </Row>
       {isLoading && (

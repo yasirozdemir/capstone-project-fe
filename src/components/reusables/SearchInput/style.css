@@ -1,0 +1,12 @@
+#search-input {
+  flex-grow: 1;
+  background-color: #585858 !important;
+  border: 1px solid #f5c518;
+  color: #f5c518;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 300ms;
+}
+#search-input:hover {
+  background-color: #f0c21c5d !important;
+}

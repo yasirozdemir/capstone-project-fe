@@ -8,6 +8,7 @@ interface props {
 const SearchInput = ({ setSearchParam, setPage }: props) => {
   return (
     <input
+      id="search-input"
       type="text"
       placeholder="Search..."
       onChange={(e) => {
