@@ -11,6 +11,7 @@ import GenreDropdown from "../../reusables/GenreDropdown";
 import SearchInput from "../../reusables/SearchInput";
 import WLModal from "../../modals/WLModal";
 import SortDropdown from "../../reusables/SortDropdown";
+import DiscoverMoreCard from "../../reusables/DiscoverMoreCard";
 
 export interface IOption {
   label: string;
@@ -97,8 +98,8 @@ const MoviesPage = () => {
         >
           <SearchInput setSearchParam={setTitle} setPage={setPage} />
           <div
-            className="d-flex justify-content-end justify-content-md-center"
-            style={{ gap: "inherit", flexWrap: "wrap" }}
+            className="d-flex justify-content-between"
+            style={{ gap: "inherit" }}
           >
             <SortDropdown sort={sort} setSort={setSort} />
             {allGenres && (
@@ -129,7 +130,7 @@ const MoviesPage = () => {
         movieID={movieIDToSave}
       />
       <Row xs={1} sm={2} md={3} lg={5} className="pt-3">
-        {movies ? (
+        {movies && movies.length !== 0 ? (
           <>
             {movies.map(
               (movie) =>
@@ -145,7 +146,10 @@ const MoviesPage = () => {
             )}
           </>
         ) : (
-          "Nothing to show!"
+          <div className="mx-auto d-flex flex-column justify-content-center align-items-center">
+            <h5>No movies found!</h5>
+            <DiscoverMoreCard />
+          </div>
         )}
       </Row>
       <Row className="mb-3 justify-content-center mt-auto">
@@ -154,22 +158,21 @@ const MoviesPage = () => {
           className="d-flex justify-content-center"
           style={{ gap: "0.5rem", flexWrap: "wrap" }}
         >
-          {movies?.length !== 0 &&
-            pages &&
-            pages !== 0 &&
-            Array.from({ length: pages }, (_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setPage(i + 1);
-                }}
-                className={
-                  page === i + 1 ? "pagination-btn current" : "pagination-btn"
-                }
-              >
-                {i + 1}
-              </button>
-            ))}
+          {movies?.length !== 0 && pages && pages !== 0
+            ? Array.from({ length: pages }, (_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setPage(i + 1);
+                  }}
+                  className={
+                    page === i + 1 ? "pagination-btn current" : "pagination-btn"
+                  }
+                >
+                  {i + 1}
+                </button>
+              ))
+            : ""}
         </Col>
       </Row>
     </Container>

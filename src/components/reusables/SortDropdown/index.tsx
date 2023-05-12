@@ -40,7 +40,7 @@ const SortDropdown = ({ sort, setSort }: Props) => {
   return (
     <>
       <Dropdown onToggle={handleToggle} id="sort-dropdown" alignRight>
-        <Dropdown.Toggle variant="dark" className="d-flex">
+        <Dropdown.Toggle variant="dark" className="d-flex w-100">
           <span className="d-flex align-items-center justify-content-center">
             Sort by {icon}
             {show ? (

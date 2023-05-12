@@ -25,7 +25,7 @@ const GenreDropdown = ({ genres, currentGenre }: Props) => {
   return (
     <>
       <Dropdown onToggle={handleToggle} id="genre-dropdown" alignRight>
-        <Dropdown.Toggle variant="dark" className="d-flex">
+        <Dropdown.Toggle variant="dark" className="d-flex w-100">
           <span className="d-flex align-items-center justify-content-center">
             {currentGenre || "Genres"}
             {show ? (
