@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { IMovie } from "../../../interfaces/IMovie";
 import { toast } from "react-toastify";
 import { alertOptions } from "../../../tools";
-import MovieCardV2 from "../../reusables/MovieCardV2";
+import MovieCard from "../../reusables/MovieCard";
 import { ThreeDots } from "react-loader-spinner";
 import { BsSortAlphaDown, BsSortAlphaDownAlt } from "react-icons/bs";
 import GenreDropdown from "../../reusables/GenreDropdown";
@@ -137,7 +137,7 @@ const MoviesPage = () => {
             {movies.map(
               (movie) =>
                 movie && (
-                  <MovieCardV2
+                  <MovieCard
                     key={movie._id}
                     movie={movie}
                     saveable

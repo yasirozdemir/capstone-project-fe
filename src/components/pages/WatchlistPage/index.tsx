@@ -22,7 +22,7 @@ import {
 import { BiMovie } from "react-icons/bi";
 import { FaSkullCrossbones } from "react-icons/fa";
 import BG from "../../reusables/BG";
-import MovieCardV2 from "../../reusables/MovieCardV2";
+import MovieCard from "../../reusables/MovieCard";
 
 function formatMembers(arr: Array<IUser>): JSX.Element[] {
   return arr
@@ -317,7 +317,7 @@ const WatchlistPage = () => {
               .map(
                 (movie) =>
                   movie && (
-                    <MovieCardV2
+                    <MovieCard
                       key={movie._id}
                       movie={movie}
                       isMember={isMember}
