@@ -44,7 +44,7 @@ const MovieCard = ({
           </Link>
           <div className="second-poster-overlay">
             <span>
-              {movie.imdbRating}
+              {movie.imdbRating === "N/A" ? "?" : movie.imdbRating}
               <BsStarFill fill="#f5c518" />
             </span>
             {isMember && removeFromWL && (

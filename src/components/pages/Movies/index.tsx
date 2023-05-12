@@ -7,10 +7,10 @@ import { toast } from "react-toastify";
 import { alertOptions } from "../../../tools";
 import MovieCard from "../../reusables/MovieCard";
 import { ThreeDots } from "react-loader-spinner";
-import { BsSortAlphaDown, BsSortAlphaDownAlt } from "react-icons/bs";
 import GenreDropdown from "../../reusables/GenreDropdown";
 import SearchInput from "../../reusables/SearchInput";
 import WLModal from "../../modals/WLModal";
+import SortDropdown from "../../reusables/SortDropdown";
 
 export interface IOption {
   label: string;
@@ -25,7 +25,10 @@ const MoviesPage = () => {
   const [pages, setPages] = useState<number | null>(0);
   const [movies, setMovies] = useState<IMovie[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [sortOrder, setSortOrder] = useState(true);
+  const [sort, setSort] = useState<{
+    criteria: string | null;
+    order: string;
+  }>({ criteria: null, order: "" });
   const [allGenres, setAllGenres] = useState<string[]>([]);
   const [showWLModal, setShowWLModal] = useState(false);
   const [movieIDToSave, setMovieIDToSave] = useState("");
@@ -40,11 +43,9 @@ const MoviesPage = () => {
   const getMovies = async () => {
     const URL = `${
       process.env.REACT_APP_API_URL
-    }/movies?limit=${limit}&offset=${(page - 1) * limit || 0}&sort=${
-      sortOrder ? "" : "-"
-    }title${genres ? `&genres=${genres}` : ""}${
-      title ? `&title=/^${title}/i` : ""
-    }`;
+    }/movies?limit=${limit}&offset=${(page - 1) * limit || 0}${
+      sort.criteria ? `&sort=${sort.order}${sort.criteria}` : ""
+    }${genres ? `&genres=${genres}` : ""}${title ? `&title=/^${title}/i` : ""}`;
     try {
       setIsLoading(true);
       const res = await fetch(URL, options);
@@ -84,7 +85,7 @@ const MoviesPage = () => {
       setMovies([]);
     };
     // eslint-disable-next-line
-  }, [genres, page, sortOrder, title]);
+  }, [genres, page, sort, title]);
 
   return (
     <Container id="movies-page" className="topnav-fix">
@@ -95,24 +96,7 @@ const MoviesPage = () => {
           style={{ gap: "0.5rem" }}
         >
           <SearchInput setSearchParam={setTitle} setPage={setPage} />
-          <button
-            onClick={() => {
-              setSortOrder(!sortOrder);
-            }}
-          >
-            Sort
-            {sortOrder ? (
-              <BsSortAlphaDownAlt
-                className="ml-2"
-                style={{ fontSize: "1.5rem" }}
-              />
-            ) : (
-              <BsSortAlphaDown
-                className="ml-2"
-                style={{ fontSize: "1.5rem" }}
-              />
-            )}
-          </button>
+          <SortDropdown sort={sort} setSort={setSort} />
           {allGenres && (
             <GenreDropdown currentGenre={genres as string} genres={allGenres} />
           )}

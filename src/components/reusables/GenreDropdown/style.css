@@ -1,23 +1,27 @@
-#genre-dropdown .dropdown-menu {
+#genre-dropdown .dropdown-menu,
+#sort-dropdown .dropdown-menu {
   max-height: 250px;
   overflow-y: scroll;
   background-color: #d4d4d4;
 }
 
-#genre-dropdown .dropdown-toggle::after {
+#genre-dropdown .dropdown-toggle::after,
+#sort-dropdown .dropdown-toggle::after {
   content: none;
 }
 
-#genre-dropdown.btn-primary.dropdown-toggle:focus {
+#genre-dropdown.btn-primary.dropdown-toggle:focus,
+#sort-dropdown.btn-primary.dropdown-toggle:focus {
   box-shadow: none;
 }
 
 #genre-dropdown .btn.focus,
-#genre-dropdown .btn:focus {
+#sort-dropdown .btn:focus {
   box-shadow: none;
 }
 
-#genre-dropdown .dropdown-item:active {
+#genre-dropdown .dropdown-item:active,
+#sort-dropdown .dropdown-item:active {
   color: #000;
   background-color: #f0c21c5d;
 }
