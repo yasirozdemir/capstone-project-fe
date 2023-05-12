@@ -2,11 +2,13 @@
   background: url(https://images.pexels.com/photos/7991319/pexels-photo-7991319.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
 }
 
 #login-register-form {
   row-gap: 1.3rem;
   font-size: 1.2rem;
+  z-index: 2;
 }
 
 #login-register-form .logo-wrapper {

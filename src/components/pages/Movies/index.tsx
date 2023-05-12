@@ -130,7 +130,7 @@ const MoviesPage = () => {
         movieID={movieIDToSave}
       />
       <Row xs={1} sm={2} md={3} lg={5} className="pt-3">
-        {movies && movies.length !== 0 ? (
+        {movies && movies.length !== 0 && (
           <>
             {movies.map(
               (movie) =>
@@ -145,7 +145,8 @@ const MoviesPage = () => {
                 )
             )}
           </>
-        ) : (
+        )}
+        {!isLoading && movies?.length === 0 && (
           <div className="mx-auto d-flex flex-column justify-content-center align-items-center">
             <h5>No movies found!</h5>
             <DiscoverMoreCard />
