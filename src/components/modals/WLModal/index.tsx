@@ -13,6 +13,12 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+interface props {
+  showWLModal: boolean;
+  setShowWLModal: Function;
+  movieID?: string | undefined;
+}
+
 const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
   const [watchlists, setWatchlists] = useState<IWatchlist[] | null>(null);
   const [isCreate, setIsCreate] = useState(false);
@@ -184,11 +190,5 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
     </Modal>
   );
 };
-
-interface props {
-  showWLModal: boolean;
-  setShowWLModal: Function;
-  movieID: string | undefined;
-}
 
 export default WLModal;

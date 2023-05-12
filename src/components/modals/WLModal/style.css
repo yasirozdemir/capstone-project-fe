@@ -3,6 +3,11 @@
   margin-bottom: 0.5rem;
 }
 
+.modal-body {
+  max-height: 400px !important;
+  overflow-y: scroll;
+}
+
 #WLModal .WL-link {
   background-color: #ececec;
   padding: 0.2rem 0.5rem;

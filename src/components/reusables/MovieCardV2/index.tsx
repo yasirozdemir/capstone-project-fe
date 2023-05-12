@@ -4,7 +4,23 @@ import { Link } from "react-router-dom";
 import { IMovie } from "../../../interfaces/IMovie";
 import "./style.css";
 
-const MovieCardV2 = ({ movie, isMember, removeFromWL, saveable }: props) => {
+interface props {
+  movie: IMovie;
+  isMember?: boolean;
+  removeFromWL?: Function;
+  saveable?: boolean;
+  setMovieIDToSave?: Function;
+  setShowWLModal?: Function;
+}
+
+const MovieCardV2 = ({
+  movie,
+  isMember,
+  removeFromWL,
+  saveable,
+  setMovieIDToSave,
+  setShowWLModal,
+}: props) => {
   return (
     <Col key={movie._id} className="d-flex justify-content-center mb-3">
       <div className="movie-card">
@@ -23,21 +39,22 @@ const MovieCardV2 = ({ movie, isMember, removeFromWL, saveable }: props) => {
             </div>
           </Link>
           <div className="second-poster-overlay">
-            {isMember && (
+            {isMember && removeFromWL && (
               <button
                 className="remove"
                 onClick={() => {
-                  removeFromWL!(movie._id);
+                  removeFromWL(movie._id);
                 }}
               >
                 <BsBookmarkXFill />
               </button>
             )}
-            {saveable && (
+            {saveable && setMovieIDToSave && setShowWLModal && (
               <button
                 className="save"
                 onClick={() => {
-                  console.log("will be added later");
+                  setMovieIDToSave(movie._id);
+                  setShowWLModal(true);
                 }}
               >
                 <BsBookmarkCheckFill />
@@ -49,12 +66,5 @@ const MovieCardV2 = ({ movie, isMember, removeFromWL, saveable }: props) => {
     </Col>
   );
 };
-
-interface props {
-  movie: IMovie;
-  isMember?: boolean;
-  removeFromWL?: Function;
-  saveable?: boolean;
-}
 
 export default MovieCardV2;

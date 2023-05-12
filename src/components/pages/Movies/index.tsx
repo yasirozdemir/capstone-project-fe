@@ -10,6 +10,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { BsSortAlphaDown, BsSortAlphaDownAlt } from "react-icons/bs";
 import GenreDropdown from "../../reusables/GenreDropdown";
 import SearchInput from "../../reusables/SearchInput";
+import WLModal from "../../modals/WLModal";
 
 export interface IOption {
   label: string;
@@ -26,6 +27,8 @@ const MoviesPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [sortOrder, setSortOrder] = useState(true);
   const [allGenres, setAllGenres] = useState<string[]>([]);
+  const [showWLModal, setShowWLModal] = useState(false);
+  const [movieIDToSave, setMovieIDToSave] = useState("");
   const limit = 15;
 
   const options = {
@@ -69,6 +72,7 @@ const MoviesPage = () => {
 
   useEffect(() => {
     getGenres();
+    document.title = "What a Movie | Movies";
     setTitle(params.get("title") ?? "");
     // eslint-disable-next-line
   }, []);
@@ -122,12 +126,25 @@ const MoviesPage = () => {
           />
         </Row>
       )}
+      <WLModal
+        showWLModal={showWLModal}
+        setShowWLModal={setShowWLModal}
+        movieID={movieIDToSave}
+      />
       <Row xs={1} sm={2} md={3} lg={5} className="pt-3">
         {movies ? (
           <>
             {movies.map(
               (movie) =>
-                movie && <MovieCardV2 key={movie._id} movie={movie} saveable />
+                movie && (
+                  <MovieCardV2
+                    key={movie._id}
+                    movie={movie}
+                    saveable
+                    setMovieIDToSave={setMovieIDToSave}
+                    setShowWLModal={setShowWLModal}
+                  />
+                )
             )}
           </>
         ) : (

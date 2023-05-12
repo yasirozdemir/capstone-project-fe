@@ -64,6 +64,7 @@ const WatchlistPage = () => {
         setIsMember(data.members.some((m: IUser) => m._id === loggedInUserID));
         setIsLiked(data.likes.some((id: string) => id === loggedInUserID));
         setName(data.name);
+        document.title = `What a Movie | ${data.name}`;
         const avColor = await getAverageColorFromImage(data.cover);
         setPrimColor(colorToRgba(avColor as IColor));
       } else {
@@ -310,17 +311,20 @@ const WatchlistPage = () => {
             </Col>
           </Row>
           <Row xs={1} md={3} lg={5} className="pt-3 justify-content-center">
-            {WL.movies.map(
-              (movie) =>
-                movie && (
-                  <MovieCardV2
-                    key={movie._id}
-                    movie={movie}
-                    isMember={isMember}
-                    removeFromWL={removeFromWL}
-                  />
-                )
-            )}
+            {WL.movies
+              .slice()
+              .reverse()
+              .map(
+                (movie) =>
+                  movie && (
+                    <MovieCardV2
+                      key={movie._id}
+                      movie={movie}
+                      isMember={isMember}
+                      removeFromWL={removeFromWL}
+                    />
+                  )
+              )}
             <Col className="d-flex justify-content-center mb-3">
               <div className="movie-card" style={{ maxWidth: "300px" }}>
                 <div className="movie-card-body">
