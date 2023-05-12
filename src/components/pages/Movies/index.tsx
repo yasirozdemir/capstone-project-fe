@@ -1,6 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import "./style.css";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { IMovie } from "../../../interfaces/IMovie";
 import { toast } from "react-toastify";
@@ -20,7 +20,7 @@ export interface IOption {
 const MoviesPage = () => {
   const [params] = useSearchParams();
   const genres = params.get("genres");
-  const page = parseInt(params.get("page") ?? "1");
+  const [page, setPage] = useState(1);
   const [title, setTitle] = useState("");
   const [pages, setPages] = useState<number | null>(0);
   const [movies, setMovies] = useState<IMovie[] | null>(null);
@@ -74,6 +74,7 @@ const MoviesPage = () => {
     getGenres();
     document.title = "What a Movie | Movies";
     setTitle(params.get("title") ?? "");
+    setPage(parseInt(params.get("page") ?? "1"));
     // eslint-disable-next-line
   }, []);
 
@@ -89,7 +90,7 @@ const MoviesPage = () => {
     <Container id="movies-page" className="topnav-fix">
       <Row className="control-panel mb-5">
         <Col xs={12} className="d-flex">
-          <SearchInput setSearchParam={setTitle} />
+          <SearchInput setSearchParam={setTitle} setPage={setPage} />
           {allGenres && (
             <GenreDropdown currentGenre={genres as string} genres={allGenres} />
           )}
@@ -161,17 +162,17 @@ const MoviesPage = () => {
             pages &&
             pages !== 0 &&
             Array.from({ length: pages }, (_, i) => (
-              <Link
+              <button
                 key={i}
-                to={`/movies?page=${i + 1}${genres ? `&genres=${genres}` : ""}${
-                  title ? `&title=${title}` : ""
-                }`}
+                onClick={() => {
+                  setPage(i + 1);
+                }}
                 className={
-                  page === i + 1 ? "pagination-link current" : "pagination-link"
+                  page === i + 1 ? "pagination-btn current" : "pagination-btn"
                 }
               >
                 {i + 1}
-              </Link>
+              </button>
             ))}
         </Col>
       </Row>
