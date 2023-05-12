@@ -1,9 +1,7 @@
 import { Col } from "react-bootstrap";
-import {
-  BsBookmarkXFill,
-  BsBookmarkCheckFill,
-  BsStarFill,
-} from "react-icons/bs";
+import { BsStarFill } from "react-icons/bs";
+import { ImBookmark } from "react-icons/im";
+import { RiBookmark2Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { IMovie } from "../../../interfaces/IMovie";
 import "./style.css";
@@ -54,7 +52,7 @@ const MovieCard = ({
                   removeFromWL(movie._id);
                 }}
               >
-                <BsBookmarkXFill />
+                <RiBookmark2Fill />
               </button>
             )}
             {saveable && setMovieIDToSave && setShowWLModal && (
@@ -65,7 +63,7 @@ const MovieCard = ({
                   setShowWLModal(true);
                 }}
               >
-                <BsBookmarkCheckFill />
+                <ImBookmark />
               </button>
             )}
           </div>
