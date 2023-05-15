@@ -111,12 +111,14 @@
   z-index: -1;
 }
 
-#movie-advisor-btn:hover::before {
-  opacity: 1;
+#movie-advisor-btn:hover,
+#movie-advisor-btn.active {
+  -webkit-text-fill-color: #fff;
 }
 
-#movie-advisor-btn:hover {
-  -webkit-text-fill-color: #fff;
+#movie-advisor-btn:hover::before,
+#movie-advisor-btn.active::before {
+  opacity: 1;
 }
 
 #nav .navbar-brand {
