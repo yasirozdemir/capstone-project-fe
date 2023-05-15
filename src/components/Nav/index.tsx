@@ -5,6 +5,7 @@ import { useAppSelector } from "../../redux/hooks";
 import { toast } from "react-toastify";
 import { alertOptions } from "../../tools";
 import { useState } from "react";
+import { TbRobot } from "react-icons/tb";
 
 const NavCustom = () => {
   const user = useAppSelector((st) => st.store.user);
@@ -98,6 +99,7 @@ const NavCustom = () => {
               to="/movie-advisor"
               className="nav-link"
               onClick={collapseNav}
+              id="movie-advisor-btn"
             >
               Movie Advisor
             </NavLink>

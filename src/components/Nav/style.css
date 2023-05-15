@@ -27,6 +27,98 @@
   background-color: rgba(88, 88, 88, 0.3);
 }
 
+#movie-advisor-btn {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  animation: bgAnim 3s infinite;
+  background: rgb(255, 0, 0);
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(203, 255, 107, 1) 20%,
+    rgba(251, 185, 11, 1) 40%,
+    rgba(84, 227, 255, 1) 60%,
+    rgba(61, 246, 99, 1) 80%,
+    rgba(174, 61, 246, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(203, 255, 107, 1) 20%,
+    rgba(251, 185, 11, 1) 40%,
+    rgba(84, 227, 255, 1) 60%,
+    rgba(61, 246, 99, 1) 80%,
+    rgba(174, 61, 246, 1) 100%
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(203, 255, 107, 1) 20%,
+    rgba(251, 185, 11, 1) 40%,
+    rgba(84, 227, 255, 1) 60%,
+    rgba(61, 246, 99, 1) 80%,
+    rgba(174, 61, 246, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff0000",endColorstr="#ae3df6",GradientType=1);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 300% 300%;
+}
+
+@keyframes bgAnim {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+#movie-advisor-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: all 600ms;
+  background: rgb(131, 58, 180);
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#833ab4",endColorstr="#fcb045",GradientType=1);
+  opacity: 0;
+  z-index: -1;
+}
+
+#movie-advisor-btn:hover::before {
+  opacity: 1;
+}
+
+#movie-advisor-btn:hover {
+  -webkit-text-fill-color: #fff;
+}
+
 #nav .navbar-brand {
   width: 7rem;
 }
