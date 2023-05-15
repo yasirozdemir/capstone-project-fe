@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginRegister from "./components/pages/Login";
 import Verified from "./components/non-functionals/Verified";
-import Nav from "./components/Nav";
+import NavCustom from "./components/Nav";
 import UserProfile from "./components/pages/UserProfile";
 import GoogleRedirect from "./components/non-functionals/GoogleRedirect";
 import { useAppDispatch } from "./redux/hooks";
@@ -46,7 +46,7 @@ function App() {
             path="/discover"
             element={
               <>
-                <Nav />
+                <NavCustom />
                 <AI />
               </>
             }
@@ -55,7 +55,7 @@ function App() {
             path="/user/:userID"
             element={
               <>
-                <Nav />
+                <NavCustom />
                 <UserProfile />
               </>
             }
@@ -64,7 +64,7 @@ function App() {
             path="/movie/:movieID"
             element={
               <>
-                <Nav />
+                <NavCustom />
                 <MoviePage />
               </>
             }
@@ -73,7 +73,7 @@ function App() {
             path="/watchlist/:watchlistID"
             element={
               <>
-                <Nav />
+                <NavCustom />
                 <WatchlistPage />
               </>
             }
@@ -82,7 +82,7 @@ function App() {
             path="/movies"
             element={
               <>
-                <Nav />
+                <NavCustom />
                 <MoviesPage />
               </>
             }

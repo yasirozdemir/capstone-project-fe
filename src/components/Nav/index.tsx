@@ -1,14 +1,14 @@
-import { Container } from "react-bootstrap";
+import { Container, Navbar, Nav } from "react-bootstrap";
 import "./style.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { useAppSelector } from "../../redux/hooks";
 import { toast } from "react-toastify";
 import { alertOptions } from "../../tools";
+import { useState } from "react";
 
-const Nav = () => {
+const NavCustom = () => {
   const user = useAppSelector((st) => st.store.user);
-  const [showNav, setShowNav] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
 
   const logOut = async () => {
@@ -21,6 +21,7 @@ const Nav = () => {
       };
       const URL = `${process.env.REACT_APP_API_URL}/users/session`;
       const res = await fetch(URL, options);
+      collapseNav();
       if (res.ok) {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("loggedInUserID");
@@ -34,45 +35,30 @@ const Nav = () => {
     }
   };
 
+  const collapseNav = () => {
+    setIsExpanded(false);
+  };
+
   return (
-    <Container fluid className="sticky-top" id="nav">
-      <div>
-        <div className="d-flex d-md-none h-100">
-          <button
-            id="navbar-controller"
-            className={showNav ? "collapsed" : ""}
-            onClick={() => {
-              setShowNav(!showNav);
-            }}
-          >
-            <span className="icon-line"></span>
-            <span className="icon-line"></span>
-            <span className="icon-line"></span>
-          </button>
-        </div>
-        <div style={{ width: "8rem" }}>
-          <NavLink to="/discover">
-            <img
-              src={require("../../assets/images/logo-lg.png")}
-              alt="logo"
-              className="w-100"
-            />
-          </NavLink>
-        </div>
-        <div className="nav-links-container">
-          <NavLink to="/discover" className="d-none d-lg-inline">
-            Discover
-          </NavLink>
-          <NavLink to="/movies" className="d-none d-lg-inline">
-            Movies
-          </NavLink>
-          {user._id !== "" && (
-            <button className="d-none d-lg-inline" id="logout" onClick={logOut}>
-              Log out
-            </button>
-          )}
+    <Container fluid>
+      <Navbar
+        id="nav"
+        expand="lg"
+        variant="light"
+        bg="light"
+        fixed="top"
+        expanded={isExpanded}
+      >
+        <NavLink to="/discover" className="navbar-brand" onClick={collapseNav}>
+          <img
+            src={require("../../assets/images/logo-lg.png")}
+            alt="logo"
+            className="w-100"
+          />
+        </NavLink>
+        <Nav className="flex-row user-related">
           {user._id !== "" ? (
-            <NavLink to="/user/me" id="navatar">
+            <NavLink to="/user/me" id="navatar" onClick={collapseNav}>
               <img
                 src={
                   user.avatar
@@ -84,27 +70,44 @@ const Nav = () => {
               />
             </NavLink>
           ) : (
-            <NavLink to="/" id="login">
+            <NavLink
+              to="/"
+              id="login"
+              className="nav-link"
+              onClick={collapseNav}
+            >
               Login
             </NavLink>
           )}
-        </div>
-      </div>
-      {showNav && (
-        <div id="md-nav" className="pb-2">
-          <NavLink to="/discover" className="mt-2">
-            Discover
-          </NavLink>
-          <NavLink to="/movies">Movies</NavLink>
-          {user._id !== "" && (
-            <button id="logout" onClick={logOut}>
-              Log out
-            </button>
-          )}
-        </div>
-      )}
+        </Nav>
+        <Navbar.Toggle
+          aria-controls="custom-nav"
+          onClick={() => {
+            setIsExpanded(!isExpanded);
+          }}
+        >
+          <span className="icon-line"></span>
+          <span className="icon-line"></span>
+          <span className="icon-line"></span>
+        </Navbar.Toggle>
+        <Navbar.Collapse id="custom-nav">
+          <Nav className="ml-auto">
+            <NavLink to="/discover" className="nav-link" onClick={collapseNav}>
+              Discover
+            </NavLink>
+            <NavLink to="/movies" className="nav-link" onClick={collapseNav}>
+              Movies
+            </NavLink>
+            {user._id !== "" && (
+              <button className="nav-link" id="logout" onClick={logOut}>
+                Log out
+              </button>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     </Container>
   );
 };
 
-export default Nav;
+export default NavCustom;
