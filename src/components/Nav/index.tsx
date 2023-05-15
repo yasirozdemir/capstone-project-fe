@@ -41,14 +41,7 @@ const NavCustom = () => {
 
   return (
     <Container fluid>
-      <Navbar
-        id="nav"
-        expand="lg"
-        variant="light"
-        bg="light"
-        fixed="top"
-        expanded={isExpanded}
-      >
+      <Navbar id="nav" expand="lg" fixed="top" expanded={isExpanded}>
         <NavLink to="/discover" className="navbar-brand" onClick={collapseNav}>
           <img
             src={require("../../assets/images/logo-lg.png")}
@@ -58,7 +51,12 @@ const NavCustom = () => {
         </NavLink>
         <Nav className="flex-row user-related">
           {user._id !== "" ? (
-            <NavLink to="/user/me" id="navatar" onClick={collapseNav}>
+            <NavLink
+              to="/user/me"
+              id="navatar"
+              onClick={collapseNav}
+              className="ml-0 ml-lg-2"
+            >
               <img
                 src={
                   user.avatar
@@ -91,7 +89,7 @@ const NavCustom = () => {
           <span className="icon-line"></span>
         </Navbar.Toggle>
         <Navbar.Collapse id="custom-nav">
-          <Nav className="ml-auto">
+          <Nav className="ml-auto" style={{ gap: "0.5rem" }}>
             <NavLink to="/discover" className="nav-link" onClick={collapseNav}>
               Discover
             </NavLink>
