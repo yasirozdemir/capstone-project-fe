@@ -60,7 +60,7 @@ const AI = () => {
   };
 
   useEffect(() => {
-    document.title = "What a Movie | Discover";
+    document.title = "What a Movie | Movie Advisor";
   }, []);
 
   // The following lines (76 -79) is unnecessary for production, it's just for developers to style the page

@@ -38,7 +38,7 @@ const LoginRegister = ({ isLogin }: props) => {
       const data = await res.json();
       if (res.ok) {
         localStorage.setItem("accessToken", data.accessToken);
-        navigate("/discover");
+        navigate("/movie-advisor");
         dispatch({
           type: slicedStore.actions.setUser,
           payload: data.user,

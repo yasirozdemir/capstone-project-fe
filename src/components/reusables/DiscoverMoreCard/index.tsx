@@ -8,7 +8,7 @@ const DiscoverMoreCard = () => {
       <div className="movie-card" style={{ maxWidth: "300px" }}>
         <div className="movie-card-body">
           <Link
-            to={"/discover"}
+            to={"/movie-advisor"}
             style={{ fontSize: "1.2rem" }}
             className="d-flex flex-column justify-content-center align-items-center w-100"
           >

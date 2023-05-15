@@ -17,7 +17,7 @@ const GoogleRedirect = () => {
     if (accessToken) {
       localStorage.setItem("accessToken", accessToken);
       dispatch(setLoggedInUser());
-      navigate("/discover");
+      navigate("/movie-advisor");
     }
     // eslint-disable-next-line
   }, []);

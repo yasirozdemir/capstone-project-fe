@@ -42,7 +42,11 @@ const NavCustom = () => {
   return (
     <Container fluid>
       <Navbar id="nav" expand="lg" fixed="top" expanded={isExpanded}>
-        <NavLink to="/discover" className="navbar-brand" onClick={collapseNav}>
+        <NavLink
+          to="/movie-advisor"
+          className="navbar-brand"
+          onClick={collapseNav}
+        >
           <img
             src={require("../../assets/images/logo-lg.png")}
             alt="logo"
@@ -90,8 +94,12 @@ const NavCustom = () => {
         </Navbar.Toggle>
         <Navbar.Collapse id="custom-nav">
           <Nav className="ml-auto" style={{ gap: "0.5rem" }}>
-            <NavLink to="/discover" className="nav-link" onClick={collapseNav}>
-              Discover
+            <NavLink
+              to="/movie-advisor"
+              className="nav-link"
+              onClick={collapseNav}
+            >
+              Movie Advisor
             </NavLink>
             <NavLink to="/movies" className="nav-link" onClick={collapseNav}>
               Movies

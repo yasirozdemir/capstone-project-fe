@@ -43,7 +43,7 @@ function App() {
           <Route path="/" element={<LoginRegister />} />
           <Route path="/register" element={<LoginRegister isLogin={false} />} />
           <Route
-            path="/discover"
+            path="/movie-advisor"
             element={
               <>
                 <NavCustom />
