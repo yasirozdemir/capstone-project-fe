@@ -11,7 +11,7 @@ import { IColor, colorToRgba, getAverageColorFromImage } from "../../../tools";
 import PPModal from "../../modals/AvatarModal";
 import { useAppSelector } from "../../../redux/hooks";
 import EditProfile from "../../modals/EditProfile";
-import DynamicBG from "../../reusables/DynamicBG";
+import BG from "../../reusables/BG";
 import PeopleModal from "../../modals/PeopleModal";
 import NavCustom from "../../reusables/Nav";
 
@@ -131,7 +131,7 @@ const UserProfile = () => {
           </Col>
         ) : (
           <>
-            <DynamicBG colors={[primColor, "#121212"]} to="bottom" />
+            <BG colors={[primColor, "#121212"]} to="bottom" />
             <Row className="justify-content-center py-4 py-lg-5">
               <Col
                 xs={12}
