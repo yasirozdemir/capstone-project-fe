@@ -4,7 +4,7 @@ import "./style.css";
 import { BsHeartFill } from "react-icons/bs";
 import React from "react";
 
-const WLCard = ({ WL }: props) => {
+const WLCard = ({ WL }: { WL: IWatchlist }) => {
   return (
     <Link to={`/watchlist/${WL._id}`} className="wl-link">
       <div className="wl-wrapper">
@@ -31,9 +31,5 @@ const WLCard = ({ WL }: props) => {
     </Link>
   );
 };
-
-interface props {
-  WL: IWatchlist;
-}
 
 export default WLCard;

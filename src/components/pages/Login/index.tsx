@@ -8,6 +8,10 @@ import { toast } from "react-toastify";
 import { useAppDispatch } from "../../../redux/hooks";
 import { slicedStore } from "../../../redux/slices";
 
+interface props {
+  isLogin: boolean;
+}
+
 const LoginRegister = ({ isLogin }: props) => {
   const [showPW, setShowPW] = useState(false);
   const [formData, setFormData] = useState({});
@@ -155,10 +159,6 @@ const LoginRegister = ({ isLogin }: props) => {
     </Container>
   );
 };
-
-interface props {
-  isLogin: boolean;
-}
 
 LoginRegister.defaultProps = {
   isLogin: true,

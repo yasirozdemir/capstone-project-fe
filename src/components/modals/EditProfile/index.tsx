@@ -7,6 +7,19 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { IoMdCheckmarkCircle, IoMdClose } from "react-icons/io";
 import { slicedStore } from "../../../redux/slices";
 
+interface IFormData {
+  name?: string;
+  surname?: string;
+  email?: string;
+  password?: string;
+}
+
+interface props {
+  showEditModal: boolean;
+  setShowEditModal: Function;
+  setUser: Function;
+}
+
 const EditProfile = ({ showEditModal, setShowEditModal, setUser }: props) => {
   const [formData, setFormData] = useState<IFormData>({});
   const loggedInUser = useAppSelector((st) => st.store.user);
@@ -114,18 +127,5 @@ const EditProfile = ({ showEditModal, setShowEditModal, setUser }: props) => {
     </Modal>
   );
 };
-
-interface IFormData {
-  name?: string;
-  surname?: string;
-  email?: string;
-  password?: string;
-}
-
-interface props {
-  showEditModal: boolean;
-  setShowEditModal: Function;
-  setUser: Function;
-}
 
 export default EditProfile;

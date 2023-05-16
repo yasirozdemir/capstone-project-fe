@@ -13,6 +13,11 @@ import {
 import { MutatingDots } from "react-loader-spinner";
 import { setLoggedInUser } from "../../../redux/actions";
 
+interface props {
+  showAvatarModal: boolean;
+  setShowAvatarModal: Function;
+}
+
 const AvatarModal = ({ showAvatarModal, setShowAvatarModal }: props) => {
   const dispatch = useAppDispatch();
   const imgSrc = useAppSelector((st) => st.store.user.avatar);
@@ -148,10 +153,5 @@ const AvatarModal = ({ showAvatarModal, setShowAvatarModal }: props) => {
     </Modal>
   );
 };
-
-interface props {
-  showAvatarModal: boolean;
-  setShowAvatarModal: Function;
-}
 
 export default AvatarModal;
