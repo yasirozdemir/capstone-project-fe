@@ -74,7 +74,7 @@ const MoviesPage = () => {
 
   useEffect(() => {
     getGenres();
-    document.title = "What a Movie | Movies";
+    document.title = "What ai Movie | Movies";
     setTitle(params.get("title") ?? "");
     setPage(parseInt(params.get("page") ?? "1"));
     // eslint-disable-next-line

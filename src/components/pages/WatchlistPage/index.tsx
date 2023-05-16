@@ -72,7 +72,7 @@ const WatchlistPage = () => {
         setIsMember(data.members.some((m: IUser) => m._id === loggedInUserID));
         setIsLiked(data.likes.some((id: string) => id === loggedInUserID));
         setName(data.name);
-        document.title = `What a Movie | ${data.name}`;
+        document.title = `What ai Movie | ${data.name}`;
         const avColor = await getAverageColorFromImage(data.cover);
         setPrimColor(colorToRgba(avColor as IColor));
       } else {

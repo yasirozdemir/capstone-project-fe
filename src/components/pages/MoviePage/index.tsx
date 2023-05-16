@@ -43,7 +43,7 @@ const MoviePage = () => {
     const data = await res.json();
     if (res.ok) {
       setMovie(data);
-      document.title = `What a Movie | ${data.title}`;
+      document.title = `What ai Movie | ${data.title}`;
       const avColor = await getAverageColorFromImage(data.poster);
       setPrimColor(colorToRgba(avColor as IColor));
     } else {

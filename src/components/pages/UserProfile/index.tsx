@@ -87,7 +87,7 @@ const UserProfile = () => {
         setIsFollowing(
           (data.followers as IUser[]).some((u) => u._id === loggedInUserID)
         );
-        document.title = `What a Movie | ${data.name} ${data.surname}`;
+        document.title = `What ai Movie | ${data.name} ${data.surname}`;
         const avColor = await getAverageColorFromImage(data.avatar);
         setPrimColor(colorToRgba(avColor as IColor));
         setFollowers(data.followers);

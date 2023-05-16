@@ -54,7 +54,7 @@ const LoginRegister = ({ isLogin }: props) => {
   };
 
   useEffect(() => {
-    document.title = `What a Movie | ${isLogin ? "Login" : "Register"}`;
+    document.title = `What ai Movie | ${isLogin ? "Login" : "Register"}`;
   }, [isLogin]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
