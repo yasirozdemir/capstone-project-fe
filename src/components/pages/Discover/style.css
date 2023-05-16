@@ -1,8 +1,7 @@
 #ai-wrapper {
   color: #fff;
   position: relative;
-  min-height: calc(100vh - 65px);
-  margin-top: 65px;
+  min-height: 100vh;
 }
 
 #ai-wrapper::before {
