@@ -13,7 +13,7 @@ import {
 } from "../../../tools";
 import { BsStarFill, BsBookmarksFill } from "react-icons/bs";
 import WLModal from "../../modals/WLModal";
-import BG from "../../reusables/BG";
+import DynamicBG from "../../reusables/DynamicBG";
 import NavCustom from "../../reusables/Nav";
 
 function formatArrays(arr: Array<string>): JSX.Element[] {
@@ -62,7 +62,7 @@ const MoviePage = () => {
       <Container id="movie-page" className="topnav-fix mb-3 mb-md-0">
         {movie && (
           <>
-            <BG colors={[primColor, "#121212"]} to="bottom" />
+            <DynamicBG colors={[primColor, "#121212"]} to="bottom" />
             <div id="movie-detail-wrapper">
               <Row className="flex-column flex-md-row mb-3">
                 <Col
