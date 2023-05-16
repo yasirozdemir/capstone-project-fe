@@ -2,7 +2,7 @@ import { createGradient } from "../../../tools";
 import { useState, useEffect } from "react";
 import "./style.css";
 
-const BG = ({ colors, to }: { colors: string[]; to: string }) => {
+const DynamicBG = ({ colors, to }: { colors: string[]; to: string }) => {
   const [gradient, setGradient] = useState("");
 
   useEffect(() => {
@@ -12,4 +12,4 @@ const BG = ({ colors, to }: { colors: string[]; to: string }) => {
   return <div id="bg-holder" style={{ background: gradient }}></div>;
 };
 
-export default BG;
+export default DynamicBG;

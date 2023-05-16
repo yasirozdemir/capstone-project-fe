@@ -16,7 +16,7 @@ import {
 } from "react-icons/bs";
 import { FaSkullCrossbones } from "react-icons/fa";
 import { MdPersonAddAlt1 } from "react-icons/md";
-import BG from "../../reusables/BG";
+import DynamicBG from "../../reusables/DynamicBG";
 import MovieCard from "../../reusables/MovieCard";
 import DiscoverMoreCard from "../../reusables/DiscoverMoreCard";
 import WLModal from "../../modals/WLModal";
@@ -212,7 +212,7 @@ const WatchlistPage = () => {
       <Container id="watchlist-page" className="topnav-fix">
         {WL && (
           <>
-            <BG colors={[primColor, "#121212"]} to="bottom" />
+            <DynamicBG colors={[primColor, "#121212"]} to="bottom" />
             <Row className="mb-4 pb-4 justify-content-center">
               <Col
                 xs={12}
