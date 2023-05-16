@@ -8,7 +8,6 @@ import {
   BsFillCheckSquareFill,
 } from "react-icons/bs";
 import { IWatchlist } from "../../../interfaces/IWatchlist";
-import { alertOptions } from "../../../tools";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -37,10 +36,10 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
       if (res.ok) {
         setWatchlists(data);
       } else {
-        toast.error(data.message, alertOptions);
+        toast.error(data.message);
       }
     } catch (error) {
-      toast.error(String(error), alertOptions);
+      toast.error(String(error));
     }
   };
 
@@ -51,7 +50,7 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
 
   const creataNewWL = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
-    if (name === "") toast.error("Please insert a name first!", alertOptions);
+    if (name === "") toast.error("Please insert a name first!");
     try {
       const options = {
         method: "POST",
@@ -65,16 +64,13 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
       const res = await fetch(URL, options);
       const data = await res.json();
       if (res.ok) {
-        toast.success(
-          `Watchlist '${data.name}' successfully created!`,
-          alertOptions
-        );
+        toast.success(`Watchlist '${data.name}' successfully created!`);
         getWLs();
       } else {
-        toast.error(data.message, alertOptions);
+        toast.error(data.message);
       }
     } catch (error) {
-      toast.error(String(error), alertOptions);
+      toast.error(String(error));
     }
   };
 
@@ -93,15 +89,14 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
         toast.success(
           `Movie successfully ${isSave ? "saved into" : "removed from"} ${
             w.name
-          }!`,
-          alertOptions
+          }!`
         );
         getWLs();
       } else {
-        toast.error(data.message, alertOptions);
+        toast.error(data.message);
       }
     } catch (error) {
-      toast.error(String(error), alertOptions);
+      toast.error(String(error));
     }
   };
 

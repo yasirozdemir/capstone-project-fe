@@ -1,14 +1,3 @@
-export const alertOptions: any = {
-  position: "top-center",
-  autoClose: 3000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  theme: "light",
-};
-
 export function durationToHM(dur: string): string {
   const totalM = parseInt(dur, 10);
   const h = Math.floor(totalM / 60);

@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { alertOptions } from "../../../tools";
 import { useAppDispatch } from "../../../redux/hooks";
 import { slicedStore } from "../../../redux/slices";
 
@@ -45,11 +44,11 @@ const LoginRegister = ({ isLogin }: props) => {
         });
       } else {
         setError({ is: true, message: data.message });
-        toast.error(isError.message, alertOptions);
+        toast.error(isError.message);
       }
     } catch (error) {
       setError({ is: true, message: String(error) });
-      toast.error(isError.message, alertOptions);
+      toast.error(isError.message);
     }
   };
 

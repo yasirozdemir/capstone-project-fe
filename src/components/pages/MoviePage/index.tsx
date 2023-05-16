@@ -6,7 +6,6 @@ import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   IColor,
-  alertOptions,
   colorToRgba,
   durationToHM,
   fullDateToYear,
@@ -15,6 +14,7 @@ import {
 import { BsStarFill, BsBookmarksFill } from "react-icons/bs";
 import WLModal from "../../modals/WLModal";
 import BG from "../../reusables/BG";
+import NavCustom from "../../Nav";
 
 function formatArrays(arr: Array<string>): JSX.Element[] {
   return arr
@@ -47,7 +47,7 @@ const MoviePage = () => {
       const avColor = await getAverageColorFromImage(data.poster);
       setPrimColor(colorToRgba(avColor as IColor));
     } else {
-      toast.error(data.message, alertOptions);
+      toast.error(data.message);
     }
   };
 
@@ -57,119 +57,122 @@ const MoviePage = () => {
   }, [movieID]);
 
   return (
-    <Container id="movie-page" className="topnav-fix mb-3 mb-md-0">
-      {movie && (
-        <>
-          <BG colors={[primColor, "#121212"]} to="bottom" />
-          <div id="movie-detail-wrapper">
-            <Row className="flex-column flex-md-row mb-3">
-              <Col
-                xs={12}
-                md={9}
-                className="d-flex flex-column align-items-center align-items-md-start justify-content-center text-center text-md-left"
-              >
-                <h2 className="m-0">{movie.title}</h2>
-                <div
-                  className="d-flex justify-content-center"
-                  style={{ columnGap: "0.5rem", flexWrap: "wrap" }}
+    <>
+      <NavCustom />
+      <Container id="movie-page" className="topnav-fix mb-3 mb-md-0">
+        {movie && (
+          <>
+            <BG colors={[primColor, "#121212"]} to="bottom" />
+            <div id="movie-detail-wrapper">
+              <Row className="flex-column flex-md-row mb-3">
+                <Col
+                  xs={12}
+                  md={9}
+                  className="d-flex flex-column align-items-center align-items-md-start justify-content-center text-center text-md-left"
                 >
-                  {fullDateToYear(movie.released)}
-                  <span>∙</span>
-                  {movie.rated}
-                  <span>∙</span>
-                  {durationToHM(movie.duration)}
-                  <span>∙</span>
-                  <span className="d-flex align-items-center justify-content-center">
-                    {movie.imdbRating}
-                    <BsStarFill fill="#f5c518" className="ml-1" />
-                  </span>
-                </div>
-              </Col>
-              <Col className="d-flex flex-column align-items-center align-items-md-end ml-auto">
-                <button
-                  id="saveToWLBtn"
-                  className="mt-2 mt-md-0"
-                  onClick={() => {
-                    setShowWLModal(!showWLModal);
-                  }}
-                >
-                  <BsBookmarksFill /> Save
-                </button>
-                <WLModal
-                  movieID={movieID}
-                  showWLModal={showWLModal}
-                  setShowWLModal={setShowWLModal}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col
-                xs={12}
-                md={4}
-                className="d-flex justify-content-center justify-content-md-start mb-2 mb-md-0"
-              >
-                <div className="poster-wrapper">
-                  <img
-                    src={movie.poster}
-                    alt="movie poster"
-                    className="img-fluid"
+                  <h2 className="m-0">{movie.title}</h2>
+                  <div
+                    className="d-flex justify-content-center"
+                    style={{ columnGap: "0.5rem", flexWrap: "wrap" }}
+                  >
+                    {fullDateToYear(movie.released)}
+                    <span>∙</span>
+                    {movie.rated}
+                    <span>∙</span>
+                    {durationToHM(movie.duration)}
+                    <span>∙</span>
+                    <span className="d-flex align-items-center justify-content-center">
+                      {movie.imdbRating}
+                      <BsStarFill fill="#f5c518" className="ml-1" />
+                    </span>
+                  </div>
+                </Col>
+                <Col className="d-flex flex-column align-items-center align-items-md-end ml-auto">
+                  <button
+                    id="saveToWLBtn"
+                    className="mt-2 mt-md-0"
+                    onClick={() => {
+                      setShowWLModal(!showWLModal);
+                    }}
+                  >
+                    <BsBookmarksFill /> Save
+                  </button>
+                  <WLModal
+                    movieID={movieID}
+                    showWLModal={showWLModal}
+                    setShowWLModal={setShowWLModal}
                   />
-                </div>
-              </Col>
-              <Col xs={12} md={8} style={{ fontSize: "1.2rem" }}>
-                {movie.genres.length >= 1 && (
-                  <div className="genre-wrapper mb-2 justify-content-center justify-content-md-start">
-                    {movie.genres.map((g, i) => (
-                      <Link
-                        to={"/movies?genres=" + g}
-                        key={i}
-                        className="genre-badge"
+                </Col>
+              </Row>
+              <Row>
+                <Col
+                  xs={12}
+                  md={4}
+                  className="d-flex justify-content-center justify-content-md-start mb-2 mb-md-0"
+                >
+                  <div className="poster-wrapper">
+                    <img
+                      src={movie.poster}
+                      alt="movie poster"
+                      className="img-fluid"
+                    />
+                  </div>
+                </Col>
+                <Col xs={12} md={8} style={{ fontSize: "1.2rem" }}>
+                  {movie.genres.length >= 1 && (
+                    <div className="genre-wrapper mb-2 justify-content-center justify-content-md-start">
+                      {movie.genres.map((g, i) => (
+                        <Link
+                          to={"/movies?genres=" + g}
+                          key={i}
+                          className="genre-badge"
+                        >
+                          {g}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                  {movie.description.length >= 1 && (
+                    <div className="movie-info-rows">
+                      <i>Description:</i>
+                      <p
+                        className="m-0"
+                        style={{
+                          display: "-webkit-box",
+                          WebkitLineClamp: 5,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                        }}
                       >
-                        {g}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-                {movie.description.length >= 1 && (
-                  <div className="movie-info-rows">
-                    <i>Description:</i>
-                    <p
-                      className="m-0"
-                      style={{
-                        display: "-webkit-box",
-                        WebkitLineClamp: 5,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                      }}
-                    >
-                      {movie.description}
-                    </p>
-                  </div>
-                )}
-                {movie.director.length >= 1 && (
-                  <div className="movie-info-rows">
-                    <i>Director{movie.director.length > 1 ? "s" : ""}:</i>
-                    <p className="m-0">{formatArrays(movie.director)}</p>
-                  </div>
-                )}
-                {movie.writer.length >= 1 && (
-                  <div className="movie-info-rows">
-                    <i>Writer{movie.writer.length > 1 ? "s" : ""}:</i>
-                    <p className="m-0">{formatArrays(movie.writer)}</p>
-                  </div>
-                )}
-                {movie.actors.length >= 1 && (
-                  <div className="movie-info-rows">
-                    <i>Star{movie.actors.length > 1 ? "s" : ""}:</i>
-                    <p className="m-0">{formatArrays(movie.actors)}</p>
-                  </div>
-                )}
-              </Col>
-            </Row>
-          </div>
-        </>
-      )}
-    </Container>
+                        {movie.description}
+                      </p>
+                    </div>
+                  )}
+                  {movie.director.length >= 1 && (
+                    <div className="movie-info-rows">
+                      <i>Director{movie.director.length > 1 ? "s" : ""}:</i>
+                      <p className="m-0">{formatArrays(movie.director)}</p>
+                    </div>
+                  )}
+                  {movie.writer.length >= 1 && (
+                    <div className="movie-info-rows">
+                      <i>Writer{movie.writer.length > 1 ? "s" : ""}:</i>
+                      <p className="m-0">{formatArrays(movie.writer)}</p>
+                    </div>
+                  )}
+                  {movie.actors.length >= 1 && (
+                    <div className="movie-info-rows">
+                      <i>Star{movie.actors.length > 1 ? "s" : ""}:</i>
+                      <p className="m-0">{formatArrays(movie.actors)}</p>
+                    </div>
+                  )}
+                </Col>
+              </Row>
+            </div>
+          </>
+        )}
+      </Container>
+    </>
   );
 };
 

@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { Form, Modal } from "react-bootstrap";
 import { ChangeEventHandler } from "react";
 import { toast } from "react-toastify";
-import { alertOptions } from "../../../tools";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import "./style.css";
 import {
@@ -36,16 +35,16 @@ const AvatarModal = ({ showAvatarModal, setShowAvatarModal }: props) => {
       const URL = `${process.env.REACT_APP_API_URL}/users/me/avatar`;
       const res = await fetch(URL, options);
       if (res.ok) {
-        toast.success("Avatar has successfully updated!", alertOptions);
+        toast.success("Avatar has successfully updated!");
         dispatch(setLoggedInUser());
       } else {
         if (isSet) {
           const data = await res.json();
-          toast.error(data.message, alertOptions);
+          toast.error(data.message);
         }
       }
     } catch (error) {
-      toast.error(String(error), alertOptions);
+      toast.error(String(error));
     } finally {
       setIsChanging(false);
     }

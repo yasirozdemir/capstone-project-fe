@@ -4,7 +4,6 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { IMovie } from "../../../interfaces/IMovie";
 import { toast } from "react-toastify";
-import { alertOptions } from "../../../tools";
 import MovieCard from "../../reusables/MovieCard";
 import { ThreeDots } from "react-loader-spinner";
 import GenreDropdown from "../../reusables/GenreDropdown";
@@ -12,6 +11,7 @@ import SearchInput from "../../reusables/SearchInput";
 import WLModal from "../../modals/WLModal";
 import SortDropdown from "../../reusables/SortDropdown";
 import DiscoverMoreCard from "../../reusables/DiscoverMoreCard";
+import NavCustom from "../../Nav";
 
 export interface IOption {
   label: string;
@@ -55,10 +55,10 @@ const MoviesPage = () => {
         setMovies(data.movies);
         setPages(data.numberOfPages);
       } else {
-        toast.error(data.message, alertOptions);
+        toast.error(data.message);
       }
     } catch (error) {
-      toast.error(String(error), alertOptions);
+      toast.error(String(error));
     } finally {
       setIsLoading(false);
     }
@@ -89,94 +89,99 @@ const MoviesPage = () => {
   }, [genres, page, sort, title]);
 
   return (
-    <Container id="movies-page" className="topnav-fix">
-      <Row className="control-panel mt-4 mb-5">
-        <Col
-          xs={12}
-          className="d-flex flex-column flex-md-row"
-          style={{ gap: "0.5rem" }}
-        >
-          <SearchInput setSearchParam={setTitle} setPage={setPage} />
-          <div
-            className="d-flex justify-content-between"
-            style={{ gap: "inherit" }}
+    <>
+      <NavCustom />
+      <Container id="movies-page" className="topnav-fix">
+        <Row className="control-panel mt-4 mb-5">
+          <Col
+            xs={12}
+            className="d-flex flex-column flex-md-row"
+            style={{ gap: "0.5rem" }}
           >
-            <SortDropdown sort={sort} setSort={setSort} />
-            {allGenres && (
-              <GenreDropdown
-                currentGenre={genres as string}
-                genres={allGenres}
-              />
-            )}
-          </div>
-        </Col>
-      </Row>
-      {isLoading && (
-        <Row>
-          <ThreeDots
-            height="80"
-            width="80"
-            radius="8"
-            color="#fefefe"
-            wrapperClass="mx-auto"
-            wrapperStyle={{ marginTop: "5rem" }}
-            visible={true}
-          />
+            <SearchInput setSearchParam={setTitle} setPage={setPage} />
+            <div
+              className="d-flex justify-content-between"
+              style={{ gap: "inherit" }}
+            >
+              <SortDropdown sort={sort} setSort={setSort} />
+              {allGenres && (
+                <GenreDropdown
+                  currentGenre={genres as string}
+                  genres={allGenres}
+                />
+              )}
+            </div>
+          </Col>
         </Row>
-      )}
-      <WLModal
-        showWLModal={showWLModal}
-        setShowWLModal={setShowWLModal}
-        movieID={movieIDToSave}
-      />
-      <Row xs={1} sm={2} md={3} lg={5} className="pt-3">
-        {movies && movies.length !== 0 && (
-          <>
-            {movies.map(
-              (movie) =>
-                movie && (
-                  <MovieCard
-                    key={movie._id}
-                    movie={movie}
-                    saveable
-                    setMovieIDToSave={setMovieIDToSave}
-                    setShowWLModal={setShowWLModal}
-                  />
-                )
-            )}
-          </>
+        {isLoading && (
+          <Row>
+            <ThreeDots
+              height="80"
+              width="80"
+              radius="8"
+              color="#fefefe"
+              wrapperClass="mx-auto"
+              wrapperStyle={{ marginTop: "5rem" }}
+              visible={true}
+            />
+          </Row>
         )}
-        {!isLoading && movies?.length === 0 && (
-          <div className="mx-auto d-flex flex-column justify-content-center align-items-center">
-            <h5>No movies found!</h5>
-            <DiscoverMoreCard />
-          </div>
-        )}
-      </Row>
-      <Row className="mb-3 justify-content-center mt-auto">
-        <Col
-          xs={12}
-          className="d-flex justify-content-center"
-          style={{ gap: "0.5rem", flexWrap: "wrap" }}
-        >
-          {movies?.length !== 0 && pages && pages !== 0
-            ? Array.from({ length: pages }, (_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    setPage(i + 1);
-                  }}
-                  className={
-                    page === i + 1 ? "pagination-btn current" : "pagination-btn"
-                  }
-                >
-                  {i + 1}
-                </button>
-              ))
-            : ""}
-        </Col>
-      </Row>
-    </Container>
+        <WLModal
+          showWLModal={showWLModal}
+          setShowWLModal={setShowWLModal}
+          movieID={movieIDToSave}
+        />
+        <Row xs={1} sm={2} md={3} lg={5} className="pt-3">
+          {movies && movies.length !== 0 && (
+            <>
+              {movies.map(
+                (movie) =>
+                  movie && (
+                    <MovieCard
+                      key={movie._id}
+                      movie={movie}
+                      saveable
+                      setMovieIDToSave={setMovieIDToSave}
+                      setShowWLModal={setShowWLModal}
+                    />
+                  )
+              )}
+            </>
+          )}
+          {!isLoading && movies?.length === 0 && (
+            <div className="mx-auto d-flex flex-column justify-content-center align-items-center">
+              <h5>No movies found!</h5>
+              <DiscoverMoreCard />
+            </div>
+          )}
+        </Row>
+        <Row className="mb-3 justify-content-center mt-auto">
+          <Col
+            xs={12}
+            className="d-flex justify-content-center"
+            style={{ gap: "0.5rem", flexWrap: "wrap" }}
+          >
+            {movies?.length !== 0 && pages && pages !== 0
+              ? Array.from({ length: pages }, (_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      setPage(i + 1);
+                    }}
+                    className={
+                      page === i + 1
+                        ? "pagination-btn current"
+                        : "pagination-btn"
+                    }
+                  >
+                    {i + 1}
+                  </button>
+                ))
+              : ""}
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

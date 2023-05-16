@@ -3,7 +3,6 @@ import "./style.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 import { toast } from "react-toastify";
-import { alertOptions } from "../../tools";
 import { useState } from "react";
 
 const NavCustom = () => {
@@ -28,10 +27,10 @@ const NavCustom = () => {
         navigate("/");
       } else {
         const data = await res.json();
-        toast.error(data.message, alertOptions);
+        toast.error(data.message);
       }
     } catch (error) {
-      toast.error(String(error), alertOptions);
+      toast.error(String(error));
     }
   };
 

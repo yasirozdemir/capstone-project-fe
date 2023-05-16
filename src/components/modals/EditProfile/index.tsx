@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Form, Modal } from "react-bootstrap";
 import { ChangeEventHandler } from "react";
 import { toast } from "react-toastify";
-import { alertOptions } from "../../../tools";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { IoMdCheckmarkCircle, IoMdClose } from "react-icons/io";
 import { slicedStore } from "../../../redux/slices";
@@ -33,15 +32,15 @@ const EditProfile = ({ showEditModal, setShowEditModal, setUser }: props) => {
         if (res.ok) {
           setUser(data);
           dispatch({ type: slicedStore.actions.setUser, payload: data });
-          toast.success("User successfully edited!", alertOptions);
+          toast.success("User successfully edited!");
         } else {
-          toast.error(data.message, alertOptions);
+          toast.error(data.message);
         }
       } else {
-        toast.error("You haven't updated anything!", alertOptions);
+        toast.error("You haven't updated anything!");
       }
     } catch (error) {
-      toast.error(String(error), alertOptions);
+      toast.error(String(error));
     }
   };
 
