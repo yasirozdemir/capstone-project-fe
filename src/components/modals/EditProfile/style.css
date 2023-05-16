@@ -14,7 +14,7 @@
 }
 
 #EditModal .modal-body input {
-  background-color: #d4d4d4c2;
+  background-color: #f7f7f791;
   border-radius: 0.25rem;
   padding: 0.5rem;
   font-weight: 600;
@@ -24,7 +24,7 @@
 #EditModal .modal-footer button {
   display: flex;
   align-items: center;
-  background-color: #d4d4d4c2;
+  background-color: #f7f7f791;
   border-radius: 0.25rem;
   padding: 0.5rem 0.75rem;
   font-weight: 600;
