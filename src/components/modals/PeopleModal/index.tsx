@@ -2,7 +2,7 @@ import { Modal } from "react-bootstrap";
 import { IoMdClose } from "react-icons/io";
 import { IUser } from "../../../interfaces/IUser";
 import UserCardHorizontal from "../../reusables/UserCardHorizontal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface props {
   showPeopleModal: boolean;
@@ -49,9 +49,12 @@ const PeopleModal = ({
     }
   };
 
-  if (addMemberToWL && showPeopleModal) {
-    getFollowersOfUser();
-  }
+  useEffect(() => {
+    if (addMemberToWL && showPeopleModal) {
+      getFollowersOfUser();
+    }
+    // eslint-disable-next-line
+  }, [showPeopleModal]);
 
   return (
     <Modal id="PeopleModal" show={showPeopleModal}>
