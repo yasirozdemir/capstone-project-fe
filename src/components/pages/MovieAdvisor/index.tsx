@@ -71,7 +71,7 @@ const MovieAdvisor = () => {
   return (
     <>
       <NavCustom />
-      <div id="ai-wrapper">
+      <div id="movie-advisor-wrapper">
         <Container
           id="ai-section"
           className={

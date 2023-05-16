@@ -1,10 +1,10 @@
-#ai-wrapper {
+#movie-advisor-wrapper {
   color: #fff;
   position: relative;
   min-height: 100vh;
 }
 
-#ai-wrapper::before {
+#movie-advisor-wrapper::before {
   content: "";
   position: absolute;
   top: 0;
@@ -19,7 +19,7 @@
   filter: blur(10px);
 }
 
-#ai-wrapper::after {
+#movie-advisor-wrapper::after {
   content: "";
   position: absolute;
   top: 0;
@@ -58,7 +58,7 @@
 }
 
 #ai-section > .row:nth-of-type(1) {
-  height: 45vh;
+  height: calc(50vh + 65px);
   align-items: flex-end;
 }
 
