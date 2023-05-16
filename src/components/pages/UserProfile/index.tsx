@@ -13,7 +13,7 @@ import { useAppSelector } from "../../../redux/hooks";
 import EditProfile from "../../modals/EditProfile";
 import BG from "../../reusables/BG";
 import PeopleModal from "../../modals/PeopleModal";
-import NavCustom from "../../Nav";
+import NavCustom from "../../reusables/Nav";
 
 const UserProfile = () => {
   const loggedInUserID = localStorage.getItem("loggedInUserID");

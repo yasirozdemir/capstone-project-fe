@@ -11,7 +11,7 @@ import SearchInput from "../../reusables/SearchInput";
 import WLModal from "../../modals/WLModal";
 import SortDropdown from "../../reusables/SortDropdown";
 import DiscoverMoreCard from "../../reusables/DiscoverMoreCard";
-import NavCustom from "../../Nav";
+import NavCustom from "../../reusables/Nav";
 
 export interface IOption {
   label: string;

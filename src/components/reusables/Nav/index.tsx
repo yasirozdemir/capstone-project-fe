@@ -1,7 +1,7 @@
 import { Container, Navbar, Nav } from "react-bootstrap";
 import "./style.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../../redux/hooks";
 import { toast } from "react-toastify";
 import { useState } from "react";
 
@@ -47,7 +47,7 @@ const NavCustom = () => {
           onClick={collapseNav}
         >
           <img
-            src={require("../../assets/images/logo-lg.png")}
+            src={require("../../../assets/images/logo-lg.png")}
             alt="logo"
             className="w-100"
           />

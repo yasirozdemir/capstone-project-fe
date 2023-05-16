@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { slicedStore } from "../../../redux/slices";
 import MovieCard from "../../reusables/MovieCard";
 import WLModal from "../../modals/WLModal";
-import NavCustom from "../../Nav";
+import NavCustom from "../../reusables/Nav";
 
 // The following import is unnecessary for production, it's just for developers to style the page
 // import { sampleMoviesArray } from "../../../assets/sampleMovies";

@@ -14,7 +14,7 @@ import {
 import { BsStarFill, BsBookmarksFill } from "react-icons/bs";
 import WLModal from "../../modals/WLModal";
 import BG from "../../reusables/BG";
-import NavCustom from "../../Nav";
+import NavCustom from "../../reusables/Nav";
 
 function formatArrays(arr: Array<string>): JSX.Element[] {
   return arr

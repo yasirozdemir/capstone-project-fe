@@ -21,7 +21,7 @@ import MovieCard from "../../reusables/MovieCard";
 import DiscoverMoreCard from "../../reusables/DiscoverMoreCard";
 import WLModal from "../../modals/WLModal";
 import PeopleModal from "../../modals/PeopleModal";
-import NavCustom from "../../Nav";
+import NavCustom from "../../reusables/Nav";
 
 function formatMembers(arr: Array<IUser>): JSX.Element[] {
   return arr
