@@ -13,3 +13,16 @@ export interface IUser {
   following: string[];
   refreshToken: string;
 }
+
+export interface IUserDetailed {
+  _id: string;
+  name: string;
+  surname: string;
+  email: string;
+  avatar: string;
+  verified: boolean;
+  watchlists: IWatchlist[];
+  likedWatchlists: IWatchlist[];
+  followers: IUser[];
+  following: IUser[];
+}

@@ -23,6 +23,7 @@ import { FaSkullCrossbones } from "react-icons/fa";
 import BG from "../../reusables/BG";
 import MovieCard from "../../reusables/MovieCard";
 import DiscoverMoreCard from "../../reusables/DiscoverMoreCard";
+import WLModal from "../../modals/WLModal";
 
 function formatMembers(arr: Array<IUser>): JSX.Element[] {
   return arr
@@ -48,6 +49,8 @@ const WatchlistPage = () => {
   const [primColor, setPrimColor] = useState("");
   const loggedInUserID = localStorage.getItem("loggedInUserID");
   const navigate = useNavigate();
+  const [showWLModal, setShowWLModal] = useState(false);
+  const [movieIDToSave, setMovieIDToSave] = useState("");
 
   const getWatchlist = async () => {
     const options = {
@@ -310,6 +313,11 @@ const WatchlistPage = () => {
               </div>
             </Col>
           </Row>
+          <WLModal
+            showWLModal={showWLModal}
+            setShowWLModal={setShowWLModal}
+            movieID={movieIDToSave}
+          />
           <Row xs={1} md={3} lg={5} className="pt-3 justify-content-center">
             {WL.movies
               .slice()
@@ -322,6 +330,9 @@ const WatchlistPage = () => {
                       movie={movie}
                       isMember={isMember}
                       removeFromWL={removeFromWL}
+                      setMovieIDToSave={setMovieIDToSave}
+                      setShowWLModal={setShowWLModal}
+                      saveable
                     />
                   )
               )}

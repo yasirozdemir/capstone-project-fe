@@ -109,6 +109,8 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#833ab4",endColorstr="#fcb045",GradientType=1);
   opacity: 0;
   z-index: -1;
+  animation: bgAnim 3s infinite;
+  background-size: 300% 300%;
 }
 
 #movie-advisor-btn:hover,
@@ -117,8 +119,12 @@
 }
 
 #movie-advisor-btn:hover::before,
-#movie-advisor-btn.active::before {
+#movie-advisor-btn.active:hover::before {
   opacity: 1;
+}
+
+#movie-advisor-btn.active::before {
+  opacity: 0.5;
 }
 
 #nav .navbar-brand {

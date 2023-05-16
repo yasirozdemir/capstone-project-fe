@@ -1,0 +1,17 @@
+#user-card-horizontal {
+  background-color: #dadada;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  color: #000;
+  transition: all 300ms;
+}
+
+#user-card-horizontal > div {
+  width: 2.5rem;
+  overflow: hidden;
+}
+
+#user-card-horizontal:hover {
+  background-color: #c6c6c6;
+  text-decoration: none;
+}

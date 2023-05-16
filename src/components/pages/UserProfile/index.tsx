@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import "./style.css";
 import { useEffect, useState } from "react";
-import { IUser } from "../../../interfaces/IUser";
+import { IUser, IUserDetailed } from "../../../interfaces/IUser";
 import { toast } from "react-toastify";
 import { Col, Container, Row } from "react-bootstrap";
 import { GoVerified } from "react-icons/go";
@@ -17,30 +17,30 @@ import PPModal from "../../modals/AvatarModal";
 import { useAppSelector } from "../../../redux/hooks";
 import EditProfile from "../../modals/EditProfile";
 import BG from "../../reusables/BG";
+import PeopleModal from "../../modals/PeopleModal";
 
 const UserProfile = () => {
   const loggedInUserID = localStorage.getItem("loggedInUserID");
   const loggedInUser = useAppSelector((st) => st.store.user);
   const navigate = useNavigate();
   const { userID } = useParams();
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUserDetailed | null>(null);
   const [isLoading, setLoading] = useState(false);
-  const [isError, setError] = useState({ is: false, message: "" });
   const [isMe, setIsMe] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const [showWLs, setShowWLs] = useState(true);
   const [showAvatarModal, setShowAvatarModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [primColor, setPrimColor] = useState("");
+  const [followers, setFollowers] = useState([]);
+  const [followingUsers, setFollowingUsers] = useState([]);
+  const [showPeopleModal, setShowPeopleModal] = useState(false);
+  const [showFollowers, setShowFollowers] = useState(false); // if true show followers, otherwise show following
 
   const followFunc = async (userID: string | undefined, isFollow: boolean) => {
     try {
       if (userID === undefined) {
-        setError({
-          is: true,
-          message: "Something went wrong following this user!",
-        });
-        toast.error(isError.message, alertOptions);
+        toast.error("Something went wrong following this user!", alertOptions);
       } else {
         const options = {
           method: isFollow ? "POST" : "DELETE",
@@ -53,7 +53,6 @@ const UserProfile = () => {
         const res = await fetch(URL, options);
         const data = await res.json();
         if (res.ok) {
-          toast.success(data.message, alertOptions);
           setUser((prev) => {
             if (prev) {
               return { ...prev, followers: data.followers };
@@ -61,14 +60,14 @@ const UserProfile = () => {
             return prev;
           });
           setIsFollowing(isFollow);
+          setFollowers(data.followers);
+          setFollowingUsers(data.following);
         } else {
-          setError({ is: true, message: data.message });
-          toast.error(isError.message, alertOptions);
+          toast.error(data.message, alertOptions);
         }
       }
     } catch (error) {
-      setError({ is: true, message: String(error) });
-      toast.error(isError.message, alertOptions);
+      toast.error(String(error), alertOptions);
     }
   };
 
@@ -85,17 +84,19 @@ const UserProfile = () => {
       const data = await res.json();
       if (res.ok) {
         setUser(data);
-        setIsFollowing(data.followers.includes(loggedInUserID));
+        setIsFollowing(
+          (data.followers as IUser[]).some((u) => u._id === loggedInUserID)
+        );
         document.title = `What a Movie | ${data.name} ${data.surname}`;
         const avColor = await getAverageColorFromImage(data.avatar);
         setPrimColor(colorToRgba(avColor as IColor));
+        setFollowers(data.followers);
+        setFollowingUsers(data.following);
       } else {
-        setError({ is: true, message: data.message });
-        toast.error(isError.message, alertOptions);
+        toast.error(data.message, alertOptions);
       }
     } catch (error) {
-      setError({ is: true, message: String(error) });
-      toast.error(isError.message, alertOptions);
+      toast.error(String(error), alertOptions);
     } finally {
       setLoading(false);
     }
@@ -105,12 +106,16 @@ const UserProfile = () => {
     if (userID === loggedInUserID) navigate("/user/me");
     if (userID === "me") {
       setIsMe(true);
-      setShowAvatarModal(false);
-      setShowEditModal(false);
     } else setIsMe(false);
     getUser();
     // eslint-disable-next-line
   }, [userID, loggedInUser]);
+
+  useEffect(() => {
+    setShowAvatarModal(false);
+    setShowEditModal(false);
+    setShowPeopleModal(false);
+  }, [user]);
 
   return (
     <Container id="user-profile">
@@ -164,7 +169,6 @@ const UserProfile = () => {
                     <GoVerified
                       style={{
                         fontSize: "1.2rem",
-                        color: "green",
                       }}
                       className="ml-2 mt-3 mt-lg-0"
                     />
@@ -172,13 +176,30 @@ const UserProfile = () => {
                     ""
                   )}
                 </div>
+                <PeopleModal
+                  showFollowers={showFollowers}
+                  showPeopleModal={showPeopleModal}
+                  setShowPeopleModal={setShowPeopleModal}
+                  followers={followers}
+                  following={followingUsers}
+                />
                 <div className="d-flex my-2">
-                  <button>
+                  <button
+                    onClick={() => {
+                      setShowFollowers(true);
+                      setShowPeopleModal(true);
+                    }}
+                  >
                     <p className="mb-0 mr-3">
                       <strong>{user?.followers.length}</strong> Followers
                     </p>
                   </button>
-                  <button>
+                  <button
+                    onClick={() => {
+                      setShowFollowers(false);
+                      setShowPeopleModal(true);
+                    }}
+                  >
                     <p className="mb-0">
                       <strong>{user?.following.length}</strong> Following
                     </p>

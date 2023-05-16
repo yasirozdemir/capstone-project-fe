@@ -55,7 +55,7 @@ const MovieCard = ({
                 <RiBookmark2Fill />
               </button>
             )}
-            {saveable && setMovieIDToSave && setShowWLModal && (
+            {!isMember && saveable && setMovieIDToSave && setShowWLModal && (
               <button
                 className="save"
                 onClick={() => {
