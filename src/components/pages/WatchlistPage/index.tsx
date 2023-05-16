@@ -20,10 +20,12 @@ import {
   BsTrash3Fill,
 } from "react-icons/bs";
 import { FaSkullCrossbones } from "react-icons/fa";
+import { MdPersonAddAlt1 } from "react-icons/md";
 import BG from "../../reusables/BG";
 import MovieCard from "../../reusables/MovieCard";
 import DiscoverMoreCard from "../../reusables/DiscoverMoreCard";
 import WLModal from "../../modals/WLModal";
+import PeopleModal from "../../modals/PeopleModal";
 
 function formatMembers(arr: Array<IUser>): JSX.Element[] {
   return arr
@@ -50,7 +52,9 @@ const WatchlistPage = () => {
   const loggedInUserID = localStorage.getItem("loggedInUserID");
   const navigate = useNavigate();
   const [showWLModal, setShowWLModal] = useState(false);
+  const [showPeopleModal, setShowPeopleModal] = useState(false);
   const [movieIDToSave, setMovieIDToSave] = useState("");
+  const [members, setMembers] = useState([]);
 
   const getWatchlist = async () => {
     const options = {
@@ -64,6 +68,7 @@ const WatchlistPage = () => {
       const data = await res.json();
       if (res.ok) {
         setWL(data);
+        setMembers(data.members);
         setIsMember(data.members.some((m: IUser) => m._id === loggedInUserID));
         setIsLiked(data.likes.some((id: string) => id === loggedInUserID));
         setName(data.name);
@@ -156,6 +161,27 @@ const WatchlistPage = () => {
           "Movie successfully removed from the wathclist!",
           alertOptions
         );
+        getWatchlist();
+      } else {
+        toast.error(data.message, alertOptions);
+      }
+    } catch (error) {
+      toast.error(String(error), alertOptions);
+    }
+  };
+
+  const addMemberToWL = async (userID: string) => {
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    };
+    const URL = `${process.env.REACT_APP_API_URL}/watchlists/${watchlistID}/members/${userID}`;
+    try {
+      const res = await fetch(URL, options);
+      const data = await res.json();
+      if (res.ok) {
         getWatchlist();
       } else {
         toast.error(data.message, alertOptions);
@@ -292,6 +318,15 @@ const WatchlistPage = () => {
                         Delete <BsTrash3Fill className="ml-2" />
                       </button>
                     )}
+                    <button
+                      className="mx-auto mx-md-0"
+                      onClick={() => {
+                        setShowPeopleModal(!showPeopleModal);
+                      }}
+                    >
+                      Add Member
+                      <MdPersonAddAlt1 className="ml-2" fontSize="1.3rem" />
+                    </button>
                   </>
                 )}
                 <button
@@ -317,6 +352,12 @@ const WatchlistPage = () => {
             showWLModal={showWLModal}
             setShowWLModal={setShowWLModal}
             movieID={movieIDToSave}
+          />
+          <PeopleModal
+            showPeopleModal={showPeopleModal}
+            setShowPeopleModal={setShowPeopleModal}
+            addMemberToWL={addMemberToWL}
+            members={members}
           />
           <Row xs={1} md={3} lg={5} className="pt-3 justify-content-center">
             {WL.movies
