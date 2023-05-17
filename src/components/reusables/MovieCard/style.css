@@ -75,6 +75,10 @@
   padding: 0rem 0.2rem;
 }
 
+.poster-overlay-detailed > i {
+  padding-inline: 0.3rem;
+}
+
 .second-poster-overlay {
   position: absolute;
   top: 0;

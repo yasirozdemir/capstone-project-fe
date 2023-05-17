@@ -65,6 +65,7 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
       const data = await res.json();
       if (res.ok) {
         toast.success(`Watchlist '${data.name}' successfully created!`);
+        setName("");
         getWLs();
       } else {
         toast.error(data.message);
@@ -119,7 +120,7 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
       </Modal.Header>
       <Modal.Body>
         <div>
-          {watchlists !== null
+          {watchlists !== null && watchlists.length !== 0
             ? watchlists.map((w) => (
                 <div key={w._id} className="WL-modal-item">
                   <Link to={"/watchlist/" + w._id} className="WL-link d-flex">
@@ -171,6 +172,7 @@ const WLModal = ({ showWLModal, setShowWLModal, movieID }: props) => {
                 type="text"
                 name="name"
                 placeholder="New Watchlist"
+                value={name}
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
