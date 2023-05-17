@@ -15,7 +15,6 @@ export const initialState: IStore = {
     likedWatchlists: [],
     followers: [],
     following: [],
-    refreshToken: "",
   },
   movies: [],
 };

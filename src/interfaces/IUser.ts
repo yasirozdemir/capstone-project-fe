@@ -11,7 +11,6 @@ export interface IUser {
   likedWatchlists: IWatchlist[];
   followers: string[];
   following: string[];
-  refreshToken: string;
 }
 
 export interface IUserDetailed {
