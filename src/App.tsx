@@ -9,19 +9,22 @@ import UserProfile from "./components/pages/UserProfile";
 import GoogleRedirect from "./components/non-functionals/GoogleRedirect";
 import { useAppDispatch } from "./redux/hooks";
 import { setLoggedInUser } from "./redux/actions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import MoviePage from "./components/pages/MoviePage";
 import WatchlistPage from "./components/pages/WatchlistPage";
 import MoviesPage from "./components/pages/Movies";
+import { Loc } from "./tools";
 
 function App() {
   const dispatch = useAppDispatch();
+  const [loc, setLoc] = useState<string | null>(null);
   const accessToken = localStorage.getItem("accessToken");
 
   useEffect(() => {
-    if (accessToken) dispatch(setLoggedInUser());
+    if (accessToken && loc !== "/" && loc !== "/register")
+      dispatch(setLoggedInUser());
     // eslint-disable-next-line
-  }, [accessToken]);
+  }, [accessToken, loc]);
 
   return (
     <div className="App">
@@ -38,6 +41,7 @@ function App() {
         theme="light"
       />
       <BrowserRouter>
+        <Loc setLoc={setLoc} />
         <Routes>
           <Route path="/" element={<LoginRegister />} />
           <Route path="/register" element={<LoginRegister isLogin={false} />} />

@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 export function durationToHM(dur: string): string {
   const totalM = parseInt(dur, 10);
   const h = Math.floor(totalM / 60);
@@ -72,4 +75,15 @@ export function colorToRgba(color: IColor): string {
 export function createGradient(colors: string[], to: string): string {
   const gradientColors = colors.join(",");
   return `linear-gradient(to ${to}, ${gradientColors})`;
+}
+
+export function Loc({ setLoc }: { setLoc: Function }) {
+  const location = useLocation();
+
+  useEffect(() => {
+    setLoc(location.pathname);
+    // eslint-disable-next-line
+  }, [location]);
+
+  return null;
 }

@@ -33,13 +33,9 @@ const MoviePage = () => {
   const [showWLModal, setShowWLModal] = useState(false);
   const [primColor, setPrimColor] = useState("");
   const getMovie = async () => {
-    const options = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    };
-    const URL = `${process.env.REACT_APP_API_URL}/movies/${movieID}`;
-    const res = await fetch(URL, options);
+    const res = await fetch(
+      `${process.env.REACT_APP_API_URL}/movies/${movieID}`
+    );
     const data = await res.json();
     if (res.ok) {
       setMovie(data);

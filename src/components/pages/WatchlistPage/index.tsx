@@ -53,14 +53,10 @@ const WatchlistPage = () => {
   const [members, setMembers] = useState([]);
 
   const getWatchlist = async () => {
-    const options = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    };
-    const URL = `${process.env.REACT_APP_API_URL}/watchlists/${watchlistID}`;
     try {
-      const res = await fetch(URL, options);
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/watchlists/${watchlistID}`
+      );
       const data = await res.json();
       if (res.ok) {
         setWL(data);

@@ -1,37 +1,22 @@
 import { Container, Navbar, Nav } from "react-bootstrap";
 import "./style.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../../redux/hooks";
-import { toast } from "react-toastify";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { useState } from "react";
+import { slicedStore } from "../../../redux/slices";
 
 const NavCustom = () => {
   const user = useAppSelector((st) => st.store.user);
   const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const logOut = async () => {
-    try {
-      const options = {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      };
-      const URL = `${process.env.REACT_APP_API_URL}/users/session`;
-      const res = await fetch(URL, options);
-      collapseNav();
-      if (res.ok) {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("loggedInUserID");
-        navigate("/");
-      } else {
-        const data = await res.json();
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error(String(error));
-    }
+  const logOut = () => {
+    collapseNav();
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("loggedInUserID");
+    dispatch({ type: slicedStore.actions.setUser, payload: [] });
+    navigate("/");
   };
 
   const collapseNav = () => {

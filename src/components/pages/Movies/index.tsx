@@ -35,12 +35,6 @@ const MoviesPage = () => {
   const [movieIDToSave, setMovieIDToSave] = useState("");
   const limit = 15;
 
-  const options = {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    },
-  };
-
   const getMovies = async () => {
     const URL = `${
       process.env.REACT_APP_API_URL
@@ -49,7 +43,7 @@ const MoviesPage = () => {
     }${genres ? `&genres=${genres}` : ""}${title ? `&title=/^${title}/i` : ""}`;
     try {
       setIsLoading(true);
-      const res = await fetch(URL, options);
+      const res = await fetch(URL);
       const data = await res.json();
       if (res.ok) {
         setMovies(data.movies);

@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
 import { slicedStore } from "./slices";
+import { toast } from "react-toastify";
 
 export const setLoggedInUser = () => async (dispatch: Dispatch) => {
   try {
@@ -15,9 +16,9 @@ export const setLoggedInUser = () => async (dispatch: Dispatch) => {
       dispatch({ type: slicedStore.actions.setUser, payload: data });
       localStorage.setItem("loggedInUserID", data._id);
     } else {
-      console.log(data.message);
+      toast.error("Session expired, log in again!");
     }
   } catch (error) {
-    console.error(error);
+    toast.error(String(error));
   }
 };
