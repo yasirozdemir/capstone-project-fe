@@ -49,7 +49,7 @@ const NavCustom = () => {
                 src={
                   user.avatar
                     ? user.avatar
-                    : "https://res.cloudinary.com/yasirdev/image/upload/v1682762639/WhataMovie/users/avatars/user_default.jpg"
+                    : "https://res.cloudinary.com/yasirdev/image/upload/v1684314041/WhataMovie/users/avatars/user_default.jpg"
                 }
                 alt="user profile"
                 className="w-100"
