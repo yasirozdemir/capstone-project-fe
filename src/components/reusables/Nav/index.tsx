@@ -51,6 +51,7 @@ const NavCustom = () => {
                     ? user.avatar
                     : "https://res.cloudinary.com/yasirdev/image/upload/v1684314041/WhataMovie/users/avatars/user_default.jpg"
                 }
+                style={{ objectFit: "cover" }}
                 alt="user profile"
                 className="w-100"
               />

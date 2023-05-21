@@ -147,6 +147,7 @@ const UserProfile = () => {
                     }
                     alt="user avatar"
                     className="w-100"
+                    style={{ objectFit: "cover" }}
                     onClick={() => {
                       if (isMe) setShowAvatarModal(!showAvatarModal);
                     }}
