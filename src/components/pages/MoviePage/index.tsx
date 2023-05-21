@@ -78,7 +78,7 @@ const MoviePage = () => {
                     {durationToHM(movie.duration)}
                     <span>∙</span>
                     <span className="d-flex align-items-center justify-content-center">
-                      {movie.imdbRating}
+                      {movie.imdbRating !== "N/A" ? movie.imdbRating : "?"}
                       <BsStarFill fill="#f5c518" className="ml-1" />
                     </span>
                   </div>
