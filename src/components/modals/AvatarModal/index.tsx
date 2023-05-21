@@ -12,13 +12,19 @@ import {
 } from "react-icons/io";
 import { MutatingDots } from "react-loader-spinner";
 import { setLoggedInUser } from "../../../redux/actions";
+import { IUser } from "../../../interfaces/IUser";
 
 interface props {
   showAvatarModal: boolean;
   setShowAvatarModal: Function;
+  setUser: Function;
 }
 
-const AvatarModal = ({ showAvatarModal, setShowAvatarModal }: props) => {
+const AvatarModal = ({
+  showAvatarModal,
+  setShowAvatarModal,
+  setUser,
+}: props) => {
   const dispatch = useAppDispatch();
   const imgSrc = useAppSelector((st) => st.store.user.avatar);
   const [imgData, setImgData] = useState<FormData>();
@@ -39,12 +45,18 @@ const AvatarModal = ({ showAvatarModal, setShowAvatarModal }: props) => {
       } else options.method = "DELETE";
       const URL = `${process.env.REACT_APP_API_URL}/users/me/avatar`;
       const res = await fetch(URL, options);
+      const data = await res.json();
       if (res.ok) {
         toast.success("Avatar has successfully updated!");
+        setUser((prevUser: IUser) => ({
+          ...prevUser,
+          avatar: isSet
+            ? data.avatarURL
+            : "https://res.cloudinary.com/yasirdev/image/upload/v1684314041/WhataMovie/users/avatars/user_default.jpg",
+        }));
         dispatch(setLoggedInUser());
       } else {
         if (isSet) {
-          const data = await res.json();
           toast.error(data.message);
         }
       }
@@ -105,6 +117,7 @@ const AvatarModal = ({ showAvatarModal, setShowAvatarModal }: props) => {
           <img
             src={imgSrc}
             className="w-100 rounded-circle"
+            style={{ objectFit: "cover" }}
             alt="Profile img"
             onClick={() => {
               setShowAvatarModal(true);

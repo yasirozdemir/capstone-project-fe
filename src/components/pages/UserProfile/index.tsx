@@ -152,6 +152,7 @@ const UserProfile = () => {
                     <PPModal
                       showAvatarModal={showAvatarModal}
                       setShowAvatarModal={setShowAvatarModal}
+                      setUser={setUser}
                     />
                   )}
                 </div>
