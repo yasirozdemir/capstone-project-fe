@@ -87,3 +87,7 @@ export function Loc({ setLoc }: { setLoc: Function }) {
 
   return null;
 }
+
+export function checkIsMe(userID: string): boolean {
+  return localStorage.getItem("loggedInUserID") === userID;
+}

@@ -2,6 +2,7 @@ import { IUser } from "../../../interfaces/IUser";
 import { Link } from "react-router-dom";
 import "./style.css";
 import { MdPersonAddAlt1 } from "react-icons/md";
+import { checkIsMe } from "../../../tools";
 
 const UserCardHorizontal = ({
   user,
@@ -14,7 +15,10 @@ const UserCardHorizontal = ({
 }) => {
   return (
     <div id="user-card-horizontal" className="d-flex align-items-center">
-      <Link to={"/user/" + user._id} className="d-flex align-items-center">
+      <Link
+        to={`/user/${checkIsMe(user._id) ? "me" : user._id}`}
+        className="d-flex align-items-center"
+      >
         <div className="rounded-circle d-flex align-items-center justify-content-center">
           <img src={user.avatar} alt="avatar" className="img-fluid" />
         </div>

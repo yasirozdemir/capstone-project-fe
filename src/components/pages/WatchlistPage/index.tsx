@@ -4,7 +4,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { IWatchlistDetailed } from "../../../interfaces/IWatchlist";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { IColor, colorToRgba, getAverageColorFromImage } from "../../../tools";
+import {
+  IColor,
+  checkIsMe,
+  colorToRgba,
+  getAverageColorFromImage,
+} from "../../../tools";
 import { format } from "date-fns";
 import { IUser } from "../../../interfaces/IUser";
 import {
@@ -28,7 +33,10 @@ function formatMembers(arr: Array<IUser>): JSX.Element[] {
     .filter((m) => m)
     .map((m, i, arr) => (
       <React.Fragment key={m._id}>
-        <Link to={"/user/" + m._id} className="member-link">
+        <Link
+          to={`/user/${checkIsMe(m._id) ? "me" : m._id}`}
+          className="member-link"
+        >
           {m.name} {m.surname}
         </Link>
         <span>{i !== arr.length - 1 && " ∙ "}</span>

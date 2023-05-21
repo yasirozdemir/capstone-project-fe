@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./style.css";
 import { useEffect, useState } from "react";
 import { IUser, IUserDetailed } from "../../../interfaces/IUser";
@@ -9,7 +9,6 @@ import { ThreeDots } from "react-loader-spinner";
 import WLCardHorizontal from "../../reusables/WLCardHorizontal";
 import { IColor, colorToRgba, getAverageColorFromImage } from "../../../tools";
 import PPModal from "../../modals/AvatarModal";
-import { useAppSelector } from "../../../redux/hooks";
 import EditProfile from "../../modals/EditProfile";
 import DynamicBG from "../../reusables/DynamicBG";
 import PeopleModal from "../../modals/PeopleModal";
@@ -17,8 +16,6 @@ import NavCustom from "../../reusables/Nav";
 
 const UserProfile = () => {
   const loggedInUserID = localStorage.getItem("loggedInUserID");
-  const loggedInUser = useAppSelector((st) => st.store.user);
-  const navigate = useNavigate();
   const { userID } = useParams();
   const [user, setUser] = useState<IUserDetailed | null>(null);
   const [isLoading, setLoading] = useState(false);
@@ -99,13 +96,12 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    if (userID === loggedInUserID) navigate("/user/me");
     if (userID === "me") {
       setIsMe(true);
     } else setIsMe(false);
     getUser();
     // eslint-disable-next-line
-  }, [userID, loggedInUser]);
+  }, [userID]);
 
   useEffect(() => {
     setShowAvatarModal(false);
