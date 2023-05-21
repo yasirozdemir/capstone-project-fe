@@ -104,7 +104,7 @@ const MoviePage = () => {
                 <Col
                   xs={12}
                   md={4}
-                  className="d-flex justify-content-center justify-content-md-start mb-2 mb-md-0"
+                  className="d-flex align-items-center justify-content-center justify-content-md-start mb-2 mb-md-0"
                 >
                   <div className="poster-wrapper">
                     <img
