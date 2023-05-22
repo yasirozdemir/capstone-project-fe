@@ -97,6 +97,7 @@ const PeopleModal = ({
         {followersOfLoggedInUser &&
           addMemberToWL &&
           members &&
+          followersOfLoggedInUser.length !== 0 &&
           followersOfLoggedInUser.map(
             (u) =>
               u && (

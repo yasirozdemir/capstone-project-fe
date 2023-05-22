@@ -271,15 +271,21 @@ const UserProfile = () => {
               <Col xs={12} md={8} className="d-flex mt-3">
                 {showWLs ? (
                   <div className="d-flex flex-column w-100">
-                    {user?.watchlists.map(
-                      (wl) => wl && <WLCardHorizontal key={wl._id} WL={wl} />
-                    )}
+                    {user && user.watchlists?.length !== 0
+                      ? user.watchlists.map(
+                          (wl) =>
+                            wl && <WLCardHorizontal key={wl._id} WL={wl} />
+                        )
+                      : "This user is not a member of any watchlist yet!"}
                   </div>
                 ) : (
                   <div className="d-flex flex-column w-100">
-                    {user?.likedWatchlists.map(
-                      (wl) => wl && <WLCardHorizontal key={wl._id} WL={wl} />
-                    )}
+                    {user && user.likedWatchlists?.length !== 0
+                      ? user?.likedWatchlists.map(
+                          (wl) =>
+                            wl && <WLCardHorizontal key={wl._id} WL={wl} />
+                        )
+                      : "This user hasn't liked any watchlist yet!"}
                   </div>
                 )}
               </Col>
