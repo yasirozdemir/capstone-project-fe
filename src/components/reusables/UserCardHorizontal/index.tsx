@@ -14,7 +14,7 @@ const UserCardHorizontal = ({
   checkIsMember?: Function;
 }) => {
   return (
-    <div id="user-card-horizontal" className="d-flex align-items-center">
+    <div id="user-card-horizontal" className="d-flex align-items-center mb-2">
       <Link
         to={`/user/${checkIsMe(user._id) ? "me" : user._id}`}
         className="d-flex align-items-center"
