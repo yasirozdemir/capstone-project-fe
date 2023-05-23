@@ -101,6 +101,7 @@ const EditProfile = ({ showEditModal, setShowEditModal, setUser }: props) => {
           />
           <input
             type="email"
+            name="email"
             placeholder="Email"
             defaultValue={loggedInUser.email}
             autoComplete="false"
