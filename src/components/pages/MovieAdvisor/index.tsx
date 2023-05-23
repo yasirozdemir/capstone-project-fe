@@ -141,6 +141,7 @@ const MovieAdvisor = () => {
                 width="80"
                 radius="8"
                 color="#fefefe"
+                wrapperClass="justify-content-center"
                 wrapperStyle={{ marginTop: "10vh" }}
                 visible={true}
               />

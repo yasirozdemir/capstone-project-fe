@@ -29,13 +29,12 @@ function App() {
   return (
     <div className="App">
       <ToastContainer
-        position="top-center"
-        autoClose={3000}
+        position="bottom-left"
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={true}
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
         draggable
         pauseOnHover
         theme="light"
