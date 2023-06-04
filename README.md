@@ -12,7 +12,7 @@
 - [Live Frontend](https://what-ai-movie.vercel.app)
 - [Backend Repo](https://github.com/yasirozdemir/capstone-project-be)
 
-- What ai Movie is a web app that users can search for movies depending on their feeling, thoughts or desires. It uses OpenAI for the movie suggestions. The user can create watchlists with the people who follows them. Check documentation for more.
+- What ai Movie is a web app where users can search for movies depending on their feeling, thoughts, or desires. It uses OpenAI for movie suggestions. The user can create watchlists with the people who follow them. Check the documentation for more.
 
 ## :camera: Images
 
