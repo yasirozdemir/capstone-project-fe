@@ -56,7 +56,10 @@ const MovieAdvisor = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
-    promptToMovies();
+
+    // REMOVE THIS LINE & THE P ELEMENT THAT STARTS AT LINE 86 AFTER ENABLING THE FORM LATER
+    alert("This future is currently disabled!");
+    // promptToMovies();
   };
 
   useEffect(() => {
@@ -80,6 +83,19 @@ const MovieAdvisor = () => {
         >
           <Row>
             <Col xs={12}>
+              <p
+                style={{
+                  textAlign: "center",
+                  margin: "0 0 1rem 1rem",
+                  fontStyle: "italic",
+                  fontSize: "1.15rem",
+                  color: "#ff0",
+                }}
+              >
+                The AI Search Tool is currently deactivated because of the token
+                issue with Open AI, <br /> It'll be activated soon in the new
+                version of the app!
+              </p>
               <div className="prompt-wrapper">
                 {prompt.length === 0 && (
                   <Typewriter
